@@ -1,6 +1,20 @@
 div#block {
     height: 80px;
     width: 80px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: aqua;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+div#block:hover {
+    background-color: cadetblue;
+}
+
+div#block:active {
+    background-color: chartreuse;
+    transition: background-color 0.1s;
 }
