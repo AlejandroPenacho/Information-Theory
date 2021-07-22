@@ -2,7 +2,7 @@
 module.exports = {
     mode : "development",
     entry : {
-        "test" : `${__dirname}/src/test.js`
+        "main" : `${__dirname}/src/main.ts`
     },
     output : {
         filename : "[name].js",

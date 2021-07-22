@@ -1,19 +1,21 @@
-let mine = document.getElementById("block");
-let value = 0;
+let mine: HTMLElement = document.getElementById("block");
+let value: number = 0;
 
-increaseValue = ()=>{
+
+let getUntil = (text: string) : string => {
+    if (text[0] == "p"){
+        return ""
+    } else {
+        return (text[0] + getUntil(text.slice(1)))
+    }
+}
+
+let increaseValue = () : void =>{
     value++;
     mine.innerHTML = value.toString();
 
     let currentSize = window.getComputedStyle(mine).fontSize;
     
-    getUntil = (text) => {
-        if (text[0] == "p"){
-            return ""
-        } else {
-            return (text[0] + getUntil(text.slice(1)))
-        }
-    }
 
 
     let numSize = getUntil(currentSize);

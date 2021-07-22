@@ -1,4 +1,9 @@
-div#block {
+<script lang="ts">
+
+</script>
+
+<style>
+div#testBlock {
     height: 80px;
     width: 80px;
     display: flex;
@@ -10,11 +15,16 @@ div#block {
     transition: background-color 0.3s;
 }
 
-div#block:hover {
+div#testBlock:hover {
     background-color: cadetblue;
 }
 
-div#block:active {
+div#testBlock:active {
     background-color: chartreuse;
     transition: background-color 0.1s;
 }
+</style>
+
+<div id="testBlock">
+    JAJA
+</div>

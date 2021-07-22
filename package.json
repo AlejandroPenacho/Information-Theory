@@ -1,11 +1,12 @@
 {
   "name": "informationtheory",
-  "version": "1.0.0",
+  "version": "0.1",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js",
-    "build": "webpack"
+    "run": "node server.js",
+    "build": "webpack",
+    "test": "webpack && node server.js"
   },
   "author": "Alejandro Penacho",
   "license": "ISC",
