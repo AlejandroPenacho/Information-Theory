@@ -8,6 +8,10 @@ app.get("", (req, res) => {
 	res.sendFile(path.join(__dirname,"public/index.html"));
 });
 
+app.use("", (req, res) => {
+	res.sendFile(path.join(__dirname, req.originalUrl));
+})
+
 app.listen(PORT, ()=>{
 	console.log(`Listening in port ${PORT}`);
 });
