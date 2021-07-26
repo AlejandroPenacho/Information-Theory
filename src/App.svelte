@@ -1,5 +1,5 @@
 <script lang="ts">
-
+    import Dice from "./svelte/Dice.svelte";
 </script>
 
 <style>
@@ -23,8 +23,19 @@ div#testBlock:active {
     background-color: chartreuse;
     transition: background-color 0.1s;
 }
+
+div.diceBox {
+    padding: 20px;
+    background-color: green;
+    display: flex;
+
+}
+
+
 </style>
 
-<div id="testBlock">
-    JAJA
+<div class="diceBox">
+    <Dice/>
+    <Dice/>
+    <Dice/>
 </div>
