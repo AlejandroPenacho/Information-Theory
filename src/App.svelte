@@ -7,7 +7,7 @@
 
 </style>
 
-<DiceDeck nDices={30}/>
+<DiceDeck nDices={10}/>
 <div style= "font-size: 40px;">
     Voy a comprar una <FillWordButton />amisa
 </div>

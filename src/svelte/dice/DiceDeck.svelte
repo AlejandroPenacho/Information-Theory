@@ -4,14 +4,19 @@
     export let nDices;
 
     let diceClick = new Array(nDices);
-    let diceValue = new Array(nDices);
-
-    let totalValue;
-
-    $: totalValue = diceValue.reduce((acc,x) => {return (acc+x)}, 0);
+    let diceValueStatus = {
+        sum : nDices,
+        nDicesAt : [nDices,0,0,0,0,0]
+    }
 
     function throwAllDices(){
         throwNextDice(0)();
+    }
+
+    function updateDiceData(prevValue, newValue){
+        diceValueStatus.sum += (newValue - prevValue);
+        diceValueStatus.nDicesAt[prevValue-1] -= 1;
+        diceValueStatus.nDicesAt[newValue-1] += 1
     }
 
     function throwNextDice(index){
@@ -75,12 +80,31 @@ div.result {
     padding-right: 10px;
 }
 
+div.diceNumbersBlock {
+    display: flex;
+    flex-wrap: wrap;
+    height: 60px;
+    width: 400px;
+}
+
+div.minorDiceBlock {
+    display: flex;
+    height: 50%;
+    align-items: center;
+}
+
+img.exampleDice {
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+}
+
 </style>
 
 <div class="main">
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
-            <Dice bind:click={diceClick[index]} bind:currentValue={diceValue[index]}/>
+            <Dice bind:click={diceClick[index]} updateDiceData={updateDiceData}/>
         {/each}
     </div>
     <div class="lowerDeck">
@@ -90,10 +114,18 @@ div.result {
             </div>
         </div>
         <div class="result">
-            Sum: {totalValue}
+            Sum: {diceValueStatus.sum}
         </div>
         <div class="result">
-            Mean: {(totalValue/nDices).toPrecision(4)}
+            Mean: {(diceValueStatus.sum/nDices).toPrecision(4)}
+        </div>
+        <div class="diceNumbersBlock">
+            {#each [...Array(6).keys()] as index}
+            <div class="minorDiceBlock" >
+                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{index+1}" >
+                {(diceValueStatus.nDicesAt[index]/nDices).toPrecision(4)}
+            </div>
+            {/each}
         </div>
     </div>
 </div>

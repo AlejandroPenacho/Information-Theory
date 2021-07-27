@@ -1,14 +1,19 @@
 <script lang="ts">
     const ANIMATION_TIME : number = 1000;
 
-    export let currentValue: number = 1;
+    let prevValue = 0;
+
+    let currentValue: number = 1;
     let nTurns : number = 0;
     let clickTime : number = 0;
     let timeLastDiceUpdate: number = 0;
     let diceSize: number = 1;
     let diceAngle: number = 0;
 
+    export let updateDiceData;
+
     export function click() {
+        prevValue = currentValue;
         nTurns = Math.floor(Math.random()*2 + 2);
         clickTime = Date.now();
         requestAnimationFrame(rAFfunction);
@@ -30,6 +35,7 @@
         } else {
             diceAngle = 0;
             diceSize = 1;
+            updateDiceData(prevValue, currentValue);
         }
     }
 
