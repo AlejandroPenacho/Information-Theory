@@ -18,7 +18,7 @@
         return () => {
             diceClick[index]();
             if (index < (nDices-1)){
-                setTimeout(throwNextDice(index+1), 200)
+                setTimeout(throwNextDice(index+1), 1000/nDices)
             }
         }
     }
@@ -36,6 +36,7 @@ div.allClickButton {
     user-select: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
 }
 
 div.allClickButton:hover {
@@ -50,7 +51,7 @@ div.allClickButton:active {
 div.diceBox {
     padding: 20px;
     display: flex;
-
+    flex-wrap: wrap;
 }
 
 div.main {
@@ -70,6 +71,8 @@ div.result {
     align-items: center;
     justify-content: center;
     margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 </style>
@@ -87,7 +90,10 @@ div.result {
             </div>
         </div>
         <div class="result">
-            {totalValue}
+            Sum: {totalValue}
+        </div>
+        <div class="result">
+            Mean: {(totalValue/nDices).toPrecision(4)}
         </div>
     </div>
 </div>
