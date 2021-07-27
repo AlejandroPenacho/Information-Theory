@@ -1,22 +1,35 @@
 <script lang="ts">
-    const ANIMATION_TIME : number = 2000;
+    const ANIMATION_TIME : number = 1000;
 
-    let currentValue: number = 1;
+    export let currentValue: number = 1;
     let nTurns : number = 0;
-    let currentTime : number = 0;
+    let clickTime : number = 0;
+    let timeLastDiceUpdate: number = 0;
+    let diceSize: number = 1;
+    let diceAngle: number = 0;
 
-    function click() {
-        nTurns += Math.floor(Math.random()*3 + 1);
-        currentTime = Date.now();
+    export function click() {
+        nTurns = Math.floor(Math.random()*2 + 2);
+        clickTime = Date.now();
         requestAnimationFrame(rAFfunction);
     }
 
     function rAFfunction(){
-        if (Date.now() % 200 > 150){
+
+        let currentTime = Date.now();
+
+        diceAngle = (currentTime-clickTime)/1000 * nTurns * 360;
+        diceSize = 1.3 - 0.3*Math.pow((1-(currentTime-clickTime)/(500)),2);
+
+        if ((currentTime-timeLastDiceUpdate) > 150){
             currentValue = Math.floor(Math.random()*6 + 1);
+            timeLastDiceUpdate = Date.now();
         }
-        if (Date.now() - currentTime < ANIMATION_TIME){
+        if (currentTime - clickTime < ANIMATION_TIME){
             requestAnimationFrame(rAFfunction);
+        } else {
+            diceAngle = 0;
+            diceSize = 1;
         }
     }
 
@@ -28,14 +41,16 @@
         height: 50px;
         width: 50px;
         margin: 5px;
+        cursor: pointer;
     }
     img {
         height: 100%;
         width: 100%;
-        transition: transform 2000ms linear;
     }
+
+
 </style>
 
 <div class="container">
-    <img src="/assets/svg/dice/dice{currentValue}.svg" alt="Its a dice" on:click={click} style="transform: rotate({nTurns*360}deg)">
+    <img src="/assets/svg/dice/dice{currentValue}.svg" alt="{currentValue}" on:click={click} style="transform: rotate({diceAngle}deg) scale({diceSize, diceSize})">
 </div>
