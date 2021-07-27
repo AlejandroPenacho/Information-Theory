@@ -1,5 +1,6 @@
 <script lang="ts">
     import Dice from "./Dice.svelte";
+    import PieChart from "/src/svelte/PieChart.svelte";
 
     export let nDices;
 
@@ -128,4 +129,5 @@ img.exampleDice {
             {/each}
         </div>
     </div>
+    <PieChart percentageList={diceValueStatus.nDicesAt.map((x)=>{return x/nDices})}/>
 </div>
