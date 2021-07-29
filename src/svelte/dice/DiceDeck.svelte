@@ -22,10 +22,10 @@
 
     function throwNextDice(index){
         return () => {
-            diceClick[index]();
             if (index < (nDices-1)){
                 setTimeout(throwNextDice(index+1), 1000/nDices)
             }
+            diceClick[index]();
         }
     }
 </script>
@@ -123,7 +123,7 @@ img.exampleDice {
         <div class="diceNumbersBlock">
             {#each [...Array(6).keys()] as index}
             <div class="minorDiceBlock" >
-                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{index+1}" >
+                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
                 {(diceValueStatus.nDicesAt[index]/nDices).toPrecision(4)}
             </div>
             {/each}

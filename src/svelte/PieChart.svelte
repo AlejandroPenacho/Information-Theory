@@ -42,7 +42,7 @@
 
 <div>
     {#each [...Array(colorList.length).keys()] as index}
-        <svg width="50mm" heigh="50mm" viewbox="0 0 200 200" id="main">
+        <svg width="50mm" height="50mm" viewBox="0 0 200 200" id="main">
             <path 
             style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.503;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
             d={generatePath(200, angleList[index], angleList[index+1])} />

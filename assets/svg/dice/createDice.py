@@ -1,7 +1,7 @@
-import PySVG
+import SaVaGe
 import copy
 
-baseDice = PySVG.parse_svg("baseDice.svg", 3)
+baseDice = SaVaGe.parse_svg("baseDice.svg", 3)
 
 dice_pass = [
     ["middle"],

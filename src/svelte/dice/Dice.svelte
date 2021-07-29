@@ -44,9 +44,9 @@
 
 <style>
     div.container {
-        height: 50px;
-        width: 50px;
-        margin: 5px;
+        height: 15px;
+        width: 15px;
+        margin: 2px;
         cursor: pointer;
     }
     img {
@@ -58,5 +58,5 @@
 </style>
 
 <div class="container">
-    <img src="/assets/svg/dice/dice{currentValue}.svg" alt="{currentValue}" on:click={click} style="transform: rotate({diceAngle}deg) scale({diceSize, diceSize})">
+    <img src="/assets/svg/dice/dice{currentValue}.svg" alt="{currentValue.toString()}" on:click={click} style="transform: rotate({diceAngle}deg) scale({diceSize})">
 </div>
