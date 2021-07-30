@@ -22,9 +22,10 @@
 
     function generatePath(squareSize, initialAngle, finalAngle){
         let radius = squareSize/2;
+        let largeArc = ((finalAngle-initialAngle) > Math.PI) ? 1 : 0;
         let path = `M ${squareSize/2} ${squareSize/2} `
         path += `L ${radius*(1+Math.cos(initialAngle))} ${radius*(1+Math.sin(initialAngle))} `
-        path += `A ${radius} ${radius} 0 0 1 ${radius*(1+Math.cos(finalAngle))} ${radius*(1+Math.sin(finalAngle))} Z`
+        path += `A ${radius} ${radius} 0 ${largeArc} 1 ${radius*(1+Math.cos(finalAngle))} ${radius*(1+Math.sin(finalAngle))} Z`
 
         return path
     }
@@ -42,9 +43,9 @@
 
 <div>
     {#each [...Array(colorList.length).keys()] as index}
-        <svg width="50mm" height="50mm" viewBox="0 0 200 200" id="main">
+        <svg width="50mm" height="50mm" viewBox="-1 -1 202 202" id="main">
             <path 
-            style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.503;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+            style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
             d={generatePath(200, angleList[index], angleList[index+1])} />
         </svg>
     {/each}
