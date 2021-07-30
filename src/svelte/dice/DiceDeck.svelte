@@ -22,10 +22,10 @@
 
     function throwNextDice(index){
         return () => {
-            if (index < (nDices-1)){
-                setTimeout(throwNextDice(index+1), 1000/nDices)
-            }
             diceClick[index]();
+            if (index < (nDices-1)){
+                setTimeout(throwNextDice(index+1), 0)
+            }
         }
     }
 </script>
@@ -105,7 +105,9 @@ img.exampleDice {
 <div class="main">
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
-            <Dice bind:click={diceClick[index]} updateDiceData={updateDiceData}/>
+            <Dice bind:click={diceClick[index]} 
+            diceRawChance={[1,1,1,1,1,1]}
+            updateDiceData={updateDiceData}/>
         {/each}
     </div>
     <div class="lowerDeck">

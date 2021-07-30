@@ -1,7 +1,10 @@
 <script lang="ts">
-    import DiceDeck from "./svelte/dice/DiceDeck.svelte";
-    import FillWordButton from "/src/svelte/fillWord/FillWordButton.svelte";
+
+    import Scene0 from "/src/svelte/scenes/Scene0.svelte";
+    import Scene1 from "/src/svelte/scenes/Scene1.svelte";
     import Navbar from "/src/svelte/Navbar.svelte";
+
+    let selectedChapter = 0;
 </script>
 
 <style>
@@ -19,13 +22,14 @@
 
 <div class="mainDiv">
     <div class="leftBar">
-        <Navbar />
+        <Navbar bind:selectedChapter={selectedChapter}/>
     </div>
     <div class="mainZone">
-        <div style= "font-size: 40px;">
-            Voy a comprar una <FillWordButton />amisa
-        </div>
-        <DiceDeck nDices={600}/>
+        {#if selectedChapter==0}
+            <Scene0 /> 
+        {:else if selectedChapter==1}
+            <Scene1 />
+        {/if}
     </div>
 </div>
 

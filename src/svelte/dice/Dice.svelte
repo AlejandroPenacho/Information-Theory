@@ -11,6 +11,28 @@
     let diceAngle: number = 0;
 
     export let updateDiceData;
+    export let diceRawChance : Array<number>;
+
+    let diceNormalizedChance = new Array(6);
+
+    $: {
+        let total = diceRawChance.reduce((acc, x) => {return (acc + x)});
+        let comulative = 0;
+        for (let i=0; i<5; i++){
+            comulative += diceRawChance[i]/total;
+            diceNormalizedChance[i] = comulative;
+        }
+        diceNormalizedChance[5] = 1;
+    }
+
+    function getRandomValue(){
+        let rand = Math.random();
+        for (let i=0; i<6; i++){
+            if (rand <= diceNormalizedChance[i]){
+                return (i+1)
+            }
+        }
+    }
 
     export function click() {
         prevValue = currentValue;
@@ -27,7 +49,7 @@
         diceSize = 1.3 - 0.3*Math.pow((1-(currentTime-clickTime)/(500)),2);
 
         if ((currentTime-timeLastDiceUpdate) > 150){
-            currentValue = Math.floor(Math.random()*6 + 1);
+            currentValue = getRandomValue();
             timeLastDiceUpdate = Date.now();
         }
         if (currentTime - clickTime < ANIMATION_TIME){

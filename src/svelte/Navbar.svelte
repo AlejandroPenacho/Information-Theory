@@ -6,8 +6,9 @@
         [0, "Introduction"],
         [1, "Guessing the letter"],
         [2, "Text generator"],
-        [3, "Who is Who?"],
-        [4, "Conclusion"]
+        [3, "Dices"],
+        [4, "Who is Who?"],
+        [5, "Conclusion"]
     ]
 
     let selectColor : string = "green";
