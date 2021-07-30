@@ -1,5 +1,8 @@
 <script lang="ts">
-    import DiceDeck from "/src/svelte/dice/DiceDeck.svelte";
+    import FillWordButton from "/src/svelte/fillWord/FillWordButton.svelte"
 </script>
 
-<DiceDeck nDices={600}/>
+
+<div style= "font-size: 39px;">
+    Voy a comprar una <FillWordButton />amisa
+</div>

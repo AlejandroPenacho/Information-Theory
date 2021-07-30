@@ -2,7 +2,14 @@
     import Dice from "./Dice.svelte";
     import PieChart from "/src/svelte/PieChart.svelte";
 
-    export let nDices;
+    let possibleNDices = [10, 100, 300, 1000];
+    let rangeInput = 0;
+
+    let nDices = 10;
+
+    $: {
+        nDices = possibleNDices[rangeInput];
+    }
 
     let diceClick = new Array(nDices);
     let diceValueStatus = {
@@ -19,6 +26,7 @@
         diceValueStatus.nDicesAt[prevValue-1] -= 1;
         diceValueStatus.nDicesAt[newValue-1] += 1
     }
+
 
     function throwNextDice(index){
         return () => {
@@ -103,6 +111,7 @@ img.exampleDice {
 </style>
 
 <div class="main">
+    <input type="range" bind:value={rangeInput} min=0 max=3 />
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
             <Dice bind:click={diceClick[index]} 

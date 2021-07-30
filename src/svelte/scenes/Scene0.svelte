@@ -1,8 +1,14 @@
 <script lang="ts">
-    import FillWordButton from "/src/svelte/fillWord/FillWordButton.svelte"
+
 </script>
 
+<style>
+    div.main {
+        padding: 10px;
+        font-size: 30pt;
+    }
+</style>
 
-<div style= "font-size: 39px;">
-    Voy a comprar una <FillWordButton />amisa
+<div class="main">
+    This is very important, actually.
 </div>
