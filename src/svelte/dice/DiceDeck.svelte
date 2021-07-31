@@ -78,6 +78,7 @@ div.diceBox {
 
 div.main {
     background-color: green;
+    padding: 20px;
 }
 
 div.lowerDeck {

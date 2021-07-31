@@ -25,8 +25,9 @@
         height: 10vw;
     }
     div.mainBar {
+        position: fixed;
         height: 100vh;
-        width: 100%;
+        width: 20vw;
         background-color: var(--color1);
     }
     div.allChapters {
