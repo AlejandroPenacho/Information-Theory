@@ -34,6 +34,11 @@
         }
     }
 
+    export function restart() {
+        currentValue = 1;
+        console.log("restarted")
+    }
+
     export function click() {
         prevValue = currentValue;
         nTurns = Math.floor(Math.random()*2 + 2);

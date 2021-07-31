@@ -6,17 +6,25 @@
     let rangeInput = 0;
 
     let nDices = 10;
-
-    $: {
-        nDices = possibleNDices[rangeInput];
-    }
-
+    
     let diceClick = new Array(nDices);
+    let diceRestart = new Array(nDices);
     let diceValueStatus = {
         sum : nDices,
         nDicesAt : [nDices,0,0,0,0,0]
     }
 
+    function restartData(){
+        for (let i=0; i<nDices; i++){
+            diceRestart[i]();
+        }
+        nDices = possibleNDices[rangeInput];
+        diceValueStatus.sum = nDices;
+        diceValueStatus.nDicesAt = [nDices, 0, 0, 0, 0, 0];
+        diceValueStatus = diceValueStatus;
+    }
+
+    
     function throwAllDices(){
         throwNextDice(0)();
     }
@@ -111,10 +119,10 @@ img.exampleDice {
 </style>
 
 <div class="main">
-    <input type="range" bind:value={rangeInput} min=0 max=3 />
+    <input type="range" bind:value={rangeInput} min=0 max=3 on:change={restartData}/>
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
-            <Dice bind:click={diceClick[index]} 
+            <Dice bind:click={diceClick[index]} bind:restart={diceRestart[index]} 
             diceRawChance={[1,1,1,1,1,1]}
             updateDiceData={updateDiceData}/>
         {/each}
