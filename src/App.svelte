@@ -12,6 +12,15 @@
 </script>
 
 <style>
+
+    :global(:root) {
+        --color1 : #36151E;
+        --color2 : #593F62;
+        --color3 : #7B6D8D;
+        --color4 : #8499B1;
+        --color5 : #A5C4D4;
+    }
+
     div.mainDiv {
         display: grid;
         grid-template-columns: 20vw auto;
@@ -20,6 +29,7 @@
         grid-column: 1 2;
     }
     div.mainZone {
+        background-color: var(--color3);
         grid-column: 2 3;
     }
 </style>

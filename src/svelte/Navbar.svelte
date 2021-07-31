@@ -4,11 +4,12 @@
 
     let listOfChapters : [number, string][]= [
         [0, "Introduction"],
-        [1, "Guessing the letter"],
-        [2, "Text generator"],
-        [3, "Dices"],
-        [4, "Who is Who?"],
-        [5, "Conclusion"]
+        [1, "What is information"],
+        [2, "Guessing the letter"],
+        [3, "Text generator"],
+        [4, "Dices"],
+        [5, "Who is Who?"],
+        [6, "Conclusion"]
     ]
 
     let selectColor : string = "green";
@@ -29,7 +30,7 @@
     div.mainBar {
         height: 100vh;
         width: 100%;
-        background-color:blue;
+        background-color: var(--color1);
     }
     div.allChapters {
         display: flex;
@@ -41,6 +42,14 @@
         margin: 5px 5px 0px 10px;
         display: flex;
     }
+
+    div#selected {
+        background-color: var(--color4);
+    }
+    div#notSelected {
+        background-color: var(--color5);
+    }
+
     div.index {
         width: 20px;
     }
@@ -53,7 +62,7 @@
     <div class="allChapters">
         {#each listOfChapters as element}
             <div class="singleChapter" 
-                 style="background-color: {(selectedChapter==element[0]) ? selectColor : emptyColor}"
+                 id="{(selectedChapter==element[0]) ? "selected" : "notSelected"}"
                  on:click={selectChapter(element[0])}>
                 <div class="index">
                     {element[0]}

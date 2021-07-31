@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   sodipodi:docname="heart.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:version="0.32"
+   id="svg1326"
+   height="48"
+   width="48"
+   version="1.1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     inkscape:grid-bbox="false"
+     gridtolerance="2.0000000px"
+     inkscape:grid-points="false"
+     showgrid="false"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:window-height="700"
+     inkscape:window-width="1280"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="in"
+     inkscape:cy="23.076351"
+     inkscape:cx="20.643979"
+     inkscape:zoom="8.0168655"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:pagecheckerboard="1"
+     inkscape:window-maximized="0"
+     units="px">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0"
+       originy="0"
+       spacingx="48"
+       spacingy="48"
+       color="#3f3fff"
+       empcolor="#3f3fff"
+       opacity="0.15"
+       empopacity="0.38"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Anglo-American card suits</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Jeff Bonham</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/2.0/" />
+        <dc:description>Anglo-American card suits: clubs, diamonds, hearts and spades.  Created in Inkscape.</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>anglo-american</rdf:li>
+            <rdf:li>cards</rdf:li>
+            <rdf:li>club</rdf:li>
+            <rdf:li>clubs</rdf:li>
+            <rdf:li>diamond</rdf:li>
+            <rdf:li>diamonds</rdf:li>
+            <rdf:li>heart</rdf:li>
+            <rdf:li>hearts</rdf:li>
+            <rdf:li>spade</rdf:li>
+            <rdf:li>spades</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:source>http://commons.wikimedia.org/wiki/Image:Anglo-American_card_suits.svg</dc:source>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/2.0/">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:requires
+           rdf:resource="http://web.resource.org/cc/Notice" />
+        <cc:requires
+           rdf:resource="http://web.resource.org/cc/Attribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://web.resource.org/cc/ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       sodipodi:nodetypes="ccccccccccccccccccccc"
+       id="path30"
+       d="M 23.500453,47.654825 C 23.45652,47.575683 23.267645,47.00348 23.080728,46.383258 21.896143,42.452569 19.697094,38.472307 16.014501,33.59343 14.630956,31.760447 13.328696,30.137313 9.807335,25.856827 5.7300263,20.900554 4.5621102,19.31282 3.3827519,17.122888 2.6863138,15.829687 1.9645914,13.861988 1.7270876,12.608895 1.4897192,11.35653 1.4858495,9.3104703 1.7188321,8.2450698 2.6665315,3.9113732 6.5159996,0.64190583 11.119042,0.26119277 16.392173,-0.17494131 20.877642,2.488884 23.234419,7.4562596 l 0.526273,1.1092225 0.396087,-0.87628 c 0.588546,-1.3020554 1.155345,-2.1826852 2.11204,-3.2814466 2.435786,-2.7975018 5.334664,-4.16785604 8.82691,-4.17265004 1.56429,-0.00215 2.460662,0.12768947 3.793653,0.54949273 1.993633,0.63085121 3.494384,1.61361451 4.830958,3.16354861 3.483159,4.039172 3.070746,9.5419162 -1.220256,16.2813862 -1.000957,1.572114 -2.806973,3.898184 -5.290679,6.814172 -2.860157,3.357958 -4.257668,5.064545 -5.688457,6.946525 -3.429599,4.511105 -5.73615,8.610032 -7.00487,12.448207 -0.19354,0.585511 -0.39631,1.131101 -0.450601,1.212422 -0.126074,0.188847 -0.461081,0.191198 -0.565024,0.004 z"
+       style="fill:#ff0000;fill-opacity:1;stroke-width:0.128011" />
+  </g>
+</svg>
