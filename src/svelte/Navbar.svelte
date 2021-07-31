@@ -12,9 +12,6 @@
         [6, "Conclusion"]
     ]
 
-    let selectColor : string = "green";
-    let emptyColor : string ="burlywood";
-
     function selectChapter( chapter: number) : () => void {
         return () => {
             selectedChapter = chapter;
@@ -25,7 +22,7 @@
 
 <style>
     div.header {
-        height: 20vw;
+        height: 10vw;
     }
     div.mainBar {
         height: 100vh;
@@ -39,8 +36,9 @@
     div.singleChapter {
         cursor: pointer;
         height: 20px;
-        margin: 5px 5px 0px 10px;
+        margin: 5px 15px 0px 10px;
         display: flex;
+        border-radius: 0px 5px 5px 0px;
     }
 
     div#selected {
@@ -52,6 +50,7 @@
 
     div.index {
         width: 20px;
+        padding-left: 10px;
     }
 </style>
 
