@@ -24,6 +24,8 @@
 
     export let configurationList : Array<number>;
     export let value;
+    export let valueChange;
+
     let nSymbols = configurationList.length;
 
     let valuePerUnit = new Array(nSymbols);
@@ -34,12 +36,11 @@
             valuePerUnit[i] = current;
             current *= configurationList[i];
         }
-        console.log(valuePerUnit)
     }
+    console.log(configurationList)
 
-    console.log(value)
 
-    export let symbolValue;
+    let symbolValue;
     $: symbolValue = getSymbolValues(value);
 
     function getSymbolValues(value: number) {
@@ -49,18 +50,16 @@
             symbolValue[i] = currentValue % configurationList[i];
             currentValue = Math.floor((currentValue-symbolValue[i])/configurationList[i]);
         }
-        console.log(symbolValue)
         return symbolValue
     }
     
     function increaseValue(index : number){
         return ()=>{
             if (symbolValue[index] == (configurationList[index]-1)){
-                value -= valuePerUnit[index]*symbolValue[index];
+                valueChange(value - valuePerUnit[index]*symbolValue[index]);
             } else {
-                value += valuePerUnit[index];
+                valueChange(value + valuePerUnit[index]);
             }
-            console.log(value)
         }
     }
 
@@ -69,6 +68,7 @@
 <style>
     div.main {
         display: flex;
+        flex-direction: row;
     }
     div.number {
         display: flex;
