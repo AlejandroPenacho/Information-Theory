@@ -1,5 +1,4 @@
 <script lang="ts">
-    let currentValue = 1;
 
     let coinSVGs = [
         "/assets/svg/coins/darkCoin.svg",
@@ -22,16 +21,60 @@
         "/assets/svg/compass/compassNW.svg"
     ]
 
+
+    export let configurationList : Array<number>;
+    let value = "1";
+    let nSymbols = configurationList.length;
+
+    console.log(configurationList);
+    console.log(nSymbols);
+
+    export let symbolValue;
+    $: symbolValue = getSymbolValues(parseInt(value));
+
+    function getSymbolValues(value: number) {
+        let symbolValue : Array<number> = new Array(nSymbols);
+        let currentValue = value;
+        for (let i=(nSymbols-1); i>=0; i--){
+            symbolValue[i] = currentValue % configurationList[i];
+            currentValue = Math.floor((currentValue-symbolValue[i])/configurationList[i]);
+        }
+        console.log(symbolValue)
+        return symbolValue
+    }
 </script>
 
+<style>
+    div.main {
+        display: flex;
+    }
+    div.number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: chartreuse;
+    }
+</style>
+
+<input type="number" bind:value={value} />
+<div>
+    {#each symbolValue as here}
+    <div>
+        {here}
+    </div>
+    {/each}
+</div>
+
 <div class="main">
-    <div>
-
-    </div>
-    <div>
-
-    </div>
-    <div>
-
-    </div>
+        {#each configurationList as currentBit, index}
+        {#if currentBit==2}
+            <img src={coinSVGs[symbolValue[index]]} alt=0/>
+        {:else if currentBit==4}
+            <img src={suitSVGs[symbolValue[index]]} alt=0/>
+        {:else if currentBit==8}
+            <img src={compassSVGs[symbolValue[index]]} alt=0/>
+        {:else if currentBit==16}
+            <div class="number"> {symbolValue[index]} </div>
+        {/if}
+    {/each}
 </div>
