@@ -33,5 +33,5 @@
         the second one to transmit more information for each symbol than the first one. Actually, 1 symbol of a
         group of 8 is equivalent to 2 symbols of 4, and 3 symbols of 2, as can be seen below.
     </div>
-    <SymbolEq configurationList={[2,4,8,16]} />
+    <SymbolEq configurationList={[2,2,2,2]} value="7"/>
 </div>

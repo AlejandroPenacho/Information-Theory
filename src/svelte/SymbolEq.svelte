@@ -23,11 +23,18 @@
 
 
     export let configurationList : Array<number>;
-    let value = "1";
+    export let value;
     let nSymbols = configurationList.length;
 
-    console.log(configurationList);
-    console.log(nSymbols);
+    let valueIncrease = new Array(nSymbols);
+
+    $: {
+        let current = 1;
+        for (let i=nSymbols; i>=0; i--){
+            valueIncrease[i] = current;
+            current *= configurationList[i];
+        }
+    }
 
     export let symbolValue;
     $: symbolValue = getSymbolValues(parseInt(value));
@@ -55,15 +62,6 @@
         background-color: chartreuse;
     }
 </style>
-
-<input type="number" bind:value={value} />
-<div>
-    {#each symbolValue as here}
-    <div>
-        {here}
-    </div>
-    {/each}
-</div>
 
 <div class="main">
         {#each configurationList as currentBit, index}
