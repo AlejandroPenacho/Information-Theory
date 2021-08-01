@@ -26,18 +26,21 @@
     export let value;
     let nSymbols = configurationList.length;
 
-    let valueIncrease = new Array(nSymbols);
+    let valuePerUnit = new Array(nSymbols);
 
     $: {
         let current = 1;
-        for (let i=nSymbols; i>=0; i--){
-            valueIncrease[i] = current;
+        for (let i=(nSymbols-1); i>=0; i--){
+            valuePerUnit[i] = current;
             current *= configurationList[i];
         }
+        console.log(valuePerUnit)
     }
 
+    console.log(value)
+
     export let symbolValue;
-    $: symbolValue = getSymbolValues(parseInt(value));
+    $: symbolValue = getSymbolValues(value);
 
     function getSymbolValues(value: number) {
         let symbolValue : Array<number> = new Array(nSymbols);
@@ -49,6 +52,18 @@
         console.log(symbolValue)
         return symbolValue
     }
+    
+    function increaseValue(index : number){
+        return ()=>{
+            if (symbolValue[index] == (configurationList[index]-1)){
+                value -= valuePerUnit[index]*symbolValue[index];
+            } else {
+                value += valuePerUnit[index];
+            }
+            console.log(value)
+        }
+    }
+
 </script>
 
 <style>
@@ -61,18 +76,35 @@
         justify-content: center;
         background-color: chartreuse;
     }
+    img {
+        cursor: pointer;
+    }
+    div.number {
+        cursor: pointer;
+        user-select: none;
+    }
+
 </style>
 
 <div class="main">
         {#each configurationList as currentBit, index}
         {#if currentBit==2}
-            <img src={coinSVGs[symbolValue[index]]} alt=0/>
+            <img src={coinSVGs[symbolValue[index]]}
+                 alt={symbolValue[index]}
+                 on:click={increaseValue(index)} />
         {:else if currentBit==4}
-            <img src={suitSVGs[symbolValue[index]]} alt=0/>
+            <img src={suitSVGs[symbolValue[index]]}
+                 alt={symbolValue[index]}
+                 on:click={increaseValue(index)} />
         {:else if currentBit==8}
-            <img src={compassSVGs[symbolValue[index]]} alt=0/>
+            <img src={compassSVGs[symbolValue[index]]}
+                 alt={symbolValue[index]}
+                 on:click={increaseValue(index)} />
         {:else if currentBit==16}
-            <div class="number"> {symbolValue[index]} </div>
+            <div class="number"
+                 on:click={increaseValue(index)}>
+                 {symbolValue[index]}
+            </div>
         {/if}
     {/each}
 </div>
