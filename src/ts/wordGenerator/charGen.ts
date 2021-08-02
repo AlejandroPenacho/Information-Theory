@@ -1,5 +1,5 @@
 
-class CharGenerator{
+export class TextGenerator{
     generationTable: Array<[number, string]>
     nSymbols: number;
 
@@ -39,7 +39,7 @@ class CharGenerator{
     }
 }
 
-class CharTransformer{
+export class TextTransformer{
     transfomTable: Array<[string, string]>;
     buffer: string;
     nTransformations: number;
@@ -60,5 +60,27 @@ class CharTransformer{
             }
         }
         return ""
+    }
+}
+
+export class TextBuffer {
+    bufferLength: number;
+    buffer: string;
+
+    constructor(length : number){
+        this.bufferLength = length;
+        this.buffer = "";
+    }
+
+    add(newChars: string): string {
+        let temporalBuffer = this.buffer + newChars;
+        let excessChars = (temporalBuffer.length - this.bufferLength);
+        if (excessChars > 0){
+            this.buffer = temporalBuffer.slice(excessChars);
+            return temporalBuffer.slice(0, excessChars)
+        } else {
+            this.buffer = temporalBuffer;
+            return ""
+        }
     }
 }
