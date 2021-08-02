@@ -1,28 +1,11 @@
 <script lang="ts">
-    let letter = "F";
 
-    let currentlySelected = false;
+    export let letter;
+
+    export let selected;
     let backColor;
 
-    $: backColor = currentlySelected ? "#7FFF00" : "#00FFFF";
-
-
-    function click_function(){
-        currentlySelected = !currentlySelected;
-        if (currentlySelected){
-            letter="?";
-        }
-    }
-
-    function processKeyDown(e){
-        if (e.key != "Shift" && currentlySelected){
-            letter = e.key;
-            currentlySelected = !currentlySelected;
-        }
-        
-    }
-
-    document.onkeydown = processKeyDown;
+    $: backColor = selected ? "#7FFF00" : "#00FFFF";
 
 </script>
 
@@ -37,6 +20,6 @@
     }
 </style>
 
-<span style="background-color: {backColor}" on:click={click_function}>
+<span style="background-color: {backColor}" on:click>
     {letter}
 </span>

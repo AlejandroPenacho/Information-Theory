@@ -3,13 +3,14 @@
     export let selectedChapter : number = 0;
 
     let listOfChapters : [number, string][]= [
-        [0, "Introduction"],
-        [1, "What is information"],
-        [2, "Guessing the letter"],
-        [3, "Text generator"],
-        [4, "Dices"],
-        [5, "Who is Who?"],
-        [6, "Conclusion"]
+        [0, "Problems of communication"],
+        [1, "Introduction"],
+        [2, "What is information?"],
+        [3, "Guessing the letter"],
+        [4, "Text generator"],
+        [5, "Dices"],
+        [6, "Who is Who?"],
+        [7, "Conclusion"]
     ]
 
     function selectChapter( chapter: number) : () => void {

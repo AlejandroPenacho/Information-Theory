@@ -37,7 +37,6 @@
             current *= configurationList[i];
         }
     }
-    console.log(configurationList)
 
 
     let symbolValue;

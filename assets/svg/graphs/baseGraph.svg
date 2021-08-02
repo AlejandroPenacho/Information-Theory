@@ -42,7 +42,7 @@
      id="layer1">
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 7.0087612,8.4008631 V 35.254865 H 84.32118"
+       d="M 5,10 V 35 H 80"
        id="path881"
        inkscape:label="mainframe" />
     <g
@@ -50,11 +50,11 @@
        inkscape:label="y-ticks">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.165;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 6.9841226,32.368146 -1.5115569,0.01185"
+         d="M 5,35 H 3"
          id="path1082" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.165;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 7.0087611,35.254864 5.357782,35.273675"
+         d="M 5,30 H 3"
          id="path1078" />
     </g>
     <g

@@ -1,12 +1,13 @@
 <script lang="ts">
 
-    import Scene0 from "/src/svelte/scenes/Scene0.svelte";
-    import Scene1 from "/src/svelte/scenes/Scene1.svelte";
-    import Scene2 from "/src/svelte/scenes/Scene2.svelte";
-    import Scene3 from "/src/svelte/scenes/Scene3.svelte";
-    import Scene4 from "/src/svelte/scenes/Scene4.svelte";
-    import Scene5 from "/src/svelte/scenes/Scene5.svelte";
     import Navbar from "/src/svelte/Navbar.svelte";
+
+    import ExampleProblems from "/src/svelte/scenes/ExampleProblems.svelte";
+    import Introduction from "/src/svelte/scenes/Introduction.svelte";
+    import Entropy1 from "/src/svelte/scenes/Entropy1.svelte";
+    import CompleteWords from "/src/svelte/scenes/CompleteWords.svelte";
+    import ThrowDices from "/src/svelte/scenes/ThrowDices.svelte";
+    import Scene5 from "/src/svelte/scenes/Scene5.svelte";
 
     let selectedChapter = 0;
 </script>
@@ -40,15 +41,15 @@
     </div>
     <div class="mainZone">
         {#if selectedChapter==0}
-            <Scene0 /> 
+            <ExampleProblems /> 
         {:else if selectedChapter==1}
-            <Scene1 />
+            <Introduction />
         {:else if selectedChapter==2}
-            <Scene2 />
+            <Entropy1 />
         {:else if selectedChapter==3}
-            <Scene3 />
+            <CompleteWords />
         {:else if selectedChapter==4}
-            <Scene4 />
+            <ThrowDices />
         {:else if selectedChapter==5}
             <Scene5 />
         {/if}
