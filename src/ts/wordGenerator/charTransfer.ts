@@ -1,3 +1,7 @@
+interface TunnelState {
+    text: string;
+    position: number;
+}
 
 export class TextGenerator{
     generationTable: Array<[number, string]>
@@ -81,6 +85,45 @@ export class TextBuffer {
         } else {
             this.buffer = temporalBuffer;
             return ""
+        }
+    }
+}
+
+export class textTunnel {
+    lenght: number;
+    transferTime: number;
+    exitFunction: (string) => void;
+    state: TunnelState;
+    frameTimestep: number;
+
+    constructor( lenght: number, tranferTime: number, exitFunction: () => void) {
+        this.lenght = lenght;
+        this.transferTime = tranferTime;
+        this.exitFunction = exitFunction;
+    }
+
+    sendString( message: string ){
+        this.state.text = message;
+        this.state.position = 0;
+        requestAnimationFrame(this.updateFrame);
+    }
+
+    updateFrame(time: number) {
+        
+        if (this.frameTimestep === undefined) {
+            this.frameTimestep = time;
+        }
+        let deltaTime = time - this.frameTimestep;
+        this.frameTimestep = time;
+
+        this.state.position += this.lenght * deltaTime / this.transferTime;
+
+        if (this.state.position < this.lenght){
+            requestAnimationFrame(this.updateFrame);
+        } else {
+            this.exitFunction(this.state.text);
+            this.state.text = "";
+            this.state.position = 0;
         }
     }
 }

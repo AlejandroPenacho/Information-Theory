@@ -1,11 +1,11 @@
 <script lang="ts">
-    import * as cg from "../../ts/wordGenerator/charGen";
+    import * as ct from "../../ts/wordGenerator/charTransfer";
 
-    let generator = new cg.TextGenerator([[2, "a"],[1, "b"],[1, "c"]]);
-    let coder = new cg.TextTransformer([["a","0"],["b","10"],["c","11"]]);
+    let generator = new ct.TextGenerator([[2, "a"],[1, "b"],[1, "c"]]);
+    let coder = new ct.TextTransformer([["a","0"],["b","10"],["c","11"]]);
 
-    let buffer1 = new cg.TextBuffer(10);
-    let buffer2 = new cg.TextBuffer(10);
+    let buffer1 = new ct.TextBuffer(10);
+    let buffer2 = new ct.TextBuffer(10);
 
     function moreToTheChain(){
         buffer2.add(coder.transform(buffer1.add(generator.generate(1))));
