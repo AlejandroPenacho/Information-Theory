@@ -10,6 +10,12 @@
     import Scene5 from "/src/svelte/scenes/Scene5.svelte";
 
     let selectedChapter = 0;
+
+    function changeChapter(newChapter){
+        return ()=>{
+            selectedChapter = newChapter;
+        }
+    }
 </script>
 
 <style>
@@ -41,7 +47,7 @@
     </div>
     <div class="mainZone">
         {#if selectedChapter==0}
-            <ExampleProblems /> 
+            <ExampleProblems nextChapter={changeChapter(1)}/> 
         {:else if selectedChapter==1}
             <Introduction />
         {:else if selectedChapter==2}
