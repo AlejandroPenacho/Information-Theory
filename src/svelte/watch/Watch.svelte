@@ -2,6 +2,7 @@
 
    import Message from "/src/svelte/watch/Message.svelte";
 
+   let animationProgress = 0;
 
    enum Author {
       self,
@@ -24,12 +25,20 @@
    ]
 
    function addMessage(newMessage: MessageData) {
-      let currentOffset = 0;
       listOfMessages.push(newMessage);
-      for (let i=(listOfMessages.length-1); i>=0; i--){
-         listOfMessages[i].offset = currentOffset;
-         currentOffset += 2;
+      animationProgress = 0;
+      requestAnimationFrame(getFrame);
+      listOfMessages = listOfMessages;
+   }
+
+   function getFrame(){
+       for (let i=0; i<(listOfMessages.length); i++){
+         listOfMessages[i].offset += 0.2;
       }
+      animationProgress += 0.1;
+      if (animationProgress < 1) {
+         requestAnimationFrame(getFrame);
+      } 
       listOfMessages = listOfMessages;
    }
 
@@ -37,14 +46,14 @@
       addMessage({
          author: Author.self,
          text: "Yes",
-         offset: 0
+         offset: -2
       })
     }
     function clickNoFun(){
       addMessage({
          author: Author.self,
          text: "No",
-         offset: 0
+         offset: -2
       })
     }
 </script>
