@@ -1,17 +1,58 @@
 <script lang="ts">
 
-    let currentTime = new Date();
-    let timeFormat = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+   import Message from "/src/svelte/watch/Message.svelte";
+
+
+   enum Author {
+      self,
+      other
+   }
+   interface MessageData {
+      text: string,
+      author: Author,
+      offset: number
+   }
+
+ 
+   let currentTime = new Date();
+   let timeFormat = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+
+
+   let listOfMessages: Array<MessageData> = [
+      {text: "Te vieness?",author: Author.other, offset: 2},
+      {text: "No", author: Author.self, offset: 0}
+   ]
+
+   function addMessage(newMessage: MessageData) {
+      let currentOffset = 0;
+      listOfMessages.push(newMessage);
+      for (let i=(listOfMessages.length-1); i>=0; i--){
+         listOfMessages[i].offset = currentOffset;
+         currentOffset += 2;
+      }
+      listOfMessages = listOfMessages;
+   }
 
     function clickYesFun(){
-        console.log("Yes")
+      addMessage({
+         author: Author.self,
+         text: "Yes",
+         offset: 0
+      })
     }
     function clickNoFun(){
-        console.log("No")
+      addMessage({
+         author: Author.self,
+         text: "No",
+         offset: 0
+      })
     }
 </script>
 
 <style>
+   svg {
+      transition: transform 1s;
+   }
 </style>
 
 <svg
@@ -301,6 +342,10 @@
          x="1.0322067"
          y="3.7412636"
          ry="0" />
+         {#each listOfMessages as message}
+            <Message {...message} />
+         {/each}
+      <!--
       <g
          id="g846">
         <path
@@ -363,6 +408,7 @@
              y="17.308865"
              id="tspan2174" /></text>
       </g>
+   -->
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.105833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
