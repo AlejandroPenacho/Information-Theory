@@ -7,6 +7,7 @@
 
     export let author: Author;
     export let text: string;
+    export let dimensions : [number, number];
 
     export let offset;
 
@@ -24,8 +25,8 @@
         <rect
            style="opacity:1;fill:#506a87;fill-opacity:1;stroke:none;stroke-width:0.403225;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect7311"
-           width="6.9861488"
-           height="1.0864806"
+           width={dimensions[0]}
+           height={dimensions[1]}
            x="1.5584966"
            y="4.1201396"
            ry="0.54324031" />
@@ -58,8 +59,8 @@
         <rect
            style="opacity:1;fill:#91c1f5;fill-opacity:1;stroke:none;stroke-width:0.237381;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
            id="rect7311-0"
-           width="2.4212236"
-           height="1.0864806"
+           width={dimensions[0]}
+           height={dimensions[1]}
            x="1.5584966"
            y="4.1201396"
            ry="0.54324031" />

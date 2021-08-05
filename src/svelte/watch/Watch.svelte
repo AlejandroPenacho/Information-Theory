@@ -3,6 +3,8 @@
    import Message from "/src/svelte/watch/Message.svelte";
 
    let animationProgress = 0;
+   let timeLastMessage = undefined;
+   let messageInterval = 2000;
 
    enum Author {
       self,
@@ -11,7 +13,8 @@
    interface MessageData {
       text: string,
       author: Author,
-      offset: number
+      offset: number,
+      dimensions: [number, number]
    }
 
  
@@ -20,40 +23,62 @@
 
 
    let listOfMessages: Array<MessageData> = [
-      {text: "Te vieness?",author: Author.other, offset: 2},
-      {text: "No", author: Author.self, offset: 0}
+     // {text: "Te vieness?",author: Author.other, offset: 2, dimensions: [7, 1]},
+     // {text: "No", author: Author.self, offset: 0, dimensions: [2.4, 1]}
    ]
+
+   export function receiveMessage(text){
+      //TODO: Compute dimension of message
+      let dimensions: [number, number] = [7, 2];
+
+      addMessage({
+         text: text,
+         author: Author.other,
+         dimensions: dimensions,
+         offset: -2
+      })
+   }
 
    function addMessage(newMessage: MessageData) {
       listOfMessages.push(newMessage);
-      animationProgress = 0;
+      animationProgress = -(newMessage.dimensions[1]+1);
       requestAnimationFrame(getFrame);
       listOfMessages = listOfMessages;
    }
 
    function getFrame(){
-       for (let i=0; i<(listOfMessages.length); i++){
-         listOfMessages[i].offset += 0.2;
+      for (let i=0; i<(listOfMessages.length); i++){
+         listOfMessages[i].offset += 0.1;
       }
       animationProgress += 0.1;
-      if (animationProgress < 1) {
+      if (animationProgress < 0) {
          requestAnimationFrame(getFrame);
       } 
       listOfMessages = listOfMessages;
    }
 
-    function clickYesFun(){
+   function clickYesFun(){
+      if ((timeLastMessage !== undefined) && ((Date.now()-timeLastMessage) < messageInterval)) {
+         return
+      }
+      timeLastMessage = Date.now();
       addMessage({
          author: Author.self,
          text: "Yes",
-         offset: -2
+         offset: -2,
+         dimensions: [2.4, 1]
       })
     }
-    function clickNoFun(){
+   function clickNoFun(){
+      if ((timeLastMessage !== undefined) && ((Date.now()-timeLastMessage) < messageInterval)) {
+         return
+      }
+      timeLastMessage = Date.now();
       addMessage({
          author: Author.self,
          text: "No",
-         offset: -2
+         offset: -2,
+         dimensions: [2.4, 1]
       })
     }
 </script>
@@ -354,71 +379,7 @@
          {#each listOfMessages as message}
             <Message {...message} />
          {/each}
-      <!--
-      <g
-         id="g846">
-        <path
-           style="opacity:1;fill:#506a87;stroke-width:1.524;stroke-linejoin:round;paint-order:stroke fill markers"
-           id="path894"
-           d="m 25.106555,23.477662 1.207867,-2.092087 1.207867,-2.092087 1.207867,2.092087 1.207868,2.092087 -2.415735,0 z"
-           transform="matrix(0.25556787,0.05430457,-0.05986525,0.17717403,-3.8894063,-0.68069579)" />
-        <rect
-           style="opacity:1;fill:#506a87;fill-opacity:1;stroke:none;stroke-width:0.403225;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-           id="rect7311"
-           width="6.9861488"
-           height="1.0864806"
-           x="1.5584966"
-           y="4.1201396"
-           ry="0.54324031" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-           x="1.9764334"
-           y="4.8836856"
-           id="text20647"><tspan
-             id="tspan20645"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.705556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
-             x="1.9764334"
-             y="4.8836856">Are you at home?</tspan><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.705556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
-             x="1.9764334"
-             y="18.11281"
-             id="tspan16478" /></text>
-      </g>
-      <g
-         id="g846-9"
-         transform="matrix(-0.99928042,0,0,1,12.487646,2.053521)">
-        <path
-           style="opacity:1;fill:#91c1f5;fill-opacity:1;stroke-width:1.524;stroke-linejoin:round;paint-order:stroke fill markers"
-           id="path894-5"
-           transform="matrix(0.25556787,0.05430457,-0.05986525,0.17717403,-3.8894063,-0.68069579)"
-           d="m 25.106555,23.477662 1.207867,-2.092087 1.207867,-2.092087 1.207867,2.092087 1.207868,2.092087 -2.415735,0 z" />
-        <rect
-           style="opacity:1;fill:#91c1f5;fill-opacity:1;stroke:none;stroke-width:0.237381;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-           id="rect7311-0"
-           width="2.4212236"
-           height="1.0864806"
-           x="1.5584966"
-           y="4.1201396"
-           ry="0.54324031" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:10.1046px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.252616"
-           x="-3.6999857"
-           y="4.6781139"
-           id="text20647-4"
-           transform="scale(-0.95476861,1.0473742)"><tspan
-             id="tspan20645-8"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.673643px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252616"
-             x="-3.6999857"
-             y="4.6781139">Yes</tspan><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.673643px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252616"
-             x="-3.6999857"
-             y="17.308865"
-             id="tspan2174" /></text>
-      </g>
-   -->
-    </g>
+   </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.105833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 2.3529556,3.2445258 1.7328398,2.8865019 2.3614473,2.5235751"
