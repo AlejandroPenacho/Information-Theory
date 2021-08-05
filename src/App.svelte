@@ -8,6 +8,7 @@
     import CompleteWords from "/src/svelte/scenes/CompleteWords.svelte";
     import ThrowDices from "/src/svelte/scenes/ThrowDices.svelte";
     import Scene5 from "/src/svelte/scenes/Scene5.svelte";
+    import SmartWatch1 from "/src/svelte/scenes/SmartWatch1.svelte";
 
     let selectedChapter = 0;
 
@@ -49,14 +50,16 @@
         {#if selectedChapter==0}
             <ExampleProblems nextChapter={changeChapter(1)}/> 
         {:else if selectedChapter==1}
-            <Introduction />
+            <SmartWatch1 />
         {:else if selectedChapter==2}
-            <Entropy1 />
+            <Introduction />
         {:else if selectedChapter==3}
-            <CompleteWords />
+            <Entropy1 />
         {:else if selectedChapter==4}
-            <ThrowDices />
+            <CompleteWords />
         {:else if selectedChapter==5}
+            <ThrowDices />
+        {:else if selectedChapter==6}
             <Scene5 />
         {/if}
     </div>
