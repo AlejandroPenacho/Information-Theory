@@ -37,16 +37,15 @@
         height: 80mm;
     }
     svg {
-        position: absolute
     }
 </style>
 
 <div>
-    {#each [...Array(colorList.length).keys()] as index}
         <svg width="50mm" height="50mm" viewBox="-1 -1 202 202" id="main">
-            <path 
-            style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-            d={generatePath(200, angleList[index], angleList[index+1])} />
+            {#each [...Array(colorList.length).keys()] as index}
+                <path 
+                style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+                d={generatePath(200, angleList[index], angleList[index+1])} />
+            {/each}
         </svg>
-    {/each}
 </div>

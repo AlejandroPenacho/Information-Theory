@@ -73,15 +73,12 @@
     div.container {
         height: 15px;
         width: 15px;
-        margin: 2px;
         cursor: pointer;
     }
     img {
         height: 100%;
         width: 100%;
     }
-
-
 </style>
 
 <div class="container">

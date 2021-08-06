@@ -7,8 +7,13 @@
     import Entropy1 from "/src/svelte/scenes/Entropy1.svelte";
     import CompleteWords from "/src/svelte/scenes/CompleteWords.svelte";
     import ThrowDices from "/src/svelte/scenes/ThrowDices.svelte";
-    import Scene5 from "/src/svelte/scenes/Scene5.svelte";
     import SmartWatch1 from "/src/svelte/scenes/SmartWatch1.svelte";
+    import RealEntropy from "/src/svelte/scenes/RealEntropy.svelte";
+    import WhoIsWhoScene from "/src/svelte/scenes/WhoIsWhoScene.svelte";
+    import LargeChains from "/src/svelte/scenes/LargeChains.svelte";
+    import Compressor from "/src/svelte/scenes/Compressor.svelte";
+    import Conclusion from "/src/svelte/scenes/Conclusion.svelte";
+
 
     let selectedChapter = 0;
 
@@ -58,9 +63,17 @@
         {:else if selectedChapter==4}
             <CompleteWords />
         {:else if selectedChapter==5}
-            <ThrowDices />
+            <RealEntropy />
         {:else if selectedChapter==6}
-            <Scene5 />
+            <WhoIsWhoScene />
+        {:else if selectedChapter==7}
+            <ThrowDices />
+        {:else if selectedChapter==8}
+            <LargeChains />
+        {:else if selectedChapter==9}
+            <Compressor />
+        {:else if selectedChapter==10}
+            <Conclusion />
         {/if}
     </div>
 </div>

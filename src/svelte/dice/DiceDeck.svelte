@@ -72,13 +72,16 @@ div.allClickButton:active {
 
 div.diceBox {
     padding: 20px;
+    max-width: 400px;
     display: flex;
     flex-wrap: wrap;
 }
 
 div.main {
     background-color: green;
-    padding: 20px;
+    padding: 10px;
+    margin-top: 15px;
+    display: flex;
 }
 
 div.lowerDeck {
@@ -101,14 +104,20 @@ div.result {
 div.diceNumbersBlock {
     display: flex;
     flex-wrap: wrap;
-    height: 60px;
-    width: 400px;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin-right: 20px;
 }
 
 div.minorDiceBlock {
     display: flex;
-    height: 50%;
+    flex-direction: column;
+    width: 50%;
     align-items: center;
+}
+div.minorDiceBlock img {
+    width: 60%;
 }
 
 img.exampleDice {
@@ -117,10 +126,53 @@ img.exampleDice {
     padding-left: 30px;
 }
 
+div.block1 {
+    background-color: blueviolet;
+}
+div.ndice-block {
+    display: flex;
+    align-items: center;
+}
+div.ndice-select {
+    display: grid;
+    grid-template-rows: 90% 10%;
+}
+
+
 </style>
 
 <div class="main">
-    <input type="range" bind:value={rangeInput} min=0 max=3 on:change={restartData}/>
+    <div class="block1">
+        <div class="ndice-block">
+            Nº dices:
+            <div class="ndice-select">
+               {nDices} 
+                <input type="range" bind:value={rangeInput} min=0 max=3 on:change={restartData}/>
+            </div>
+        </div>
+        <div class="lowerDeck">
+            <div class="allClickButton" on:click={throwAllDices}>
+                <div>
+                    Roll all
+                </div>
+            </div>
+            <div class="result">
+                Sum: {diceValueStatus.sum}
+            </div>
+            <div class="result">
+                Mean: {(diceValueStatus.sum/nDices).toPrecision(4)}
+            </div>
+        </div>
+    </div>
+    <div class="diceNumbersBlock">
+        {#each [...Array(6).keys()] as index}
+            <div class="minorDiceBlock" >
+                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
+                {(diceValueStatus.nDicesAt[index]/nDices).toFixed(3)}
+            </div>
+        {/each}
+    </div>
+    <PieChart percentageList={diceValueStatus.nDicesAt.map((x)=>{return x/nDices})}/>
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
             <Dice bind:click={diceClick[index]} bind:restart={diceRestart[index]} 
@@ -128,26 +180,4 @@ img.exampleDice {
             updateDiceData={updateDiceData}/>
         {/each}
     </div>
-    <div class="lowerDeck">
-        <div class="allClickButton" on:click={throwAllDices}>
-            <div>
-                Roll all
-            </div>
-        </div>
-        <div class="result">
-            Sum: {diceValueStatus.sum}
-        </div>
-        <div class="result">
-            Mean: {(diceValueStatus.sum/nDices).toPrecision(4)}
-        </div>
-        <div class="diceNumbersBlock">
-            {#each [...Array(6).keys()] as index}
-            <div class="minorDiceBlock" >
-                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
-                {(diceValueStatus.nDicesAt[index]/nDices).toPrecision(4)}
-            </div>
-            {/each}
-        </div>
-    </div>
-    <PieChart percentageList={diceValueStatus.nDicesAt.map((x)=>{return x/nDices})}/>
 </div>

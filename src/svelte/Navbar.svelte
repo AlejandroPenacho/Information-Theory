@@ -4,13 +4,16 @@
 
     let listOfChapters : [number, string][]= [
         [0, "Problems of communication"],
-        [1, "Introduction"],
-        [2, "What is information?"],
-        [3, "Guessing the letter"],
-        [4, "Text generator"],
-        [5, "Dices"],
+        [1, "The new Smartwatch"],
+        [2, "Intro to information"],
+        [3, "Entropy"],
+        [4, "Guessing the letter"],
+        [5, "The real entropy"],
         [6, "Who is Who?"],
-        [7, "Conclusion"]
+        [7, "Lots of Dices"],
+        [8, "Large text chains"],
+        [9, "Compressing Data"],
+        [10, "Conclusion"]
     ]
 
     function selectChapter( chapter: number) : () => void {
@@ -53,6 +56,8 @@
     div.index {
         width: 20px;
         padding-left: 10px;
+        padding-right: 5px;
+        text-align: right;
     }
 </style>
 
