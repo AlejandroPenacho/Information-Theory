@@ -5,6 +5,26 @@
 
     let sendWatchMessage;
 
+    let instructionText: Array<string> = [
+        `First of all, answering yes or no questions in this device is no problem, as you can see. 
+        You can respond just by pressing the two buttons at the bottom.`,
+        `There are, however, simple questions that at first can not be answered. However, if your 
+        friend and you agree in a simple format, as here, everything works fine.`,
+        `So, binary questions can be easily answered here. But what about harder questions?`,
+        `Ah! When there are four possibilities, two binary answers seem to be enough. Great!`
+    ]
+
+    let inMessages: Array<string> = [
+        `Heyy! Are you finally coming to dinner tonigh?`,
+        `Ok, I'll buy pizzas? Do you prefer ham or pineapple?`,
+        `Oh, right. Say yes for ham, no for pineapple`,
+        `Perfect!`,
+        `At which hour should we meet?`,
+        `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`,
+        `Okay, yes for 20 and no for 21`,
+        `And yes for .00 and no for .30`
+    ]
+
     onMount(() => sendWatchMessage("Te vienes?"))
 </script>
 
