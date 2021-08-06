@@ -11,7 +11,9 @@
         `There are, however, simple questions that at first can not be answered. However, if your 
         friend and you agree in a simple format, as here, everything works fine.`,
         `So, binary questions can be easily answered here. But what about harder questions?`,
-        `Ah! When there are four possibilities, two binary answers seem to be enough. Great!`
+        `Ah! When there are four possibilities, two binary answers seem to be enough. Great!`,
+        `Your friend and you can agree in an uniform method for 4-questions, like: 1st no-no, 
+        2nd yes-no, 3rd no-yes and 4th yes-yes.`
     ]
 
     let inMessages: Array<string> = [
@@ -22,7 +24,8 @@
         `At which hour should we meet?`,
         `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`,
         `Okay, yes for 20 and no for 21`,
-        `And yes for .00 and no for .30`
+        `And yes for .00 and no for .30`,
+        `And for the drinks: water, coke, nestea or orange juice`
     ]
 
     onMount(() => sendWatchMessage("Te vienes?"))
