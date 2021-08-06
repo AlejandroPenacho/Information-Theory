@@ -41,6 +41,14 @@ export class TextGenerator{
         }
         return outString
     }
+    generateRandomSymbolWithIndex(): [string, number]{
+        let rand = Math.random();
+        for (let i=0; i<this.nSymbols; i++){
+            if (this.generationTable[i][0] >= rand){
+                return [this.generationTable[i][1], i]
+            }
+        }
+    }
 }
 
 export class TextTransformer{
@@ -89,7 +97,7 @@ export class TextBuffer {
     }
 }
 
-export class textTunnel {
+export class TextTunnel {
     lenght: number;
     transferTime: number;
     exitFunction: (string) => void;
