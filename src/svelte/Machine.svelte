@@ -1,10 +1,38 @@
 <script lang="ts">
     import * as aux from "../ts/textMachine/aux";
+    import * as ct from "../ts/wordGenerator/charTransfer"
 
     let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
     let rawLetters = [
-        {x: 14, y:12, letter: "h"}
+        {position: [20,16], letter: "h", progress: 0}
     ]
+
+    let trajectoryTime = 300000;
+
+    let lastTime;
+
+
+   // requestAnimationFrame(getFrame);
+
+    function getFrame(time){
+      if (lastTime === undefined){
+         lastTime = time;
+      }
+      console.log(rawLetters[0].progress)
+      let timestep = time - lastTime;
+
+      for (let i=0; i<rawLetters.length; i++){
+         rawLetters[i].progress += timestep/trajectoryTime;
+         if (rawLetters[i].progress >= 1){
+            rawLetters.splice(i,1);
+         } else {
+            rawLetters[i].position = rawTrajectory(rawLetters[i].progress)
+         }
+      }
+      rawLetters = rawLetters;
+      requestAnimationFrame(getFrame);
+    }
+
 </script>
 
 <svg
@@ -136,12 +164,12 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="{letter.x}"
-         y="{letter.y}"
+         x="{letter.position[0]}"
+         y="{letter.position[1]}"
          id="text3760-7-5"><tspan
            id="tspan3758-2-0"
-           x="{letter.x}"
-           y="{letter.y}"
+           x="{letter.position[0]}"
+           y="{letter.position[1]}"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
       {/each}
 

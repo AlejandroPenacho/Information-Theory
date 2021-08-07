@@ -44,12 +44,13 @@ export function computeRawTrajectory(
 
     let timeAtPoint: number[] = new Array(6);
 
-    let currentTime;
+    let currentTime = 0;
     timeAtPoint[0] = 0;
     for (let i=0; i<5; i++){
         currentTime += lengthPerPart[i]/totalLength;
         timeAtPoint[i+1] = currentTime;
     }
+    console.log(timeAtPoint)
     timeAtPoint[5] = 1;
 
     return (t) => {
