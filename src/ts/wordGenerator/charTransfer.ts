@@ -1,7 +1,3 @@
-interface TunnelState {
-    text: string;
-    position: number;
-}
 
 export class TextGenerator{
     generationTable: Array<[number, string]>
@@ -97,41 +93,55 @@ export class TextBuffer {
     }
 }
 
+export class FloatingLetter {
+    position: [number, number];
+    progress: number;
+    letter: string
+
+    constructor(letter: string){
+        this.letter = letter;
+        this.progress = 0;
+    }
+}
+
 export class TextTunnel {
-    lenght: number;
+    passengers: Array<FloatingLetter>;
+    trajectoryFunction: (number) => [number, number];
     transferTime: number;
     exitFunction: (string) => void;
-    state: TunnelState;
     frameTimestep: number;
 
-    constructor( lenght: number, tranferTime: number, exitFunction: () => void) {
-        this.lenght = lenght;
+    constructor(trajectoryFunction: (number) => [number, number],
+                tranferTime: number,
+                exitFunction: (text) => void) {
+
+        this.trajectoryFunction = trajectoryFunction;
         this.transferTime = tranferTime;
         this.exitFunction = exitFunction;
+        this.passengers = new Array();
     }
 
-    sendString( message: string ){
-        this.state.text = message;
-        this.state.position = 0;
-        requestAnimationFrame(this.updateFrame);
-    }
+    send( message: string ){
+        for (let i=0; i<message.length; i++){
+            setTimeout(() => {
+                let newLetter = new FloatingLetter(message[i]);
+                newLetter.position = this.trajectoryFunction(0);
+                this.passengers.push(newLetter);
+            }, i*100)
+        }
+   }
 
-    updateFrame(time: number) {
+    updateFrame(timestep: number) {
         
-        if (this.frameTimestep === undefined) {
-            this.frameTimestep = time;
-        }
-        let deltaTime = time - this.frameTimestep;
-        this.frameTimestep = time;
+        for (let i=0; i<this.passengers.length; i++){
+            this.passengers[i].progress += timestep/this.transferTime;
+            this.passengers[i].position = this.trajectoryFunction(this.passengers[i].progress);
 
-        this.state.position += this.lenght * deltaTime / this.transferTime;
-
-        if (this.state.position < this.lenght){
-            requestAnimationFrame(this.updateFrame);
-        } else {
-            this.exitFunction(this.state.text);
-            this.state.text = "";
-            this.state.position = 0;
+            if (this.passengers[i].progress >= 1){
+                this.exitFunction(this.passengers[i].letter);
+                this.passengers.splice(i,1);
+            }
         }
+        this.passengers = this.passengers;
     }
 }

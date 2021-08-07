@@ -2,34 +2,42 @@
     import * as aux from "../ts/textMachine/aux";
     import * as ct from "../ts/wordGenerator/charTransfer"
 
-    let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
-    let rawLetters = [
-        {position: [20,16], letter: "h", progress: 0}
-    ]
+   let trajectoryTime = 5000;
+   let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
+   let temp = aux.computeCodifiedTrajectories(trajectoryTime,0, 1, 0, 1);
+   let rawBuffer = new ct.TextBuffer(10);
 
-    let trajectoryTime = 300000;
+   let rawTunnel = new ct.TextTunnel(rawTrajectory, trajectoryTime, (text)=>{rawBuffer.add(text)});
 
-    let lastTime;
+   let informationMeasure = [0, 0];
+
+   rawTunnel.send("x");
+
+   document.onkeydown = (e) => {
+      let key = e.key;
+      if (key !== "Shift"){
+         rawTunnel.send(key);
+      }
+   };
 
 
-   // requestAnimationFrame(getFrame);
+   let lastTime;
+
+
+
+   requestAnimationFrame(getFrame);
 
     function getFrame(time){
       if (lastTime === undefined){
          lastTime = time;
       }
-      console.log(rawLetters[0].progress)
       let timestep = time - lastTime;
+      lastTime = time;
 
-      for (let i=0; i<rawLetters.length; i++){
-         rawLetters[i].progress += timestep/trajectoryTime;
-         if (rawLetters[i].progress >= 1){
-            rawLetters.splice(i,1);
-         } else {
-            rawLetters[i].position = rawTrajectory(rawLetters[i].progress)
-         }
-      }
-      rawLetters = rawLetters;
+      rawTunnel.updateFrame(timestep);
+      rawTunnel = rawTunnel;
+      rawBuffer = rawBuffer;
+
       requestAnimationFrame(getFrame);
     }
 
@@ -129,67 +137,61 @@
        transform="translate(-0.02700973,-0.70916707)" />
     <g
        id="textzone">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="14.234507"
-         y="5.6429029"
-         id="text3760"><tspan
-           id="tspan3758"
-           x="14.234507"
-           y="5.6429029"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="20.074274"
-         y="9.78549"
-         id="text3760-7"><tspan
-           id="tspan3758-2"
-           x="20.074274"
-           y="9.78549"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="14.286995"
-         y="18.735258"
-         id="text3760-7-5"><tspan
-           id="tspan3758-2-0"
-           x="14.286995"
-           y="18.735258"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
-
-      {#each rawLetters as letter}
+       {#each rawTunnel.passengers as letter}
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
          x="{letter.position[0]}"
          y="{letter.position[1]}"
-         id="text3760-7-5"><tspan
-           id="tspan3758-2-0"
+         id="text3760-7"><tspan
+           id="tspan3758-2"
            x="{letter.position[0]}"
            y="{letter.position[1]}"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
       {/each}
-
     </g>
-    <rect
-       style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
-       id="rect870-3"
-       width="15.91974"
-       height="3.5528457"
-       x="0.0034731962"
-       y="16.130802"
-       ry="1.3098249e-16" />
-    <rect
-       style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
-       id="rect870-3-6"
-       width="15.91974"
-       height="3.5528457"
-       x="0.0030642003"
-       y="22.22146"
-       ry="1.3098249e-16" />
+    <g
+       id="rawoutput">
+      <rect
+         style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect870-3"
+         width="15.91974"
+         height="3.5528457"
+         x="0.0034731962"
+         y="16.130802"
+         ry="1.3098249e-16" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="0.19819421"
+         y="18.872644"
+         id="text3760-7-3"><tspan
+           id="tspan3758-2-6"
+           x="0.19819421"
+           y="18.872644"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{rawBuffer.buffer}</tspan></text>
+    </g>
+    <g
+       id="g48">
+      <rect
+         style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect870-3-6"
+         width="15.91974"
+         height="3.5528457"
+         x="0.0030642003"
+         y="22.22146"
+         ry="1.3098249e-16" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="0.20645028"
+         y="24.929426"
+         id="text3760-7-3-3"><tspan
+           id="tspan3758-2-6-6"
+           x="0.20645028"
+           y="24.929426"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
+    </g>
     <g
        id="g8452"
        transform="translate(0,-0.52916667)">

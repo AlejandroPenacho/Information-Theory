@@ -27,8 +27,8 @@
      width="101px"
      showguides="false"
      inkscape:zoom="18.819275"
-     inkscape:cx="17.907172"
-     inkscape:cy="5.68566"
+     inkscape:cx="15.569144"
+     inkscape:cy="11.743279"
      inkscape:window-width="1366"
      inkscape:window-height="700"
      inkscape:window-x="0"
@@ -137,58 +137,66 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="14.234507"
-         y="5.6429029"
-         id="text3760"
-         inkscape:label="raw-1"><tspan
-           sodipodi:role="line"
-           id="tspan3758"
-           x="14.234507"
-           y="5.6429029"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="20.074274"
-         y="9.78549"
+         x="17.544134"
+         y="9.3339262"
          id="text3760-7"
          inkscape:label="raw-2"><tspan
            sodipodi:role="line"
            id="tspan3758-2"
-           x="20.074274"
-           y="9.78549"
+           x="17.544134"
+           y="9.3339262"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
+    </g>
+    <g
+       id="rawoutput"
+       inkscape:label="raw-output">
+      <rect
+         style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect870-3"
+         width="15.91974"
+         height="3.5528457"
+         x="0.0034731962"
+         y="16.130802"
+         ry="1.3098249e-16"
+         inkscape:label="block" />
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="14.286995"
-         y="18.735258"
-         id="text3760-7-5"
-         inkscape:label="raw-3"><tspan
+         x="0.19819421"
+         y="18.872644"
+         id="text3760-7-3"
+         inkscape:label="raw-text"><tspan
            sodipodi:role="line"
-           id="tspan3758-2-0"
-           x="14.286995"
-           y="18.735258"
+           id="tspan3758-2-6"
+           x="0.19819421"
+           y="18.872644"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
     </g>
-    <rect
-       style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
-       id="rect870-3"
-       width="15.91974"
-       height="3.5528457"
-       x="0.0034731962"
-       y="16.130802"
-       ry="1.3098249e-16"
-       inkscape:label="cod-input" />
-    <rect
-       style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
-       id="rect870-3-6"
-       width="15.91974"
-       height="3.5528457"
-       x="0.0030642003"
-       y="22.22146"
-       ry="1.3098249e-16"
-       inkscape:label="cod-output" />
+    <g
+       id="g48"
+       inkscape:label="cod-output">
+      <rect
+         style="fill:#00ffcf;stroke-width:0.132152;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect870-3-6"
+         width="15.91974"
+         height="3.5528457"
+         x="0.0030642003"
+         y="22.22146"
+         ry="1.3098249e-16"
+         inkscape:label="block" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         x="0.20645028"
+         y="24.929426"
+         id="text3760-7-3-3"
+         inkscape:label="raw-text"><tspan
+           sodipodi:role="line"
+           id="tspan3758-2-6-6"
+           x="0.20645028"
+           y="24.929426"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
+    </g>
     <g
        id="g8452"
        inkscape:label="encoder"

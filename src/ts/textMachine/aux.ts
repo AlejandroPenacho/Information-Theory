@@ -50,7 +50,6 @@ export function computeRawTrajectory(
         currentTime += lengthPerPart[i]/totalLength;
         timeAtPoint[i+1] = currentTime;
     }
-    console.log(timeAtPoint)
     timeAtPoint[5] = 1;
 
     return (t) => {
@@ -74,6 +73,31 @@ export function computeRawTrajectory(
     }
 }
 
+export function computeCodifiedTrajectories(
+            totalTime: number,
+            x0: number,
+            x1: number,
+            y0: number,
+            y1: number) : [number[], Array<(t)=> [number, number]>]{
+
+    let lengthPerPart = [
+        x1 - x0,
+        y1 - y0,
+        x1 - x0
+    ]
+    let totalLength = lengthPerPart.reduce((acc,x) => acc+x);
+    let timePerPart = lengthPerPart.map((x) => totalTime*x/totalLength);
+
+    let trajectoryFunctions = [
+        (t) => {return interpolateLinear([x0,y0],[x1,y0],0,1,t)},
+        (t) => {return interpolateLinear([x1,y0],[x1,y1],0,1,t)},
+        (t) => {return interpolateLinear([x1,y1],[x0,y1],0,1,t)},
+    ]
+
+    return [timePerPart, trajectoryFunctions]
+
+}
+
 function interpolateLinear(x0, xF, t0, tF, t): [number, number]{
     return [x0[0] + (t-t0)*(xF[0]-x0[0])/(tF-t0),
             x0[1] + (t-t0)*(xF[1]-x0[1])/(tF-t0)]
@@ -81,6 +105,6 @@ function interpolateLinear(x0, xF, t0, tF, t): [number, number]{
 
 function interpolateCircular(curve: Circular, t0, tF, t) : [number, number]{
     let angle = curve.angle[0] + (t-t0) * (curve.angle[1]-curve.angle[0])/(tF-t0);
-    return [curve.center[0] + Math.cos(angle),
-            curve.center[1] - Math.sin(angle)]
+    return [curve.center[0] + curve.radius * Math.cos(angle),
+            curve.center[1] - curve.radius * Math.sin(angle)]
 }
