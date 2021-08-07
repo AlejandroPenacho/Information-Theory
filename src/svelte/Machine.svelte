@@ -3,27 +3,39 @@
     import * as ct from "../ts/wordGenerator/charTransfer"
 
    let trajectoryTime = 5000;
+
    let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
-   let temp = aux.computeCodifiedTrajectories(trajectoryTime,0, 1, 0, 1);
+   let temp = aux.computeCodifiedTrajectories(trajectoryTime, 14.23, 25.54, 3.02, 24.59);
+
+   let transformTable: Array<[string,string]> = [["a","b"], ["b", "c"], ["c","d"], ["d","a"]];
+   
+   let encoder = new ct.TextTransformer(transformTable);
+   let decoder = new ct.TextTransformer(transformTable);
+
+   let codTimes = temp[0];
+   let codTrajs = temp[1];
+
    let rawBuffer = new ct.TextBuffer(10);
+   let codBuffer = new ct.TextBuffer(10);
 
    let rawTunnel = new ct.TextTunnel(rawTrajectory, trajectoryTime, (text)=>{rawBuffer.add(text)});
+   let cod3Tunnel = new ct.TextTunnel(codTrajs[2], codTimes[2], (text)=>{codBuffer.add(text)});
+   let cod2Tunnel = new ct.TextTunnel(codTrajs[1], codTimes[1], (text)=>{cod3Tunnel.send(decoder.transform(text))})
+   let cod1Tunnel = new ct.TextTunnel(codTrajs[0], codTimes[0], (text)=>{cod2Tunnel.send(encoder.transform(text))})
 
    let informationMeasure = [0, 0];
 
-   rawTunnel.send("x");
 
    document.onkeydown = (e) => {
       let key = e.key;
       if (key !== "Shift"){
          rawTunnel.send(key);
+         cod1Tunnel.send(key);
       }
    };
 
 
    let lastTime;
-
-
 
    requestAnimationFrame(getFrame);
 
@@ -35,8 +47,17 @@
       lastTime = time;
 
       rawTunnel.updateFrame(timestep);
+      cod1Tunnel.updateFrame(timestep);
+      cod2Tunnel.updateFrame(timestep);
+      cod3Tunnel.updateFrame(timestep);
+
       rawTunnel = rawTunnel;
       rawBuffer = rawBuffer;
+
+      cod1Tunnel = cod1Tunnel;
+      cod2Tunnel = cod2Tunnel;
+      cod3Tunnel = cod3Tunnel;
+      codBuffer = codBuffer;
 
       requestAnimationFrame(getFrame);
     }
@@ -137,18 +158,54 @@
        transform="translate(-0.02700973,-0.70916707)" />
     <g
        id="textzone">
-       {#each rawTunnel.passengers as letter}
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-         x="{letter.position[0]}"
-         y="{letter.position[1]}"
-         id="text3760-7"><tspan
-           id="tspan3758-2"
-           x="{letter.position[0]}"
-           y="{letter.position[1]}"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
-      {/each}
+         {#each rawTunnel.passengers as letter}
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               id="text3760-7"><tspan
+               id="tspan3758-2"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
+         {/each}
+         {#each cod1Tunnel.passengers as letter}
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               id="text3760-7"><tspan
+               id="tspan3758-2"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
+         {/each}
+         {#each cod2Tunnel.passengers as letter}
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               id="text3760-7"><tspan
+               id="tspan3758-2"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
+         {/each}
+         {#each cod3Tunnel.passengers as letter}
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               id="text3760-7"><tspan
+               id="tspan3758-2"
+               x="{letter.position[0]}"
+               y="{letter.position[1]}"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{letter.letter}</tspan></text>
+         {/each}
     </g>
     <g
        id="rawoutput">
@@ -190,7 +247,7 @@
            id="tspan3758-2-6-6"
            x="0.20645028"
            y="24.929426"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">b</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.66667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">{codBuffer.buffer}</tspan></text>
     </g>
     <g
        id="g8452"
