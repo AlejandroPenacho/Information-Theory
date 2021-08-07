@@ -5,7 +5,7 @@ export enum Trait {
     hasBeard, hasMoustache
 }
 
-enum Assumption {
+export enum Assumption {
     nothing, positive, negative
 }
 
@@ -37,12 +37,7 @@ export class Character {
     }
 
     checkTrait(trait: Trait) : boolean {
-        for (let i=0; i<this.traits.length; i++){
-            if (trait==this.traits[i]){
-                return true
-            }
-        }
-        return false
+        return this.traits[trait];
     }
 }
 
@@ -78,7 +73,7 @@ export class WhoIsWho {
 
     crossTrait(trait: Trait){
         this.characters.forEach((character) => {
-            if (character.checkTrait(trait)){
+            if (!character.checkTrait(trait)){
                 character.crossedOut = true;
             }
         })

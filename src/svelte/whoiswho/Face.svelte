@@ -1,11 +1,37 @@
 <script lang="ts">
-    import WhoIsWho from "./WhoIsWho.svelte";
     import * as ww from "../../ts/whoiswho/whoiswho"
 
-    export let character;
+    export let character: ww.Character;
+
+    let backColor;
+
+    $: {
+        if (character.crossedOut) {
+            backColor = "black";
+        } else if (character.underAssumption === ww.Assumption.positive) {
+            backColor = "green";
+        } else if (character.underAssumption === ww.Assumption.negative) {
+            backColor = "red";
+        } else {
+            backColor = ""
+        }
+    }
+
 </script>
 
+<style>
+    div.frame {
+        width: 120px;
+        height: 120px;
+        border-color: crimson;
+        border-style: solid;
+        margin: 10px;
+    }
 
+</style>
+
+
+<div class="frame" style="background-color: {backColor}">
 <svg
    width="120"
    height="120"
@@ -147,5 +173,14 @@
        d="m 10.440012,27.73391 c 0.736925,0.444283 1.424669,0.966642 2.119315,1.473547 0.174195,0.127116 0.522184,0.45113 0.755642,0.528947 0.14252,0.04751 0.362265,0.02455 0.512612,0.05794 1.075546,0.2389 1.680295,0.323519 2.779825,0.176916 0.6585,-0.0878 1.2891,-0.216543 1.838725,-0.604512 0.801622,-0.565849 1.586448,-1.281716 2.317294,-1.939475 0.09087,-0.08179 0.454541,-0.554136 0.629703,-0.554136"
        id="beard" />
     {/if}
+    <rect
+       style="opacity:1;fill:#000000;stroke-width:0.899583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;fill-opacity:{character.crossedOut? 0.85 : 0}"
+       id="cover"
+       width="31.716639"
+       height="31.715063"
+       x="0.039069682"
+       y="0.0022780639"
+       ry="1.5383563e-15" />
   </g>
 </svg>
+</div>
