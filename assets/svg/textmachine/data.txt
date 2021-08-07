@@ -1,0 +1,6 @@
+Raw trajectory:
+
+Start: 14.23, 5.64
+Vertical line: x=20.07
+End: 14.23, 18.735
+Turn-radius: 4
