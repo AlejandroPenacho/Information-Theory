@@ -1,24 +1,39 @@
-enum Trait {
-    hasHat, isBald, hasBrownHair, hasYellowHair,
-    isMan, isWoman,
-    isBlack, isWhite, isAsian,
-    hasGlasses, hasBrownEyes, hasGreenEyes, hasBlueEyes,
+export enum Trait {
+    hasHat, isBald, hasLongHair, hasShortHair,
+    hasGlasses, hasEyes,
+    hasMouth, hasNose,
+    hasBeard, hasMoustache
 }
 
 enum Assumption {
     nothing, positive, negative
 }
 
-class Character {
-    traits: Array<Trait>;
+let allTraits = [
+    Trait.hasHat, Trait.isBald, Trait.hasLongHair, Trait.hasShortHair,
+    Trait.hasGlasses, Trait.hasEyes,
+    Trait.hasMouth, Trait.hasNose,
+    Trait.hasBeard, Trait.hasMoustache
+]
+
+export class Character {
+    traits: any;
     crossedOut: boolean;
     underAssumption: Assumption;
     objective: boolean;
 
     constructor(traits: Trait[], objective: boolean) {
-        this.traits = traits;
         this.objective = objective;
         this.crossedOut = false;
+        this.traits = {};
+        for (let i=0; i<allTraits.length; i++){
+            this.traits[allTraits[i]] = false;
+            for (let j=0; j<traits.length; j++){
+                if (allTraits[i] === traits[j]){
+                    this.traits[allTraits[i]] = true;
+                }
+            }
+        }
     }
 
     checkTrait(trait: Trait) : boolean {
