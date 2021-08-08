@@ -4,7 +4,9 @@
 
    let animationProgress = 0;
    let timeLastMessage = undefined;
-   let messageInterval = 2000;
+   let messageInterval = 500;
+
+   let canSend: boolean = true;
 
    enum Author {
       self,
@@ -16,6 +18,18 @@
       offset: number,
       dimensions: [number, number]
    }
+
+   let buttonColors = {
+      yes : {
+         allowed : "#00b029",
+         notallowed: "#91f5a8"
+      },
+      no : {
+         allowed : "#ff0036",
+         notallowed: "#f591a6"
+      }
+   }
+
 
  
    let currentTime = new Date();
@@ -37,6 +51,12 @@
          dimensions: dimensions,
          offset: -2
       })
+   }
+   export function sentMessage(text){
+      return text;
+   }
+   export function changeStatus(newCanSend: boolean){
+      canSend = newCanSend;
    }
 
    function addMessage(newMessage: MessageData) {
@@ -61,6 +81,9 @@
       if ((timeLastMessage !== undefined) && ((Date.now()-timeLastMessage) < messageInterval)) {
          return
       }
+      if (!canSend){
+         return
+      }
       timeLastMessage = Date.now();
       addMessage({
          author: Author.self,
@@ -71,6 +94,9 @@
     }
    function clickNoFun(){
       if ((timeLastMessage !== undefined) && ((Date.now()-timeLastMessage) < messageInterval)) {
+         return
+      }
+      if (!canSend){
          return
       }
       timeLastMessage = Date.now();
@@ -320,8 +346,8 @@
          id="g894"
          on:click={clickNoFun}>
         <rect
-           style="fill:#f591a6;fill-opacity:1;stroke-width:0.403225;stroke-linejoin:round;paint-order:stroke fill markers;
-                  cursor: pointer"
+           style="fill:{canSend? buttonColors.no.allowed : buttonColors.no.notallowed};fill-opacity:1;stroke-width:0.403225;stroke-linejoin:round;paint-order:stroke fill markers;
+                  cursor: {canSend? "pointer" : "default"}"
            id="rect2048-7"
            width="4.0086598"
            height="2.6394653"
@@ -331,7 +357,7 @@
         <text
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:2.02954px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0507385;
-                  cursor: pointer"
+                  cursor: {canSend? "pointer" : "default"}"
            x="7.3739715"
            y="10.502932"
            id="text4644-2"><tspan
@@ -344,8 +370,8 @@
          id="g899"
          on:click={clickYesFun}>
         <rect
-           style="opacity:1;fill:#91f5a8;fill-opacity:1;stroke-width:0.403225;stroke-linejoin:round;paint-order:stroke fill markers;
-                  cursor: pointer"
+           style="opacity:1;fill:{canSend? buttonColors.yes.allowed : buttonColors.yes.notallowed};fill-opacity:1;stroke-width:0.403225;stroke-linejoin:round;paint-order:stroke fill markers;
+                  cursor: {canSend? "pointer" : "default"}"
            id="rect2048"
            width="4.0086598"
            height="2.6394653"
@@ -355,7 +381,7 @@
         <text
            xml:space="preserve"
            style="font-style:normal;font-weight:normal;font-size:2.02954px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0507385;
-                   cursor: pointer"
+                   cursor: {canSend? "pointer" : "default"}"
            x="2.1651542"
            y="10.468869"
            id="text4644"><tspan

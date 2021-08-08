@@ -3,7 +3,9 @@
     import { onMount } from "svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
 
-    let sendWatchMessage;
+    let sendWatchMessage: (string)=>void;
+    let sentMessage: ()=>string;
+    let changeStatus: (boolean)=>void;
 
     let instructionText: Array<string> = [
         `First of all, answering yes or no questions in this device is no problem, as you can see. 
@@ -29,6 +31,7 @@
     ]
 
     onMount(() => sendWatchMessage("Te vienes?"))
+
 </script>
 
 <style>
@@ -46,6 +49,12 @@
         display: grid;
         grid-template-columns: 60% 40%;
     }
+   div.button {
+      width: 20px;
+      height: 20px;
+      background-color: brown;
+      margin: 10px;
+   }
 </style>
 
 <div class="main">
@@ -56,10 +65,16 @@
         that using your phone, except for answering messages. Since the screen is so small, you can only
         answer with "yes" and "no". 
     </div>
+
+    <div class="button" on:click={() => changeStatus(true)}></div>
+    <div class="button" on:click={() => changeStatus(false)}></div>
+
     <div class="main-scene">
         <div class="text">
             Here is your phone, as you can see
         </div>
-        <Watch bind:receiveMessage={sendWatchMessage} />
+        <Watch bind:receiveMessage={sendWatchMessage}
+               bind:sentMessage={sentMessage}
+               bind:changeStatus={changeStatus} />
     </div>
 </div>
