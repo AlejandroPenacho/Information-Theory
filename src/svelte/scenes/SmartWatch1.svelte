@@ -1,7 +1,6 @@
 <script lang="ts">
 
     import { onMount } from "svelte";
-import Message from "../watch/Message.svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
 
     interface MessageStage {
@@ -10,7 +9,7 @@ import Message from "../watch/Message.svelte";
         time: number,
         nMessages: number,
         newInstruction: boolean,
-        message: string
+        message: () => string
     }
 
     enum ChangeCause {
@@ -19,35 +18,41 @@ import Message from "../watch/Message.svelte";
         Any
     }
 
+    let nMessageStages = 11;
+
+    let responses: string[][] = new Array(nMessageStages);
+    for (let i=0; i<nMessageStages; i++){
+        responses[i] = [];
+    }
+
     let sendWatchMessage: (string)=>void;
     let changeStatus: (boolean)=>void;
 
     let instructionStage = 0;
     let messageStage = 0;
     let messageStages: MessageStage[] = [
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: 
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         `Heyy! Are you finally coming to dinner tonigh?`},
-        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message:
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
         `Ok, I'll buy pizzas? Do you prefer ham or pineapple?`},
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         `Oh, right. Say yes for ham, no for pineapple`},
-        {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 0, time: 6000, newInstruction: false, message: 
-        `Perfect!`},
-        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message:
+        {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 0, time: 6000, newInstruction: false, message: ()=>
+        getPizzaResponse(responses[2])},
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
         `At which hour should we meet?`},
-        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 4000, newInstruction: false, message:
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 4000, newInstruction: false, message: ()=>
         `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`},
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         `Okay, yes for 20 and no for 21`},
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         `And yes for .00 and no for .30`},
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: true, message:
-        `Ok, fine, are you ok with something?`},
-        {change: ChangeCause.Message, allowAnswer: true, nMessages: 2, time: 0, newInstruction: true, message:
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: true, message: ()=>
+        getTimeResponse([responses[6][0], responses[7][0]])},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 2, time: 0, newInstruction: true, message: ()=>
         `And for the drinks: water, coke, nestea or orange juice`},
-        {change: ChangeCause.Message, allowAnswer: false, nMessages: 1, time: 0, newInstruction: true, message:
-        `Great, see you then!`},
-
+        {change: ChangeCause.Message, allowAnswer: false, nMessages: 1, time: 0, newInstruction: true, message: ()=>
+        getDrinkResponse(responses[9])},
     ]
 
     let currentChangeCause: ChangeCause;
@@ -66,7 +71,8 @@ import Message from "../watch/Message.svelte";
         `DONE`
     ]
 
-    function sentMessage(text: number): void {
+    function sentMessage(text: string): void {
+        responses[messageStage].push(text);
         checkMessageStageChange();
     }
 
@@ -77,6 +83,9 @@ import Message from "../watch/Message.svelte";
         nMessagesLeft --;
         if (nMessagesLeft <= 0){
             changeStatus(false);
+            if (currentTimeout !== undefined){
+                clearTimeout(currentTimeout);
+            }
             setTimeout(()=> changeMessageStage(messageStage + 1), 2000);
         }
     }
@@ -102,9 +111,47 @@ import Message from "../watch/Message.svelte";
         if ((stage.change===ChangeCause.Message) || (stage.change===ChangeCause.Any)){
             nMessagesLeft = stage.nMessages;
         }
-        sendWatchMessage(stage.message);
-
+        sendWatchMessage(stage.message());
     }
+
+    function getPizzaResponse(messages: string[]){
+        if (messages[0] ==="Yes"){
+            return "Yeah, ham is the good one"
+        } else if (messages[0] === "No"){
+            return "Pineapple, really? Okay"
+        } else {
+            return "Something is wrong"
+        }
+    }
+
+    function getTimeResponse(messages: string[]){
+        if ((messages[0] === "No") && (messages[1] === "No")){
+            return "Ok, at 21.30 then!"
+        } else if ((messages[0] === "No") && (messages[1] === "Yes")){
+            return "Fine, at 21.00"
+        } else if ((messages[0] === "Yes") && (messages[1] === "No")){
+            return "Great, at 20.30"
+        } else if ((messages[0] === "Yes") && (messages[1] === "Yes")){
+            return "So, at 20.00 we meet"
+        } else {
+            return "Something wrong :("
+        }
+    }
+
+    function getDrinkResponse(messages: string[]){
+        if ((messages[0] === "No") && (messages[1] === "No")){
+            return "Water!"
+        } else if ((messages[0] === "Yes") && (messages[1] === "No")){
+            return "Coke"
+        } else if ((messages[0] === "No") && (messages[1] === "Yes")){
+            return "Nestea"
+        } else if ((messages[0] === "Yes") && (messages[1] === "Yes")){
+            return "Orange juice!"
+        } else {
+            return "Something wrong :("
+        }
+    }
+
 
     onMount(() => {changeMessageStage(0)});
 
