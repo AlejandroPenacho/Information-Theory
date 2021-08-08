@@ -1,11 +1,22 @@
 <script lang="ts">
 
     import { onMount } from "svelte";
+import Message from "../watch/Message.svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
+
+    interface MessageStage {
+        change: ChangeCause,
+        allowAnswer: boolean,
+        time: number,
+        nMessages: number,
+        newInstruction: boolean,
+        message: string
+    }
 
     enum ChangeCause {
         Message,
-        Timeout
+        Timeout,
+        Any
     }
 
     let sendWatchMessage: (string)=>void;
@@ -13,15 +24,35 @@
 
     let instructionStage = 0;
     let messageStage = 0;
-    let messagePerInstruction = [
-        [0],
-        [1, 2],
-        [3, 4, 5, 6, 7],
-        [8]
+    let messageStages: MessageStage[] = [
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: 
+        `Heyy! Are you finally coming to dinner tonigh?`},
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message:
+        `Ok, I'll buy pizzas? Do you prefer ham or pineapple?`},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        `Oh, right. Say yes for ham, no for pineapple`},
+        {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 0, time: 6000, newInstruction: false, message: 
+        `Perfect!`},
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message:
+        `At which hour should we meet?`},
+        {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 4000, newInstruction: false, message:
+        `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        `Okay, yes for 20 and no for 21`},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message:
+        `And yes for .00 and no for .30`},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: true, message:
+        `Ok, fine, are you ok with something?`},
+        {change: ChangeCause.Message, allowAnswer: true, nMessages: 2, time: 0, newInstruction: true, message:
+        `And for the drinks: water, coke, nestea or orange juice`},
+        {change: ChangeCause.Message, allowAnswer: false, nMessages: 1, time: 0, newInstruction: true, message:
+        `Great, see you then!`},
+
     ]
 
     let currentChangeCause: ChangeCause;
     let nMessagesLeft: number;
+    let currentTimeout = undefined;
 
     let instructionText: Array<string> = [
         `First of all, answering yes or no questions in this device is no problem, as you can see. 
@@ -31,49 +62,51 @@
         `So, binary questions can be easily answered here. But what about harder questions?`,
         `Ah! When there are four possibilities, two binary answers seem to be enough. Great!`,
         `Your friend and you can agree in an uniform method for 4-questions, like: 1st no-no, 
-        2nd yes-no, 3rd no-yes and 4th yes-yes.`
-    ]
-
-    let inMessages: Array<string> = [
-        `Heyy! Are you finally coming to dinner tonigh?`,
-        `Ok, I'll buy pizzas? Do you prefer ham or pineapple?`,
-        `Oh, right. Say yes for ham, no for pineapple`,
-        `Perfect!`,
-        `At which hour should we meet?`,
-        `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`,
-        `Okay, yes for 20 and no for 21`,
-        `And yes for .00 and no for .30`,
-        `And for the drinks: water, coke, nestea or orange juice`
+        2nd yes-no, 3rd no-yes and 4th yes-yes.`,
+        `DONE`
     ]
 
     function sentMessage(text: number): void {
-        checkMessageStageChange(ChangeCause.Message);
+        checkMessageStageChange();
     }
 
-    function checkMessageStageChange(cause: ChangeCause){
-        if (currentChangeCause !== cause){
+    function checkMessageStageChange(){
+        if (currentChangeCause === ChangeCause.Timeout){
             return
         }
-        if (currentChangeCause === ChangeCause.Timeout){
-            changeMessageStage();
-        } else {
-            nMessagesLeft --;
-            if (nMessagesLeft <= 0){
-                changeMessageStage();
-            }
+        nMessagesLeft --;
+        if (nMessagesLeft <= 0){
+            changeStatus(false);
+            setTimeout(()=> changeMessageStage(messageStage + 1), 2000);
         }
     }
 
-    function changeMessageStage(){
+    function changeMessageStage(stageNumber){
 
-        checkInstructionStageChange();
+        messageStage = stageNumber;
+
+        if (currentTimeout !== undefined){
+            clearTimeout(currentTimeout);
+        }
+
+        let stage = messageStages[stageNumber];
+        currentChangeCause = stage.change;
+        if (stage.newInstruction){
+            instructionStage ++;
+        }
+        changeStatus(stage.allowAnswer);
+
+        if ((stage.change===ChangeCause.Timeout) || (stage.change===ChangeCause.Any)){
+            currentTimeout = setTimeout(() => changeMessageStage(messageStage+1), stage.time);
+        }
+        if ((stage.change===ChangeCause.Message) || (stage.change===ChangeCause.Any)){
+            nMessagesLeft = stage.nMessages;
+        }
+        sendWatchMessage(stage.message);
+
     }
 
-    function checkInstructionStageChange(){
-
-    }
-
-    onMount(() => sendWatchMessage("Te vienes?"))
+    onMount(() => {changeMessageStage(0)});
 
 </script>
 
@@ -114,7 +147,7 @@
 
     <div class="main-scene">
         <div class="text">
-            Here is your phone, as you can see
+            {instructionText[instructionStage]}
         </div>
         <Watch bind:receiveMessage={sendWatchMessage}
                sentMessage={sentMessage}
