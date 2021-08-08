@@ -3,9 +3,25 @@
     import { onMount } from "svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
 
+    enum ChangeCause {
+        Message,
+        Timeout
+    }
+
     let sendWatchMessage: (string)=>void;
-    let sentMessage: ()=>string;
     let changeStatus: (boolean)=>void;
+
+    let instructionStage = 0;
+    let messageStage = 0;
+    let messagePerInstruction = [
+        [0],
+        [1, 2],
+        [3, 4, 5, 6, 7],
+        [8]
+    ]
+
+    let currentChangeCause: ChangeCause;
+    let nMessagesLeft: number;
 
     let instructionText: Array<string> = [
         `First of all, answering yes or no questions in this device is no problem, as you can see. 
@@ -29,6 +45,33 @@
         `And yes for .00 and no for .30`,
         `And for the drinks: water, coke, nestea or orange juice`
     ]
+
+    function sentMessage(text: number): void {
+        checkMessageStageChange(ChangeCause.Message);
+    }
+
+    function checkMessageStageChange(cause: ChangeCause){
+        if (currentChangeCause !== cause){
+            return
+        }
+        if (currentChangeCause === ChangeCause.Timeout){
+            changeMessageStage();
+        } else {
+            nMessagesLeft --;
+            if (nMessagesLeft <= 0){
+                changeMessageStage();
+            }
+        }
+    }
+
+    function changeMessageStage(){
+
+        checkInstructionStageChange();
+    }
+
+    function checkInstructionStageChange(){
+
+    }
 
     onMount(() => sendWatchMessage("Te vienes?"))
 
@@ -74,7 +117,7 @@
             Here is your phone, as you can see
         </div>
         <Watch bind:receiveMessage={sendWatchMessage}
-               bind:sentMessage={sentMessage}
+               sentMessage={sentMessage}
                bind:changeStatus={changeStatus} />
     </div>
 </div>

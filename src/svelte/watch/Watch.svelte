@@ -52,9 +52,8 @@
          offset: -2
       })
    }
-   export function sentMessage(text){
-      return text;
-   }
+   export let sentMessage;
+
    export function changeStatus(newCanSend: boolean){
       canSend = newCanSend;
    }
@@ -91,6 +90,7 @@
          offset: -2,
          dimensions: [2.4, 1]
       })
+      sentMessage("Yes");
     }
    function clickNoFun(){
       if ((timeLastMessage !== undefined) && ((Date.now()-timeLastMessage) < messageInterval)) {
@@ -106,6 +106,7 @@
          offset: -2,
          dimensions: [2.4, 1]
       })
+      sentMessage("No");
     }
 </script>
 
