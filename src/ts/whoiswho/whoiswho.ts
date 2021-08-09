@@ -42,7 +42,7 @@ export class Character {
 }
 
 export class WhoIsWho {
-    characters : Array<Character>
+    characters : Array<Character>;
 
     constructor(characters){
         this.characters = characters;
@@ -77,5 +77,28 @@ export class WhoIsWho {
                 character.crossedOut = true;
             }
         })
+    }
+
+    getEntropyDataOfQuestion(trait: Trait){
+        let nCharsAtSide: [number, number] = [0, 0];
+        this.characters.forEach((character) =>{
+            if (!character.crossedOut){
+                if (character.checkTrait(trait)){
+                    nCharsAtSide[0] ++;
+                } else {
+                    nCharsAtSide[1] ++;
+                }
+            }
+        });
+
+        let p = nCharsAtSide[0]/(nCharsAtSide[0]+nCharsAtSide[1]);
+
+        if (p===0 || p===1){
+            return [0, [p, 1-p]]
+        } 
+
+        let H = p * Math.log(1/p)/Math.LN2 + (1-p)*Math.log(1/(1-p))/Math.LN2
+        return [H, [p, 1-p]]
+
     }
 }
