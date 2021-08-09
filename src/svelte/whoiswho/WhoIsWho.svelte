@@ -2,6 +2,7 @@
 
     import * as ww from "../../ts/whoiswho/whoiswho";
     import Face from "/src/svelte/whoiswho/Face.svelte"
+    import Question from "/src/svelte/whoiswho/Question.svelte"
 
     let characters = [
         new ww.Character([
@@ -32,22 +33,24 @@
     div.charDeck {
         display: flex;
     }
-    div.button {
-        background-color: cyan;
-        width: 50px;
-        height: 50px;
+    div.questionDeck {
+        display: flex;
+        width: 80%;
+        flex-wrap: wrap;
     }
 </style>
-
-<div class="button"
-     on:mouseenter={()=>{game.assumeTrait(ww.Trait.hasLongHair), game=game}}
-     on:mouseleave={()=>{game.assumptionClear(); game=game}}
-     on:click={()=>{game.crossTrait(ww.Trait.hasLongHair); game=game}}>
-
-</div>
 
 <div class="charDeck">
     {#each game.characters as character}
         <Face character={character} />
+    {/each}
+</div>
+
+<div class="questionDeck">
+    {#each game.questions as question}
+        <Question question={question}
+                  on:mouseenter={()=>{game.assumeTrait(question.trait), game=game}}
+                  on:mouseleave={()=>{game.assumptionClear(); game=game}}
+                  on:click={()=>{game.crossTrait(question.trait); game.recomputeAllEntropies(); game=game}}/>
     {/each}
 </div>
