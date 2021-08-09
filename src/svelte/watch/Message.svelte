@@ -6,7 +6,7 @@
     }
 
     export let author: Author;
-    export let text: string;
+    export let text: string[];
     export let dimensions : [number, number];
 
     export let offset;
@@ -41,10 +41,24 @@
              id="tspan20645"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:{textSize}px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
              x="1.9764334"
-             y="4.8836856">{text}</tspan><tspan
+             y="4.8836856">{text[0]}</tspan><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:{textSize}px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
              x="1.9764334"
-             y="18.11281"
+             y="18.88"
+             id="tspan16478" /></text>
+         <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="1.9764334"
+           y="5.75"
+           id="text20647"><tspan
+             id="tspan20645"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:{textSize}px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="1.9764334"
+             y="5.75">{text[1]}</tspan><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:{textSize}px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             x="1.9764334"
+             y="18.88"
              id="tspan16478" /></text>
       </g>
       `

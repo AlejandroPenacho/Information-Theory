@@ -9,7 +9,7 @@
         time: number,
         nMessages: number,
         newInstruction: boolean,
-        message: () => string
+        message: () => string[]
     }
 
     enum ChangeCause {
@@ -32,25 +32,25 @@
     let messageStage = 0;
     let messageStages: MessageStage[] = [
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
-        `Heyy! Are you finally coming to dinner tonigh?`},
+        [`Heyy! Are you finally`, `coming to dinner tonigh?`]},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
-        `Ok, I'll buy pizzas? Do you prefer ham or pineapple?`},
+        [`Ok, I'll buy pizzas! Do`, `you prefer ham or pineapple?`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
-        `Oh, right. Say yes for ham, no for pineapple`},
+        [`Oh, right. Say yes for`, `ham, no for pineapple`]},
         {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 0, time: 6000, newInstruction: false, message: ()=>
         getPizzaResponse(responses[2])},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
-        `At which hour should we meet?`},
+        [`At which hour should we`, ` meet?`]},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 4000, newInstruction: false, message: ()=>
-        `Mmmmh. 20.00, 20.30, 21.00 or 21.30?`},
+        [`Mmmmh. 20.00, 20.30, 21.00`, `or 21.30?`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
-        `Okay, yes for 20 and no for 21`},
+        [`Okay, yes for 20 and no`, `for 21`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
-        `And yes for .00 and no for .30`},
+        [`And yes for .00 and no`, `for .30`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: true, message: ()=>
         getTimeResponse([responses[6][0], responses[7][0]])},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 2, time: 0, newInstruction: true, message: ()=>
-        `And for the drinks: water, coke, nestea or orange juice`},
+        [`And for the drinks: water,`, `coke, nestea or orange juice`]},
         {change: ChangeCause.Message, allowAnswer: false, nMessages: 1, time: 0, newInstruction: true, message: ()=>
         getDrinkResponse(responses[9])},
     ]
@@ -114,41 +114,41 @@
         sendWatchMessage(stage.message());
     }
 
-    function getPizzaResponse(messages: string[]){
+    function getPizzaResponse(messages: string[]) : string[]{
         if (messages[0] ==="Yes"){
-            return "Yeah, ham is the good one"
+            return ["Yeah, ham is the good", `one`]
         } else if (messages[0] === "No"){
-            return "Pineapple, really? Okay"
+            return ["Pineapple, really?", "Okay"]
         } else {
-            return "Something is wrong"
+            return ["Something is wrong", ""]
         }
     }
 
     function getTimeResponse(messages: string[]){
         if ((messages[0] === "No") && (messages[1] === "No")){
-            return "Ok, at 21.30 then!"
+            return ["Ok, at 21.30 then!", ""]
         } else if ((messages[0] === "No") && (messages[1] === "Yes")){
-            return "Fine, at 21.00"
+            return ["Fine, at 21.00", ""]
         } else if ((messages[0] === "Yes") && (messages[1] === "No")){
-            return "Great, at 20.30"
+            return ["Great, at 20.30", ""]
         } else if ((messages[0] === "Yes") && (messages[1] === "Yes")){
-            return "So, at 20.00 we meet"
+            return ["So, at 20.00 we meet", ""]
         } else {
-            return "Something wrong :("
+            return ["Something wrong :(", ""]
         }
     }
 
     function getDrinkResponse(messages: string[]){
         if ((messages[0] === "No") && (messages[1] === "No")){
-            return "Water!"
+            return ["Water!",""]
         } else if ((messages[0] === "Yes") && (messages[1] === "No")){
-            return "Coke"
+            return ["Coke",""]
         } else if ((messages[0] === "No") && (messages[1] === "Yes")){
-            return "Nestea"
+            return ["Nestea",""]
         } else if ((messages[0] === "Yes") && (messages[1] === "Yes")){
-            return "Orange juice!"
+            return ["Orange juice!",""]
         } else {
-            return "Something wrong :("
+            return ["Something wrong :(",""]
         }
     }
 
