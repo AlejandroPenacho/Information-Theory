@@ -33,16 +33,18 @@
         a 2-response). Moreover, a 4-question, like the hour or the drink, can be answered with a pair of 
         2-responses. And, obviously, a 4-question can also be asnwered with a 4-response.
     </div>
+    <div class="par">
+        Below, you can check how two responses with different number of possibilites generatate a response of
+        more possibilities, at the right. You can imagine that we are being asked for a certain point in the grid,
+        and we respond first with the row, and then with the columns.
+    </div>
     <Multiplier />
     <div class="par">
         So, two responses of a certain number can be used to answer a question of a higher number.
-        What does this mean? Well, a questions is a request for information. How much information?
-        Check for yourself a cuaternary questions demands double the answers than a binary questions,
-        so it ask for double the information. And an 8-way for thrice the information.
+        What does this mean? Well, a questions is a request for information. The more possible answers,
+        more information. 
     </div>
     <div class="par">
-        For responses, a 4-way answer conveys the information of two yes-no answers, that is double the
-        information. And for convenience, we will measure this information (asked or asnwered) in binary
-        questions/answers, which we call bits!
+        
     </div>
 </div>
