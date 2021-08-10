@@ -1,11 +1,5 @@
 <script lang="ts">
-    let currentParagraph = 0;
-
-    function changeParagraph(newPar){
-        return ()=>{
-            currentParagraph=newPar;
-        }
-    }
+    import Multiplier from "/src/svelte/symbols/Multiplier.svelte"
 </script>
 
 <style>
@@ -34,13 +28,14 @@
 <div class="main">
     <h1> What is Information Theory</h1>
     <div class="par">
-        As you may have noticed, there was some pattern here. Let's recall:
-        - Binary questions could be answered with one yes-no response.
-        - Cuaternary questions, with two yes-no responses.
-        - Cuaternary questions can also be answered with only 1 4-ways answer.
-        - If there are 8 possible answers, 3 yes-no responses are required.
+        From our experience with the smartwatch, it seems a question with 2 possible answers (let's call it 
+        a 2-question) can be answered with a response with 2 possibilities (like "yes"-"no", let's call it
+        a 2-response). Moreover, a 4-question, like the hour or the drink, can be answered with a pair of 
+        2-responses. And, obviously, a 4-question can also be asnwered with a 4-response.
     </div>
+    <Multiplier />
     <div class="par">
+        So, two responses of a certain number can be used to answer a question of a higher number.
         What does this mean? Well, a questions is a request for information. How much information?
         Check for yourself a cuaternary questions demands double the answers than a binary questions,
         so it ask for double the information. And an 8-way for thrice the information.
