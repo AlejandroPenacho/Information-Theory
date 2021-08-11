@@ -25,6 +25,7 @@
     ]
 
     let game = new ww.WhoIsWho(characters);
+    let onHover = false;
 
 </script>
 
@@ -49,8 +50,9 @@
 <div class="questionDeck">
     {#each game.questions as question}
         <Question question={question}
-                  on:mouseenter={()=>{game.assumeTrait(question.trait), game=game}}
-                  on:mouseleave={()=>{game.assumptionClear(); game=game}}
+                  hovering={onHover}
+                  on:mouseenter={()=>{game.assumeTrait(question.trait), game=game; onHover=true;}}
+                  on:mouseleave={()=>{game.assumptionClear(); game=game; onHover=false;}}
                   on:click={()=>{game.crossTrait(question.trait); game.recomputeAllEntropies(); game=game}}/>
     {/each}
 </div>

@@ -4,12 +4,33 @@
 
 
     export let question: ww.Question;
+    export let hovering;
+
+    let yesProb = 0;
+    let noProb = 0;
+
+    $: {
+        if (hovering) {
+            yesProb = question.entropy.probabilities[0]*100;
+            noProb = question.entropy.probabilities[1]*100;
+        } else {
+            yesProb = 0;
+            noProb = 0;
+        }
+    }
+
+    function returnEntropyOrInf(entropy){
+        if (entropy===-1){
+            return "∞"
+        } else {
+            return entropy.toPrecision(2)
+        }
+    }
 
 </script>
 
 <style>
     div.main {
-        height: 40px;
         width: 200px;
         display: flex;
         flex-direction: column;
@@ -18,13 +39,54 @@
         cursor: pointer;
     }
     div.name {
+        height: 8mm;
         background-color: yellowgreen;
         border-radius: 10px 10px 0px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     div.entropy-data {
+        position: relative;
         background-color: chartreuse;
-        border-radius: 0px 0px 10px 10px;
+        border-radius: 0mm 0mm 3mm 3mm;
+        height: 12mm;
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
     }
+    div.entropy-number {
+        position:absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    div.yes-bar {
+        background-color: green;
+        height: 100%;
+        transition: width 1s;
+        border-radius: 0mm 0mm 0mm 3mm;
+    }
+    div.no-bar {
+        background-color: red;
+        height: 100%;
+        transition: width 1s;
+        border-radius: 0mm 0mm 3mm 0mm;
+    }
+    div.data-flexer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    div.data-block {
+
+    }
+
 </style>
 
 <div class="main" on:mouseenter on:mouseleave on:click >
@@ -32,6 +94,27 @@
         {question.text}
     </div>
     <div class="entropy-data">
-        {question.entropy.qEntropy}
+        <div class="entropy-number">
+            {question.entropy.qEntropy.toFixed(3)}
+        </div>
+        {#if hovering}
+            <div class="data-flexer">
+                <div class="data-block">
+                    <div>{(question.entropy.probabilities[0]*100).toFixed(0)}%</div>
+                    <div>{returnEntropyOrInf(question.entropy.entropies[0])}</div>
+                </div>
+                <div class="data-block">
+                    <div>{(question.entropy.probabilities[1]*100).toFixed(0)}%</div>
+                    <div>{returnEntropyOrInf(question.entropy.entropies[1])}</div>
+                </div>
+            </div>
+        {/if}
+        <div class="yes-bar"
+             style="width: {yesProb}%">
+        </div>
+        <div class="no-bar"
+             style="width: {noProb}%">
+
+        </div>
     </div>
 </div>
