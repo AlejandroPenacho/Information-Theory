@@ -51,8 +51,15 @@
     {#each game.questions as question}
         <Question question={question}
                   hovering={onHover}
-                  on:mouseenter={()=>{game.assumeTrait(question.trait), game=game; onHover=true;}}
-                  on:mouseleave={()=>{game.assumptionClear(); game=game; onHover=false;}}
+                  on:mouseenter={()=>{game.assumeTrait(question.trait),
+                                      game.computeConditionalEntropies(question.trait);
+                                      question.entropy = game.getEntropyDataOfQuestion(question.trait, game.characters);
+                                      game=game; 
+                                      onHover=true;}}
+                  on:mouseleave={()=>{game.assumptionClear();
+                                      game.recomputeAllEntropies();
+                                      game=game;
+                                      onHover=false;}}
                   on:click={()=>{game.crossTrait(question.trait); game.recomputeAllEntropies(); game=game}}/>
     {/each}
 </div>

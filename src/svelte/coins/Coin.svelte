@@ -21,7 +21,7 @@
     }
 
     export function click() {
-        nHalfTurns = Math.floor(Math.random()*2 + 0);
+        nHalfTurns = Math.floor(Math.random()*2 + 5);
         console.log(nHalfTurns);
         clickTime = Date.now();
         requestAnimationFrame(rAFfunction);

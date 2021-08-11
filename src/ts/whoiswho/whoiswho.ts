@@ -73,7 +73,7 @@ export class WhoIsWho {
             this.questions[i] = {
                 trait: allTraits[i],
                 text: traitNames[i],
-                entropy: this.getEntropyDataOfQuestion(allTraits[i])
+                entropy: this.getEntropyDataOfQuestion(allTraits[i], this.characters)
             }
         }
     }
@@ -111,13 +111,33 @@ export class WhoIsWho {
 
     recomputeAllEntropies(){
         this.questions.forEach((question) => {
-            question.entropy = this.getEntropyDataOfQuestion(question.trait);
+            question.entropy = this.getEntropyDataOfQuestion(question.trait, this.characters);
         })
     }
 
-    getEntropyDataOfQuestion(trait: Trait) : EntropyData {
+    computeConditionalEntropies(trait: Trait){
+        let probabilities = this.getEntropyDataOfQuestion(trait, this.characters).probabilities;
+        this.questions.forEach((question) => {
+            let entropyYes = this.getEntropyDataOfQuestion(question.trait,
+                                                           this.characters.filter((char)=>{
+                                                                return char.checkTrait(trait)
+                                                           })).qEntropy;
+            let entropyNo = this.getEntropyDataOfQuestion(question.trait,
+                                                           this.characters.filter((char)=>{
+                                                                return !char.checkTrait(trait)
+                                                           })).qEntropy;
+            question.entropy = {
+                probabilities : probabilities,
+                entropies : [entropyYes, entropyNo],
+                qEntropy : probabilities[0]*entropyYes + probabilities[1]*entropyNo
+            }
+            
+        });
+    }
+
+    getEntropyDataOfQuestion(trait: Trait, characters: Array<Character>) : EntropyData {
         let nCharsAtSide: [number, number] = [0, 0];
-        this.characters.forEach((character) =>{
+        characters.forEach((character) =>{
             if (!character.crossedOut){
                 if (character.checkTrait(trait)){
                     nCharsAtSide[0] ++;
@@ -126,6 +146,13 @@ export class WhoIsWho {
                 }
             }
         });
+        if ((nCharsAtSide[0]+nCharsAtSide[1]) === 0) {
+            return {
+                probabilities: [0, 0],
+                entropies: [0, 0],
+                qEntropy: 0
+            }
+        }
 
         let p = nCharsAtSide[0]/(nCharsAtSide[0]+nCharsAtSide[1]);
 
