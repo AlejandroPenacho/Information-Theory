@@ -26,7 +26,8 @@ export enum Assumption {
 export interface Question {
     trait: Trait,
     text: string,
-    entropy: EntropyData
+    entropy: EntropyData,
+    blocked: boolean
 }
 
 export interface EntropyData{
@@ -73,6 +74,7 @@ export class WhoIsWho {
             this.questions[i] = {
                 trait: allTraits[i],
                 text: traitNames[i],
+                blocked: false,
                 entropy: this.getEntropyDataOfQuestion(allTraits[i], this.characters)
             }
         }

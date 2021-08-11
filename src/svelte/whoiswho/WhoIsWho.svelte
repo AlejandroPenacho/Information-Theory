@@ -60,6 +60,10 @@
                                       game.recomputeAllEntropies();
                                       game=game;
                                       onHover=false;}}
-                  on:click={()=>{game.crossTrait(question.trait); game.recomputeAllEntropies(); game=game}}/>
+                  on:click={()=>{game.crossTrait(question.trait);
+                                 game.recomputeAllEntropies();
+                                 question.blocked = true;
+                                 onHover = false;
+                                 game=game}}/>
     {/each}
 </div>

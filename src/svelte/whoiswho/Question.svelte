@@ -31,6 +31,7 @@
 
 <style>
     div.main {
+        position: relative;
         width: 200px;
         display: flex;
         flex-direction: column;
@@ -41,7 +42,7 @@
     div.name {
         height: 8mm;
         background-color: yellowgreen;
-        border-radius: 10px 10px 0px 0px;
+        border-radius: 3mm 3mm 0mm 0mm;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -87,34 +88,49 @@
 
     }
 
+    div.shade {
+        background-color: black;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 5;
+        opacity: 0.85;
+        border-radius: 3mm;
+    }
+
 </style>
 
-<div class="main" on:mouseenter on:mouseleave on:click >
-    <div class="name">
+<div class="main">
+    <div class="shade" style="display: {question.blocked? 'block':'none'}">
+
+    </div>
+    <div class="name" on:mouseenter on:mouseleave on:click >
         {question.text}
     </div>
-    <div class="entropy-data">
+    <div class="entropy-data" on:mouseenter on:mouseleave on:click >
         <div class="entropy-number">
             {question.entropy.qEntropy.toFixed(3)}
         </div>
-        {#if hovering}
-            <div class="data-flexer">
-                <div class="data-block">
-                    <div>{(question.entropy.probabilities[0]*100).toFixed(0)}%</div>
-                    <div>{returnEntropyOrInf(question.entropy.entropies[0])}</div>
+        {#if !question.blocked}
+            {#if hovering}
+                <div class="data-flexer">
+                    <div class="data-block">
+                        <div>{(question.entropy.probabilities[0]*100).toFixed(0)}%</div>
+                        <div>{returnEntropyOrInf(question.entropy.entropies[0])}</div>
+                    </div>
+                    <div class="data-block">
+                        <div>{(question.entropy.probabilities[1]*100).toFixed(0)}%</div>
+                        <div>{returnEntropyOrInf(question.entropy.entropies[1])}</div>
+                    </div>
                 </div>
-                <div class="data-block">
-                    <div>{(question.entropy.probabilities[1]*100).toFixed(0)}%</div>
-                    <div>{returnEntropyOrInf(question.entropy.entropies[1])}</div>
-                </div>
+            {/if}
+            <div class="yes-bar"
+                style="width: {yesProb}%">
+            </div>
+            <div class="no-bar"
+                style="width: {noProb}%">
+
             </div>
         {/if}
-        <div class="yes-bar"
-             style="width: {yesProb}%">
-        </div>
-        <div class="no-bar"
-             style="width: {noProb}%">
-
-        </div>
     </div>
 </div>
