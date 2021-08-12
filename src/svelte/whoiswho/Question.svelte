@@ -128,7 +128,7 @@
     </div>
     <div class="entropy-data" on:mouseenter on:mouseleave on:click >
         <div class="entropy-number">
-            {displayedEntropy.toFixed(3)}
+            {displayedEntropy.toPrecision(2)}
         </div>
         {#if hovering && !question.blocked}
             <div class="data-flexer">

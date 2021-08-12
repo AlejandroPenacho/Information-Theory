@@ -69,8 +69,10 @@ export class WhoIsWho {
     characters : Array<Character>;
     questions: Array<Question>;
     target: Character;
+    obtainedEntropy: number;
 
     constructor(characters: Character[]){
+        this.obtainedEntropy = 0;
         this.characters = characters;
         this.target = characters.filter((char)=> char.objective)[0];
         this.questions = new Array(allTraits.length);

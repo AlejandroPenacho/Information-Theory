@@ -63,7 +63,7 @@
                   on:click={()=>{question.obtainedEntropy = question.isTrue?
                                                             question.entropy.entropies[0] :
                                                             question.entropy.entropies[1];
-                                 console.log(question.isTrue)
+                                 game.obtainedEntropy += question.obtainedEntropy;
                                  game.crossTrait(question.trait);
                                  game.recomputeAllEntropies();
                                  question.blocked = true;
@@ -71,3 +71,5 @@
                                  game=game}}/>
     {/each}
 </div>
+
+{game.obtainedEntropy.toPrecision(2)}
