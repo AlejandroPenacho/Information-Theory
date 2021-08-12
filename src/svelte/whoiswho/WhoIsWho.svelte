@@ -60,7 +60,11 @@
                                       game.recomputeAllEntropies();
                                       game=game;
                                       onHover=false;}}
-                  on:click={()=>{game.crossTrait(question.trait);
+                  on:click={()=>{question.obtainedEntropy = question.isTrue?
+                                                            question.entropy.entropies[0] :
+                                                            question.entropy.entropies[1];
+                                 console.log(question.isTrue)
+                                 game.crossTrait(question.trait);
                                  game.recomputeAllEntropies();
                                  question.blocked = true;
                                  onHover = false;

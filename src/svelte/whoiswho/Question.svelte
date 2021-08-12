@@ -6,16 +6,35 @@
     export let question: ww.Question;
     export let hovering;
 
+    let displayedEntropy: number;
+    let obtainedEntropy: number;
+
     let yesProb = 0;
     let noProb = 0;
 
     $: {
-        if (hovering) {
+        if (question.blocked){
+            if (question.isTrue){
+                yesProb = 100;
+                noProb = 0;
+            } else {
+                yesProb = 0;
+                noProb = 100;
+            }
+        } else if (hovering) {
             yesProb = question.entropy.probabilities[0]*100;
             noProb = question.entropy.probabilities[1]*100;
         } else {
             yesProb = 0;
             noProb = 0;
+        }
+    }
+
+    $: {
+        if (question.obtainedEntropy === -1){
+            displayedEntropy = question.entropy.qEntropy;
+        } else {
+            displayedEntropy = question.obtainedEntropy;
         }
     }
 
@@ -94,7 +113,7 @@
         width: 100%;
         position: absolute;
         z-index: 5;
-        opacity: 0.85;
+        opacity: 0.40;
         border-radius: 3mm;
     }
 
@@ -109,28 +128,26 @@
     </div>
     <div class="entropy-data" on:mouseenter on:mouseleave on:click >
         <div class="entropy-number">
-            {question.entropy.qEntropy.toFixed(3)}
+            {displayedEntropy.toFixed(3)}
         </div>
-        {#if !question.blocked}
-            {#if hovering}
-                <div class="data-flexer">
-                    <div class="data-block">
-                        <div>{(question.entropy.probabilities[0]*100).toFixed(0)}%</div>
-                        <div>{returnEntropyOrInf(question.entropy.entropies[0])}</div>
-                    </div>
-                    <div class="data-block">
-                        <div>{(question.entropy.probabilities[1]*100).toFixed(0)}%</div>
-                        <div>{returnEntropyOrInf(question.entropy.entropies[1])}</div>
-                    </div>
+        {#if hovering && !question.blocked}
+            <div class="data-flexer">
+                <div class="data-block">
+                    <div>{(question.entropy.probabilities[0]*100).toFixed(0)}%</div>
+                    <div>{returnEntropyOrInf(question.entropy.entropies[0])}</div>
                 </div>
-            {/if}
-            <div class="yes-bar"
-                style="width: {yesProb}%">
-            </div>
-            <div class="no-bar"
-                style="width: {noProb}%">
-
+                <div class="data-block">
+                    <div>{(question.entropy.probabilities[1]*100).toFixed(0)}%</div>
+                    <div>{returnEntropyOrInf(question.entropy.entropies[1])}</div>
+                </div>
             </div>
         {/if}
+        <div class="yes-bar"
+            style="width: {yesProb}%">
+        </div>
+        <div class="no-bar"
+            style="width: {noProb}%">
+
+        </div>
     </div>
 </div>

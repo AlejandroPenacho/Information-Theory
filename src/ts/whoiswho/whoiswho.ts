@@ -27,7 +27,9 @@ export interface Question {
     trait: Trait,
     text: string,
     entropy: EntropyData,
-    blocked: boolean
+    blocked: boolean,
+    isTrue: boolean,
+    obtainedEntropy: number
 }
 
 export interface EntropyData{
@@ -66,16 +68,20 @@ export class Character {
 export class WhoIsWho {
     characters : Array<Character>;
     questions: Array<Question>;
+    target: Character;
 
-    constructor(characters){
+    constructor(characters: Character[]){
         this.characters = characters;
+        this.target = characters.filter((char)=> char.objective)[0];
         this.questions = new Array(allTraits.length);
         for (let i=0; i<this.questions.length; i++){
             this.questions[i] = {
                 trait: allTraits[i],
                 text: traitNames[i],
                 blocked: false,
-                entropy: this.getEntropyDataOfQuestion(allTraits[i], this.characters)
+                entropy: this.getEntropyDataOfQuestion(allTraits[i], this.characters),
+                isTrue: this.target.checkTrait(allTraits[i]),
+                obtainedEntropy : -1
             }
         }
     }
@@ -105,7 +111,7 @@ export class WhoIsWho {
 
     crossTrait(trait: Trait){
         this.characters.forEach((character) => {
-            if (!character.checkTrait(trait)){
+            if (character.checkTrait(trait) !== this.target.checkTrait(trait)){
                 character.crossedOut = true;
             }
         })
