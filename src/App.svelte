@@ -44,6 +44,7 @@
     div.mainZone {
         background-color: var(--color3);
         grid-column: 2 3;
+        min-height: 100vh;
     }
 </style>
 

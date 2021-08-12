@@ -172,12 +172,6 @@
         display: grid;
         grid-template-columns: 60% 40%;
     }
-   div.button {
-      width: 20px;
-      height: 20px;
-      background-color: brown;
-      margin: 10px;
-   }
 </style>
 
 <div class="main">
@@ -188,9 +182,6 @@
         that using your phone, except for answering messages. Since the screen is so small, you can only
         answer with "yes" and "no". 
     </div>
-
-    <div class="button" on:click={() => changeStatus(true)}></div>
-    <div class="button" on:click={() => changeStatus(false)}></div>
 
     <div class="main-scene">
         <div class="text">
