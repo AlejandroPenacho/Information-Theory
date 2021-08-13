@@ -27,5 +27,9 @@
 
 {:else if number===5}
     Again, we have 0.5
-
+{:else if number===6}
+    For this case, where there are 3 possible asnwers, the entropy is obtained in the same way. 
+    <span class="p">x</span> * <span class="H">x</span> +
+    <span class="p">x</span> * <span class="H">x</span> +
+    <span class="p">x</span> * <span class="H">x</span> = <span class="H"> X</span>
 {/if}

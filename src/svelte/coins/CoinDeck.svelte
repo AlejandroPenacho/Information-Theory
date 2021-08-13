@@ -90,7 +90,7 @@ import PieChart from "../PieChart.svelte";
                 entropy: ternaryEntropy(1/6, 1/3, 1/2),
                 questionType: QType.ternary,
                 state: (nHeads >= 4)? CoinState.head : CoinState.tail,
-                index: 5
+                index: 6
             }
         ];
         if (nHeads === 1){
@@ -121,11 +121,11 @@ import PieChart from "../PieChart.svelte";
 
     function getTernarySymbol(state: CoinState){
         if (state===CoinState.head){
-            return "A"
+            return "dice1"
         } else if (state===CoinState.tail){
-            return "B"
+            return "dice2"
         } else {
-            return "C"
+            return "dice3"
         }
     }
     function clickAll(){
@@ -234,7 +234,9 @@ import PieChart from "../PieChart.svelte";
                  src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
                  alt="Coin"/>
             {:else}
-            {getTernarySymbol(row.state)}
+            <img class="value"
+                 src="/assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
+                 alt="Coin"/>
             {/if}
             {#if !isShaded}
                 {row.text}
