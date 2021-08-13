@@ -1,5 +1,4 @@
 <script lang="ts">
-import PieChart from "../PieChart.svelte";
 
     import Coin from "/src/svelte/coins/Coin.svelte"
 
@@ -24,7 +23,7 @@ import PieChart from "../PieChart.svelte";
         ternary
     }
 
-    let isShaded = true;
+    export let isShaded = true;
 
     let nCoins: number = 6;
 

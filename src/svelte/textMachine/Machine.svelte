@@ -1,6 +1,6 @@
 <script lang="ts">
-    import * as aux from "../ts/textMachine/aux";
-    import * as ct from "../ts/wordGenerator/charTransfer"
+    import * as aux from "../../ts/textMachine/aux";
+    import * as ct from "../../ts/wordGenerator/charTransfer"
 
    let trajectoryTime = 5000;
 

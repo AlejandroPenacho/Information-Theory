@@ -3,8 +3,11 @@
     import Explanation from "/src/svelte/coins/Explanation.svelte"
 
     let explanation;
+    let isShaded;
 </script>
 
-<CoinDeck bind:hoveredRow={explanation}/>
+<CoinDeck bind:isShaded={isShaded} bind:hoveredRow={explanation}/>
 
-<Explanation number={explanation} />
+{#if !isShaded}
+    <Explanation number={explanation} />
+{/if}
