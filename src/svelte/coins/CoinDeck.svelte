@@ -1,11 +1,14 @@
 <script lang="ts">
+import PieChart from "../PieChart.svelte";
+
     import Coin from "/src/svelte/coins/Coin.svelte"
 
     interface Row {
         text: string,
         probability: string,
         entropy: number,
-        condition: boolean,
+        questionType: QType,
+        state: CoinState,
         index: number
     }
 
@@ -13,8 +16,14 @@
 
     enum CoinState {
         head,
-        tail
+        tail,
+        third
     }
+    enum QType {
+        binary,
+        ternary
+    }
+
     let isShaded = true;
 
     let nCoins: number = 6;
@@ -36,46 +45,89 @@
 
 
     let rows: Row[]; 
-    $: rows = [
-        {
-            text: "Value of first coin",
-            probability: "1/2",
-            entropy: binaryEntropy(0.5),
-            condition: (coinValues[0] === CoinState.head),
-            index: 1
-        },{
-            text: "All coins are heads",
-            probability: "1/64",
-            entropy: binaryEntropy(1/64),
-            condition: (nHeads === nCoins),
-            index: 2
-        },{
-            text: "First 3 coins are heads",
-            probability: "1/8",
-            entropy: binaryEntropy(1/8),
-            condition: ((coinValues[0]==CoinState.head)
-                       &&(coinValues[1]==CoinState.head)
-                       &&(coinValues[2]==CoinState.head)),
-            index: 4
-        },{
-            text: "Exactly 3 coins are heads",
-            probability: "1/77",
-            entropy: binaryEntropy(1/77),
-            condition: (nHeads === 3),
-            index: 3
-        },{
-            text: "4 or more coins are heads",
-            probability: "1/2",
-            entropy: binaryEntropy(1/2),
-            condition: (nHeads >= 4),
-            index: 5
+    $: {
+        rows = [
+            {
+                text: "Value of first coin",
+                probability: "1/2",
+                entropy: binaryEntropy(0.5),
+                questionType: QType.binary,
+                state: (coinValues[0] === CoinState.head)? CoinState.head : CoinState.tail,
+                index: 1
+            },{
+                text: "All coins are heads",
+                probability: "1/64",
+                entropy: binaryEntropy(1/64),
+                questionType: QType.binary,
+                state: (nHeads === nCoins)? CoinState.head : CoinState.tail,
+                index: 2
+            },{
+                text: "First 3 coins are heads",
+                probability: "1/8",
+                entropy: binaryEntropy(1/8),
+                questionType: QType.binary,
+                state: ((coinValues[0]==CoinState.head)
+                        &&(coinValues[1]==CoinState.head)
+                        &&(coinValues[2]==CoinState.head))? CoinState.head : CoinState.tail,
+                index: 4
+            },{
+                text: "Exactly 3 coins are heads",
+                probability: "1/77",
+                entropy: binaryEntropy(1/77),
+                questionType: QType.binary,
+                state: (nHeads === 3)? CoinState.head : CoinState.tail,
+                index: 3
+            },{
+                text: "4 or more coins are heads",
+                probability: "1/2",
+                entropy: binaryEntropy(1/2),
+                questionType: QType.binary,
+                state: (nHeads >= 4)? CoinState.head : CoinState.tail,
+                index: 5
+            },{
+                text: "1 / 2 or 3 / 4, 5 or 6 coins are heads",
+                probability: "1/6, 1/3, 1/2",
+                entropy: ternaryEntropy(1/6, 1/3, 1/2),
+                questionType: QType.ternary,
+                state: (nHeads >= 4)? CoinState.head : CoinState.tail,
+                index: 5
+            }
+        ];
+        if (nHeads === 1){
+            rows[5].state = CoinState.head;
+        } else if (nHeads===2 || nHeads===3){
+            rows[5].state = CoinState.tail;
+        } else {
+            rows[5].state = CoinState.third;
         }
-    ]
+    }
 
     function binaryEntropy(p){
         return -(p*Math.log(p)/Math.LN2 + (1-p)*Math.log(1-p)/Math.LN2) 
     }
 
+    function ternaryEntropy(p1, p2, p3){
+        return [p1, p2, p3].reduce((acc, x) => {return acc - x*Math.log(x)/Math.LN2})
+    }
+
+
+    function getBinarySymbol(state: CoinState){
+        if (state===CoinState.head){
+            return "lightCoin"
+        } else {
+            return "darkCoin"
+        }
+    }
+
+    function getTernarySymbol(state: CoinState){
+        if (state===CoinState.head){
+            return "A"
+        } else if (state===CoinState.tail){
+            return "B"
+        } else {
+            return "C"
+        }
+    }
     function clickAll(){
         for (let i=0; i<nCoins; i++){
             clickFunctions[i]();
@@ -84,6 +136,7 @@
     function shade(){
         isShaded = !isShaded;
     }
+
 </script>
 
 <style>
@@ -176,9 +229,13 @@
              style="background-color: {hoveredRow===row.index ? 'green': 'orange'}">
             <div class="probability"> {row.probability}</div>
             <div class="entropy"> {row.entropy.toPrecision(3)}</div>
+            {#if (row.questionType === QType.binary)}
             <img class="value"
-                 src="/assets/svg/coins/{row.condition? 'lightCoin' : 'darkCoin'}.svg" 
+                 src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
                  alt="Coin"/>
+            {:else}
+            {getTernarySymbol(row.state)}
+            {/if}
             {#if !isShaded}
                 {row.text}
             {/if}

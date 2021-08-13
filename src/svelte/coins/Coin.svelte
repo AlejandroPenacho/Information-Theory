@@ -2,7 +2,8 @@
 
     enum CoinState {
         head,
-        tail
+        tail,
+        third
     }
 
     const ANIMATION_TIME : number = 1000;
