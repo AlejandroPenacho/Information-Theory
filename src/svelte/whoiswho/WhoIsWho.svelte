@@ -1,8 +1,10 @@
 <script lang="ts">
 
     import * as ww from "../../ts/whoiswho/whoiswho";
-    import Face from "/src/svelte/whoiswho/Face.svelte"
-    import Question from "/src/svelte/whoiswho/Question.svelte"
+    import Face from "/src/svelte/whoiswho/Face.svelte";
+    import Question from "/src/svelte/whoiswho/Question.svelte";
+
+    export let sendEvent: (event: ww.Event) => void;
 
     let characters = [
         new ww.Character([
@@ -55,6 +57,7 @@
                                       game.computeConditionalEntropies(question.trait);
                                       question.entropy = game.getEntropyDataOfQuestion(question.trait, game.characters);
                                       game=game; 
+                                      sendEvent({type: ww.EventType.hover, trait: question.trait})
                                       onHover=true;}}
                   on:mouseleave={()=>{game.assumptionClear();
                                       game.recomputeAllEntropies();
@@ -68,6 +71,7 @@
                                  game.recomputeAllEntropies();
                                  question.blocked = true;
                                  onHover = false;
+                                 sendEvent({type: ww.EventType.hover, trait: question.trait})
                                  game=game}}/>
     {/each}
 </div>

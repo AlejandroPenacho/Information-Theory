@@ -23,6 +23,11 @@ export enum Assumption {
     nothing, positive, negative
 }
 
+export enum EventType {
+    click,
+    hover
+}
+
 export interface Question {
     trait: Trait,
     text: string,
@@ -38,6 +43,10 @@ export interface EntropyData{
     qEntropy: number
 }
 
+export interface Event {
+    type: EventType,
+    trait: Trait
+}
 
 
 export class Character {
