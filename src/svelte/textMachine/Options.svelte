@@ -1,8 +1,10 @@
 <script lang="ts">
 
+
     interface GenItem {
         letter: string,
         p: number,
+        cachedP: number,
         index: number
     }
 
@@ -12,30 +14,68 @@
     ]
 
     let generatorList: GenItem[] = [
-        {letter: "A", p: 1, index: 0},
-        {letter: "B", p: 0.5, index: 1}
+        {letter: "A", p: 0.5, cachedP: 0.5, index: 0},
+        {letter: "B", p: 0.5, cachedP: 0.5, index: 1}
     ]
 
     let possibleLetters = "ABCDEFGHI";
 
     let selectedTab = "Generator";
 
-    let percentageList = [
-        1, 0, 0, 0, 0, 0, 0
-    ]
+    let generatorEntropy: number;
+
+    $: generatorEntropy = computeEntropy(generatorList);
 
     function generatorAdd(){
         generatorList.push({
             letter: possibleLetters[generatorList.length],
-            p: 0
+            p: 0,
+            cachedP: 0,
+            index: generatorList.length
         });
+
         generatorList = generatorList
     }
     function generatorRemove(){
         let missedP = generatorList.pop().p;
-        generatorList.forEach((x)=> {x.p *= (1+missedP)})
-        generatorList = generatorList;
+        if (missedP === 1){
+            generatorList[generatorList.length - 1].p = missedP;
+            generatorList[generatorList.length - 1].cachedP = missedP;
+        } else {
+            generatorList.forEach((x)=> {x.p *= (1+missedP); x.cachedP = x.p})
+            generatorList = generatorList;
+        }
     }
+
+    function computeEntropy(generatorList: Array<GenItem>){
+        return generatorList.reduce((acc,x) => acc + x.p * Math.log(x.p)/Math.LN2, 0)
+    }
+
+    function adjustGeneratorProb(adjItem: GenItem){
+        return () => {
+            let pOutsideAdj = 1 - adjItem.cachedP;
+            let deltaP = adjItem.p - adjItem.cachedP;
+            adjItem.cachedP = adjItem.p;
+            if (pOutsideAdj !== 0){
+                generatorList.forEach((item)=>{
+                    if (item.index !== adjItem.index){
+                        item.p -= deltaP * item.p / pOutsideAdj;
+                        item.cachedP = item.p;
+                    }
+                })
+            } else {
+                generatorList.forEach((item)=>{
+                    if (item.index !== adjItem.index){
+                        item.p -= deltaP / (generatorList.length-1);
+                        item.cachedP = item.p;
+                    }
+                })
+            }
+            adjItem = adjItem;
+            generatorList = generatorList;
+        }
+    }
+
 
 </script>
 
@@ -77,9 +117,11 @@
     div.genProb {
         width: 60%
     }
-    div.generatorAddAndRemove {
+    div.generatorAddRemove {
         height: 14mm;
         display:flex;
+        align-items: center;
+        justify-content: space-between;
     }
 </style>
 
@@ -104,8 +146,11 @@
                         </div>
                         <input type="range" 
                                bind:value={item.p} 
-                               on:change={adjustGeneratorProb()}
+                               on:input={adjustGeneratorProb(item)}
                                min="0" max="1" step="0.01"/>
+                        <div class="prob">
+                            {item.p.toPrecision(2)}
+                        </div>
                     </div>
                 {/each}
             </div>
@@ -119,6 +164,7 @@
                     -
                 </div>
             </div>
+            {generatorEntropy.toPrecision(3)}
         {/if}
     </div>
 </div>

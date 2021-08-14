@@ -61,8 +61,6 @@ export class TextTransformer{
     transform(input: string) : string {
         this.buffer += input;
 
-        console.log(this.buffer)
-
         for (let i=0; i<this.nTransformations; i++){
             if (this.buffer === this.transfomTable[i][0]){
                 this.buffer = "";
