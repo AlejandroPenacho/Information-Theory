@@ -5,5 +5,16 @@
     let generatorData;
 </script>
 
-<Machine generatorData={generatorData}/>
-<Options bind:generatorList={generatorData}/>
+<style>
+    div.theZone {
+        display: flex;
+
+    }
+</style>
+
+<div class="main">
+    <div class="theZone">
+        <Machine generatorData={generatorData}/>
+        <Options bind:generatorList={generatorData}/>
+    </div>
+</div>

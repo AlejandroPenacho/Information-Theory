@@ -2,18 +2,29 @@
    import * as aux from "../../ts/textMachine/aux";
    import * as ct from "../../ts/wordGenerator/charTransfer"
 
-   export let generatorData;
+   export let generatorData = [
+        {letter: "A", p: 0.5, cachedP: 0.5, index: 0, coded: "0"},
+        {letter: "B", p: 0.5, cachedP: 0.5, index: 1, coded: "10"}
+   ]
 
    let trajectoryTime = 5000;
 
    let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
    let temp = aux.computeCodifiedTrajectories(trajectoryTime, 14.23, 25.54, 3.02, 24.59);
 
-   let transformTable: Array<[string,string]> = [["A","I"], ["B", "OI"], ["C","OO"], ["d","a"]];
-   let decodeTable: Array<[string, string]> = ct.reverseTable(transformTable);
    
-   let encoder = new ct.TextTransformer(transformTable);
-   let decoder = new ct.TextTransformer(decodeTable);
+   let encoder;
+   let decoder;
+
+   $: {
+      encoder = new ct.TextTransformer(generatorData.map((x)=> [x.letter, x.coded]));
+
+      // For the decoder, there are letters in the pipe between encoder and decoder that 
+      // must be processed according to the old rule
+      setTimeout(() => {
+         decoder = new ct.TextTransformer(generatorData.map((x)=> [x.coded, x.letter]));
+      }, temp[0][1])
+   }
 
    let codTimes = temp[0];
    let codTrajs = temp[1];
@@ -87,9 +98,9 @@
 </script>
 
 <svg
-   width="{48.979172*20}"
-   height="{25.769094*20}"
-   viewBox="0 0 48.979172 25.769094"
+   width="{30.97917*15}"
+   height="{25.769094*15}"
+   viewBox="0 0 30.97917 25.769094"
    version="1.1"
    id="svg5"
    xmlns="http://www.w3.org/2000/svg">

@@ -51,11 +51,17 @@ export class TextTransformer{
     transfomTable: Array<[string, string]>;
     buffer: string;
     nTransformations: number;
+    maxBufferLength: number;
 
     constructor(transformTable: Array<[string, string]>){
         this.transfomTable = transformTable;
         this.buffer = "";
         this.nTransformations = transformTable.length;
+        this.maxBufferLength = Math.max(...transformTable.map(x => x[0].length))
+    }
+
+    restart(){
+        this.buffer = "";
     }
 
     transform(input: string) : string {
@@ -66,6 +72,9 @@ export class TextTransformer{
                 this.buffer = "";
                 return this.transfomTable[i][1]
             }
+        }
+        if (this.buffer.length >= this.maxBufferLength){
+            this.buffer = "";
         }
         return ""
     }

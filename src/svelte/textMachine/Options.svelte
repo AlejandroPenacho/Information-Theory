@@ -5,7 +5,8 @@
         letter: string,
         p: number,
         cachedP: number,
-        index: number
+        index: number,
+        coded: string
     }
 
     let tabList = [
@@ -14,8 +15,8 @@
     ]
 
     export let generatorList: GenItem[] = [
-        {letter: "A", p: 0.5, cachedP: 0.5, index: 0},
-        {letter: "B", p: 0.5, cachedP: 0.5, index: 1}
+        {letter: "A", p: 0.5, cachedP: 0.5, index: 0, coded: "0"},
+        {letter: "B", p: 0.5, cachedP: 0.5, index: 1, coded: "10"}
     ]
 
     let possibleLetters = "ABCDEFGHI";
@@ -31,7 +32,8 @@
             letter: possibleLetters[generatorList.length],
             p: 0,
             cachedP: 0,
-            index: generatorList.length
+            index: generatorList.length,
+            coded: ""
         });
 
         generatorList = generatorList
@@ -82,6 +84,7 @@
         }
     }
 
+    // Code for the coder
 
 </script>
 
@@ -153,6 +156,19 @@
         align-items: center;
         justify-content: center;
     }
+
+
+    div.codificationRow {
+        display: flex;
+        height: 14mm;
+        justify-content: space-between;
+    }
+    div.codInput {
+        width: 40%;
+    }
+    input.codOutput {
+        width: 40%
+    }
 </style>
 
 
@@ -201,6 +217,16 @@
             <div class="entropyData">
                 H = {generatorEntropy.toPrecision(3)}
             </div>
+
+        {:else if selectedTab=="Compressor"}
+            {#each generatorList as item}
+                <div class="codificationRow">
+                    <div class="codInput">
+                        {item.letter}
+                    </div>
+                    <input class="codOutput" type="text" bind:value={item.coded} />
+                </div>
+            {/each}
         {/if}
     </div>
 </div>

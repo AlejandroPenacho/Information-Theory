@@ -9,7 +9,8 @@
     }
 
     div.par {
-        margin: 10px 0px 0px 0px
+        margin: 10px 0px 0px 0px;
+        padding: 8mm;
     }
 
 </style>
@@ -19,21 +20,17 @@
        What is information? 
     </h3>
     <div class="par">
-        Information (or communication) is a sequence of symbols from a given set. Nothing else. When you read,
-        you receive characters. These characters are all in a group of all possible characters: letters,
-        numbers, signs of punctuation, etc.
-    </div>
-    <div class="par"> 
-        Knowing this, our first aproach towards measuring information would be to consider the amount of
-        information is proportional to the number of symbols you receive. Three letters convey more information
-        than two.
+        It seems there is an equivalence between a single message among many possibilities, and several 
+        symbols from a smaller set. This allows to define a measure of the information of a single message.
     </div>
     <div class="par">
-        However, is not the same a communication consisting on 4 different symbols that on 8. We would expect
-        the second one to transmit more information for each symbol than the first one. Actually, 1 symbol of a
-        group of 8 is equivalent to 2 symbols of 4, and 3 symbols of 2, as can be seen below.
+        As we saw before, the information of, say, a 16-response, is equal to 2 different 4-responses, 
+        4 different 2-responses, or one 2-response and one 8-response. You can check below how there is a
+        single equivalence.
     </div>
-    <SymbolArray allConfigurations={[[2,2],[4]]}/>
-    <SymbolArray allConfigurations={[[2,2,2],[2,4],[8]]}/>
     <SymbolArray allConfigurations={[[2,2,2,2],[4,4],[2,8],[16]]}/>
+    <div class="par">
+        So, f(2) + f(2) + f(2) + f(2) = f(4) + f(4) = f(2) + f(8) = f(16). There is a function that fulfills 
+        this requirement, the logarithmic function. 
+    </div>
 </div>
