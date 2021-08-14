@@ -1,22 +1,25 @@
 <script lang="ts">
-    import * as aux from "../../ts/textMachine/aux";
-    import * as ct from "../../ts/wordGenerator/charTransfer"
+   import * as aux from "../../ts/textMachine/aux";
+   import * as ct from "../../ts/wordGenerator/charTransfer"
+
+   export let generatorData;
 
    let trajectoryTime = 5000;
 
    let rawTrajectory = aux.computeRawTrajectory(14.23, 5.64, 20.07, 14.23, 18.735, 4);
    let temp = aux.computeCodifiedTrajectories(trajectoryTime, 14.23, 25.54, 3.02, 24.59);
 
-   let transformTable: Array<[string,string]> = [["a","b"], ["b", "c"], ["c","d"], ["d","a"]];
+   let transformTable: Array<[string,string]> = [["A","I"], ["B", "OI"], ["C","OO"], ["d","a"]];
+   let decodeTable: Array<[string, string]> = ct.reverseTable(transformTable);
    
    let encoder = new ct.TextTransformer(transformTable);
-   let decoder = new ct.TextTransformer(transformTable);
+   let decoder = new ct.TextTransformer(decodeTable);
 
    let codTimes = temp[0];
    let codTrajs = temp[1];
 
-   let rawBuffer = new ct.TextBuffer(10);
-   let codBuffer = new ct.TextBuffer(10);
+   let rawBuffer = new ct.TextBuffer(8);
+   let codBuffer = new ct.TextBuffer(8);
 
    let rawTunnel = new ct.TextTunnel(rawTrajectory, trajectoryTime, (text)=>{rawBuffer.add(text)});
    let cod3Tunnel = new ct.TextTunnel(codTrajs[2], codTimes[2], (text)=>{codBuffer.add(text)});
@@ -26,25 +29,39 @@
    let informationMeasure = [0, 0];
 
 
-   document.onkeydown = (e) => {
-      let key = e.key;
-      if (key !== "Shift"){
-         rawTunnel.send(key);
-         cod1Tunnel.send(key);
-      }
-   };
+//   document.onkeydown = (e) => {
+//      let key = e.key;
+//      if (key !== "Shift"){
+//         rawTunnel.send(key);
+//         cod1Tunnel.send(key);
+//      }
+//   };
 
 
-   let lastTime;
+   let lastFrameTime;
+   let lastGenerationTime;
+   let generationInterval = 500;
 
    requestAnimationFrame(getFrame);
 
-    function getFrame(time){
-      if (lastTime === undefined){
-         lastTime = time;
+   function generateCharacter(){
+      let rand = Math.random();
+      for (let i=0; i<generatorData.length; i++){
+         rand -= generatorData[i].p;
+         if (rand <= 0){
+            rawTunnel.send(generatorData[i].letter)
+            cod1Tunnel.send(generatorData[i].letter)
+            return
+         }
       }
-      let timestep = time - lastTime;
-      lastTime = time;
+   }
+
+    function getFrame(time){
+      if (lastFrameTime === undefined){
+         lastFrameTime = time;
+      }
+      let timestep = time - lastFrameTime;
+      lastFrameTime = time;
 
       rawTunnel.updateFrame(timestep);
       cod1Tunnel.updateFrame(timestep);
@@ -58,6 +75,11 @@
       cod2Tunnel = cod2Tunnel;
       cod3Tunnel = cod3Tunnel;
       codBuffer = codBuffer;
+
+      if (lastGenerationTime === undefined || ((time - lastGenerationTime) > generationInterval)){
+         generateCharacter();
+         lastGenerationTime = time;
+      }
 
       requestAnimationFrame(getFrame);
     }

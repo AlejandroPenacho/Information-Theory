@@ -145,3 +145,9 @@ export class TextTunnel {
         this.passengers = this.passengers;
     }
 }
+
+export function reverseTable(table: Array<[string, string]>){
+    let newTable = new Array(table.length);
+    table.forEach((x, index) => {newTable[index] = [x[1], x[0]]})
+    return newTable
+}

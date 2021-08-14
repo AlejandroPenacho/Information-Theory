@@ -13,7 +13,7 @@
         "Compressor"
     ]
 
-    let generatorList: GenItem[] = [
+    export let generatorList: GenItem[] = [
         {letter: "A", p: 0.5, cachedP: 0.5, index: 0},
         {letter: "B", p: 0.5, cachedP: 0.5, index: 1}
     ]
@@ -48,7 +48,13 @@
     }
 
     function computeEntropy(generatorList: Array<GenItem>){
-        return generatorList.reduce((acc,x) => acc + x.p * Math.log(x.p)/Math.LN2, 0)
+        return generatorList.reduce((acc,x) => { 
+            if (x.p === 0){
+                return acc;
+            } else {
+                return (acc - (x.p * Math.log(x.p)/Math.LN2))
+            }
+        }, 0);
     }
 
     function adjustGeneratorProb(adjItem: GenItem){
@@ -101,6 +107,7 @@
     }
 
     div.letterList {
+        padding: 5mm;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -122,6 +129,29 @@
         display:flex;
         align-items: center;
         justify-content: space-between;
+    }
+    div.generatorAdd {
+        width: 40%;
+        border-radius: 5mm;
+        background-color: chartreuse;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    div.generatorRemove {
+        width: 40%;
+        border-radius: 5mm;
+        background-color: darksalmon;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    div.entropyData {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 
@@ -155,16 +185,22 @@
                 {/each}
             </div>
             <div class="generatorAddRemove">
-                <div class="genAdd"
+                {#if generatorList.length < possibleLetters.length}
+                <div class="generatorAdd"
                      on:click={generatorAdd}>
                     +
                 </div>
-                <div class="genRem"
+                {/if}
+                {#if generatorList.length > 1}
+                <div class="generatorRemove"
                      on:click={generatorRemove}>
                     -
                 </div>
+                {/if}
             </div>
-            {generatorEntropy.toPrecision(3)}
+            <div class="entropyData">
+                H = {generatorEntropy.toPrecision(3)}
+            </div>
         {/if}
     </div>
 </div>
