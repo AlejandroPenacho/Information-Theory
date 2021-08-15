@@ -1,5 +1,7 @@
 <script lang="ts">
     import Multiplier from "/src/svelte/symbols/Multiplier.svelte"
+
+    let numbers = [2, 2];
 </script>
 
 <style>
@@ -10,6 +12,10 @@
 
     div.par {
         margin: 10px 0px 0px 0px
+    }
+
+    span.math {
+        font-style: italic;
     }
 
     /*
@@ -35,14 +41,16 @@
     </div>
     <div class="par">
         Below, you can check how two responses with different number of possibilites generatate a response of
-        more possibilities, at the right. You can imagine that we are being asked for a certain point in the grid,
-        and we respond first with the row, and then with the columns.
+        more possibilities, at the right. You can imagine that we are being asked for a certain point in the 
+        grid, and we respond first with the row, and then with the columns.
     </div>
-    <Multiplier />
+    <Multiplier bind:nSelect={numbers}/>
     <div class="par">
         So, two responses of a certain number can be used to answer a question of a higher number.
         What does this mean? Well, a questions is a request for information. The more possible answers,
-        more information. 
+        more information. In mathematical terms, we can combine a <span class="math">{numbers[0]}</span>-response with
+        a <span class="math">{numbers[1]}</span>-response to generate a <span class="math">({numbers[0]}*{numbers[1]}=
+        {numbers[0]*numbers[1]})</span>-response.
     </div>
     <div class="par">
         

@@ -172,6 +172,12 @@
         display: grid;
         grid-template-columns: 60% 40%;
     }
+    div.text {
+        background-color: var(--color4);
+        border-radius: 5mm;
+        margin: 8mm;
+        padding: 8mm;
+    }
 </style>
 
 <div class="main">

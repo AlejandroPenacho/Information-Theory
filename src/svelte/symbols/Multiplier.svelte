@@ -1,6 +1,8 @@
 <script lang="ts">
-    let nSelect = [2, 2];
+    export let nSelect = [2, 2];
     let selectedPoint = [1,1];
+
+    let maxVal = 7;
 
 
     function changeRow(newRow){
@@ -16,9 +18,14 @@
 
 <style>
     div.main {
+        margin-top: 8mm;
+        padding: 4mm;
         display: grid;
         grid-template-columns: 3cm 3cm 3cm;
-        grid-template-rows: 2cm 3cm;
+        grid-template-rows: 14mm 3cm;
+        background-color: var(--color4);
+        border-radius: 4mm;
+        width: max-content;
     }
     div.number-1 {
         grid-column: 1 / 2;
@@ -26,6 +33,8 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+        background-color: var(--color5);
+        border-radius: 5mm 0mm 0mm 5mm;
     }
     div.number-2 {
         grid-column: 2 / 3;
@@ -33,6 +42,7 @@
         display: flex;
         align-items: center;
         justify-content:space-evenly;
+        background-color: var(--color5);
     }
     div.number-3 {
         grid-column: 3 / 4;
@@ -40,6 +50,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: var(--color5);
+        border-radius: 0mm 5mm 5mm 0mm;
     }
     div.grid-1 {
         grid-column: 1 / 2;
@@ -82,33 +94,51 @@
         border-style: solid;
         cursor: pointer;
     }
+    div.miniblock:hover {
+        background-color: chartreuse;
+    }
 
     div.clickBlock {
-        background-color: var(--color5);
+        background-color: var(--color4);
         cursor: pointer;
+        width: 6mm;
+        height: 6mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    div.clickBlock:hover {
+        background-color: var(--color2);
+    }
+    div.clickBlock#left {
+        border-radius: 3mm 0mm 0mm 3mm ;
+    }
+    div.clickBlock#right {
+        border-radius: 0mm 3mm 3mm 0mm ;
+    }
+
 </style>
 
 <div class="main">
     <div class="number-1">
-        <div class="clickBlock"
-             on:click={()=> {nSelect[0]--; nSelect=nSelect}}>
+        <div class="clickBlock" id="left"
+             on:click={()=> {nSelect[0] = Math.max(nSelect[0]-1, 1)}}>
             &lt
         </div>
         {nSelect[0]}
-        <div class="clickBlock"
-             on:click={()=> {nSelect[0]++; nSelect=nSelect}}>
+        <div class="clickBlock" id="right"
+             on:click={()=> {nSelect[0] = Math.min(nSelect[0]+1, maxVal)}}>
             &gt
         </div>
     </div>
     <div class="number-2">
-        <div class="clickBlock"
-             on:click={()=> {nSelect[1]--; nSelect=nSelect}}>
+        <div class="clickBlock" id="left"
+             on:click={()=> {nSelect[1] = Math.max(nSelect[1]-1, 1)}}>
             &lt
         </div>
         {nSelect[1]}
-        <div class="clickBlock"
-             on:click={()=> {nSelect[1]++; nSelect=nSelect}}>
+        <div class="clickBlock" id="right"
+             on:click={()=> {nSelect[1] = Math.min(nSelect[1]+1, maxVal)}}>
             &gt
         </div>
     </div>
