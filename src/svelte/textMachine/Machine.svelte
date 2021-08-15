@@ -32,12 +32,19 @@
    let rawBuffer = new ct.TextBuffer(8);
    let codBuffer = new ct.TextBuffer(8);
 
-   let rawTunnel = new ct.TextTunnel(rawTrajectory, trajectoryTime, (text)=>{rawBuffer.add(text)});
-   let cod3Tunnel = new ct.TextTunnel(codTrajs[2], codTimes[2], (text)=>{codBuffer.add(text)});
-   let cod2Tunnel = new ct.TextTunnel(codTrajs[1], codTimes[1], (text)=>{cod3Tunnel.send(decoder.transform(text))})
-   let cod1Tunnel = new ct.TextTunnel(codTrajs[0], codTimes[0], (text)=>{cod2Tunnel.send(encoder.transform(text))})
+   let rawTunnel = new ct.TextTunnel(rawTrajectory, trajectoryTime, (x)=>{
+      setTimeout(() => {tachymeters[0].tick()}, trajectoryTime/2);
+   }, (text)=>{rawBuffer.add(text)});
 
-   let informationMeasure = [0, 0];
+   let cod3Tunnel = new ct.TextTunnel(codTrajs[2], codTimes[2], ()=>{}, (text)=>{codBuffer.add(text)});
+
+   let cod2Tunnel = new ct.TextTunnel(codTrajs[1], codTimes[1], ()=>{
+      setTimeout(() => {tachymeters[1].tick()}, codTimes[1]/2);
+   }, (text)=>{cod3Tunnel.send(decoder.transform(text))})
+
+   let cod1Tunnel = new ct.TextTunnel(codTrajs[0], codTimes[0], ()=>{}, (text)=>{cod2Tunnel.send(encoder.transform(text))})
+
+   let tachymeters = [new ct.Tachymeter(15, 300), new ct.Tachymeter(15, 300)];
 
 
 //   document.onkeydown = (e) => {
@@ -78,6 +85,7 @@
       cod1Tunnel.updateFrame(timestep);
       cod2Tunnel.updateFrame(timestep);
       cod3Tunnel.updateFrame(timestep);
+      tachymeters.forEach((x) => x.updateFrame(timestep))
 
       rawTunnel = rawTunnel;
       rawBuffer = rawBuffer;
@@ -87,6 +95,8 @@
       cod3Tunnel = cod3Tunnel;
       codBuffer = codBuffer;
 
+      tachymeters = tachymeters;
+
       if (lastGenerationTime === undefined || ((time - lastGenerationTime) > generationInterval)){
          generateCharacter();
          lastGenerationTime = time;
@@ -94,6 +104,8 @@
 
       requestAnimationFrame(getFrame);
     }
+
+    setTimeout(()=>{console.log(tachymeters[0].measurers)}, 8000)
 
 </script>
 
@@ -363,7 +375,7 @@
            id="tspan6260-7"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76389px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
            x="24.657928"
-           y="12.518725">2.32</tspan></text>
+           y="12.518725">{tachymeters[1].currentShow.toPrecision(3)}</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -373,7 +385,7 @@
            id="tspan6260-7-5"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76389px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
            x="19.222595"
-           y="12.552866">4.63</tspan></text>
+           y="12.552866">{tachymeters[0].currentShow.toPrecision(3)}</tspan></text>
     </g>
   </g>
 </svg>

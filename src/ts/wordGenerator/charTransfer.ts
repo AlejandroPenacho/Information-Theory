@@ -117,15 +117,18 @@ export class TextTunnel {
     passengers: Array<FloatingLetter>;
     trajectoryFunction: (number) => [number, number];
     transferTime: number;
+    enterFunction: (string) => void;
     exitFunction: (string) => void;
     frameTimestep: number;
 
     constructor(trajectoryFunction: (number) => [number, number],
                 tranferTime: number,
+                enterFunction: (text) => void,
                 exitFunction: (text) => void) {
 
         this.trajectoryFunction = trajectoryFunction;
         this.transferTime = tranferTime;
+        this.enterFunction = enterFunction;
         this.exitFunction = exitFunction;
         this.passengers = new Array();
     }
@@ -136,6 +139,7 @@ export class TextTunnel {
                 let newLetter = new FloatingLetter(message[i]);
                 newLetter.position = this.trajectoryFunction(0);
                 this.passengers.push(newLetter);
+                this.enterFunction(message[i])
             }, i*100)
         }
    }
@@ -152,6 +156,55 @@ export class TextTunnel {
             }
         }
         this.passengers = this.passengers;
+    }
+}
+
+export class Tachymeter {
+    nMeasurers: number;
+    measurers: number[];
+    rotationTime: number;
+    measureTime: number;
+    currentShow: number;
+    showIndex: number;
+    internalTime: number;
+
+
+    constructor(nMeasurers, rotationTime){
+        this.nMeasurers = nMeasurers;
+        this.measurers = new Array(nMeasurers);
+        for (let i=0; i<nMeasurers; i++){
+            this.measurers[i] = 0;
+        }
+        this.rotationTime = rotationTime;
+        this.measureTime = rotationTime * nMeasurers;
+        this.currentShow = 0;
+        this.showIndex = 0;
+        this.internalTime = 0;
+    }
+
+    updateFrame(timestep){
+        this.internalTime += timestep;
+        if (this.internalTime >= this.rotationTime){
+            this.rotate();
+            this.internalTime -= this.rotationTime;
+        }
+    }
+
+    rotate(){
+        this.showIndex ++;
+        if (this.showIndex >= this.nMeasurers){
+            this.showIndex = 0;
+        }
+        this.currentShow = this.measurers[this.showIndex];
+        this.measurers[this.showIndex] = 0;
+    }
+
+    tick(){
+        this.measurers = this.measurers.map((x) => x+1000/this.measureTime)
+    }
+
+    show(){
+        return this.currentShow
     }
 }
 
