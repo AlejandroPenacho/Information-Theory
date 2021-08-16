@@ -78,17 +78,17 @@
         {:else if selectedChapter==3}
             <Entropy1 nextChapter={changeChapter(4)}/>
         {:else if selectedChapter==4}
-            <CompleteWords nextChapter={changeChapter(4)}/>
+            <CompleteWords nextChapter={changeChapter(5)}/>
         {:else if selectedChapter==5}
-            <RealEntropy nextChapter={changeChapter(5)}/>
+            <RealEntropy nextChapter={changeChapter(6)}/>
         {:else if selectedChapter==6}
-            <WhoIsWhoScene nextChapter={changeChapter(6)}/>
+            <WhoIsWhoScene nextChapter={changeChapter(7)}/>
         {:else if selectedChapter==7}
-            <ThrowDices nextChapter={changeChapter(7)}/>
+            <ThrowDices nextChapter={changeChapter(8)}/>
         {:else if selectedChapter==8}
-            <LargeChains nextChapter={changeChapter(8)}/>
+            <LargeChains nextChapter={changeChapter(9)}/>
         {:else if selectedChapter==9}
-            <Compressor nextChapter={changeChapter(9)}/>
+            <Compressor nextChapter={changeChapter(10)}/>
         {:else if selectedChapter==10}
             <Conclusion />
         {/if}
