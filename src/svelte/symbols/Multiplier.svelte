@@ -107,6 +107,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        -moz-user-select: none;
+        -webkit-user-select: none;
     }
     div.clickBlock:hover {
         background-color: var(--color2);

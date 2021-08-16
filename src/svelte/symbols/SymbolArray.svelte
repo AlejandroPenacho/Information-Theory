@@ -21,6 +21,7 @@
 <style>
     div.main {
         display: flex;
+        align-items: center;
     }
     div.sep {
         display: flex;

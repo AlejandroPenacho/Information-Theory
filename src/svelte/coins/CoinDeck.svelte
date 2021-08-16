@@ -85,7 +85,7 @@
                 index: 5
             },{
                 text: "1 / 2 or 3 / 4, 5 or 6 coins are heads",
-                probability: "1/6, 1/3, 1/2",
+                probability: "1/6 1/3 1/2",
                 entropy: ternaryEntropy(1/6, 1/3, 1/2),
                 questionType: QType.ternary,
                 state: (nHeads >= 4)? CoinState.head : CoinState.tail,
@@ -140,7 +140,8 @@
 
 <style>
     div.main {
-
+        display: flex;
+        align-items: center;
     }
     div.upper-zone {
         display: flex;
@@ -149,20 +150,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
     }
     div.button {
-        width: 1.3cm;
-        height: 1.3cm;
+        width: 20mm;
+        height: 50mm;
         border-radius: 3mm;
         margin: 3mm;
-        background-color: green;
+        background-color: var(--color5);
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    div.button:hover {
+        background-color: var(--color4);
     }
     div.deck {
         display: flex;
+        flex-direction: column;
         margin-left: 8mm;
         align-items: center;
+        justify-content: center;
         position: relative;
         padding: 8mm;
     }
@@ -171,7 +180,8 @@
         position: absolute;
         height:100%;
         width: 100%;
-        transform: translate(-8mm, 0);
+        border-radius: 10mm;
+        /* transform: translate(0, -8mm); */
     }
 
     div.lower-deck {
@@ -186,6 +196,12 @@
         height: 10mm;
         border-radius: 3mm;
         margin: 2mm;
+    }
+    div.question:last-child {
+        height: 20mm;
+    }
+    div.question:last-child div.probability {
+        font-size: 6mm;
     }
     div.probability {
         width: 20mm;
@@ -203,11 +219,11 @@
         <div class="left-buttons">
             <div class="button"
                  on:click={clickAll}>
-                Flip all
+                 Roll
             </div>
             <div class="button"
                  on:click={shade}>
-                Shade/ unshade
+                 Reveal
             </div>
         </div>
         <div class="deck">
@@ -221,13 +237,17 @@
         </div>
     </div>
     <div class="lower-deck">
+        <div class="question">
+            <div class="probability">P</div>
+            <div class="value"> Outcome</div>
+            <div class="entropy">H</div>
+        </div>
         {#each rows as row}
         <div class="question"
              on:mouseenter={()=>{hoveredRow = row.index}}
              on:mouseleave={()=>{hoveredRow = 0}}
              style="background-color: {hoveredRow===row.index ? 'green': 'orange'}">
             <div class="probability"> {row.probability}</div>
-            <div class="entropy"> {row.entropy.toPrecision(3)}</div>
             {#if (row.questionType === QType.binary)}
             <img class="value"
                  src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
@@ -237,6 +257,7 @@
                  src="/assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
                  alt="Coin"/>
             {/if}
+            <div class="entropy"> {row.entropy.toPrecision(3)}</div>
             {#if !isShaded}
                 {row.text}
             {/if}

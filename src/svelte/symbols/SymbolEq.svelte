@@ -74,13 +74,18 @@
         align-items: center;
         justify-content: center;
         background-color: chartreuse;
-    }
-    img {
-        cursor: pointer;
-    }
-    div.number {
         cursor: pointer;
         user-select: none;
+        width: 14mm;
+        height: 14mm;
+        border-radius: 7mm;
+    }
+    div.number:hover {
+        background-color: darkgreen;
+    }
+
+    img {
+        cursor: pointer;
     }
 
 </style>
@@ -102,7 +107,7 @@
         {:else if currentBit==16}
             <div class="number"
                  on:click={increaseValue(index)}>
-                 {symbolValue[index]}
+                 {symbolValue[index]+1}
             </div>
         {/if}
     {/each}
