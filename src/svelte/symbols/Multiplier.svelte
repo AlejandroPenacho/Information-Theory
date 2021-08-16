@@ -19,6 +19,7 @@
 <style>
     div.main {
         margin-top: 8mm;
+        margin-right: 10mm;
         padding: 4mm;
         display: grid;
         grid-template-columns: 3cm 3cm 3cm;
@@ -148,7 +149,7 @@
     <div class="grid-1">
         {#each [...Array(nSelect[0]).keys()] as index}
             <div class="miniblock"
-                 style="background-color: {(selectedPoint[0]===index)? "green": "white"}"
+                 style="background-color: {(selectedPoint[0]===index)? "green": ""}"
                  on:click={() => changeRow(index)}>
             </div>
         {/each}
@@ -156,7 +157,7 @@
     <div class="grid-2">
         {#each [...Array(nSelect[1]).keys()] as index}
             <div class="miniblock"
-                 style="background-color: {(selectedPoint[1]===index)? "green": "white"}"
+                 style="background-color: {(selectedPoint[1]===index)? "green": ""}"
                  on:click={() => changeColumn(index)}>
             </div>
         {/each}
@@ -167,7 +168,7 @@
                 {#each [...Array(nSelect[1]).keys()] as index2}
                     <div class="miniblock"
                          style="background-color: {(selectedPoint[0]===index1 &&
-                                                    selectedPoint[1]===index2)? "green" : "white"}"
+                                                    selectedPoint[1]===index2)? "green" : ""}"
                          on:click={()=>{changeRow(index1); changeColumn(index2)}}>
 
                     </div>

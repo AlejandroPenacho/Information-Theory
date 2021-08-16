@@ -46,6 +46,22 @@
         grid-column: 2 3;
         min-height: 100vh;
     }
+
+    :global(.nextButton) {
+        background-color: var(--color1);
+        margin: auto;
+        margin-top: 10mm;
+        width: 30mm;
+        height: 10mm;
+        border-radius: 3mm;
+        color: var(--color5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
 </style>
 
 <div class="mainDiv">
@@ -56,23 +72,23 @@
         {#if selectedChapter==0}
             <ExampleProblems nextChapter={changeChapter(1)}/> 
         {:else if selectedChapter==1}
-            <SmartWatch1 />
+            <SmartWatch1 nextChapter={changeChapter(2)}/>
         {:else if selectedChapter==2}
-            <Introduction />
+            <Introduction nextChapter={changeChapter(3)}/>
         {:else if selectedChapter==3}
-            <Entropy1 />
+            <Entropy1 nextChapter={changeChapter(4)}/>
         {:else if selectedChapter==4}
-            <CompleteWords />
+            <CompleteWords nextChapter={changeChapter(4)}/>
         {:else if selectedChapter==5}
-            <RealEntropy />
+            <RealEntropy nextChapter={changeChapter(5)}/>
         {:else if selectedChapter==6}
-            <WhoIsWhoScene />
+            <WhoIsWhoScene nextChapter={changeChapter(6)}/>
         {:else if selectedChapter==7}
-            <ThrowDices />
+            <ThrowDices nextChapter={changeChapter(7)}/>
         {:else if selectedChapter==8}
-            <LargeChains />
+            <LargeChains nextChapter={changeChapter(8)}/>
         {:else if selectedChapter==9}
-            <Compressor />
+            <Compressor nextChapter={changeChapter(9)}/>
         {:else if selectedChapter==10}
             <Conclusion />
         {/if}

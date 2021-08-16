@@ -3,6 +3,8 @@
     import { onMount } from "svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
 
+    export let nextChapter;
+
     interface MessageStage {
         change: ChangeCause,
         allowAnswer: boolean,
@@ -192,6 +194,11 @@
     <div class="main-scene">
         <div class="text">
             {instructionText[instructionStage]}
+            {#if instructionStage===(instructionText.length-1)}
+                <div class="nextButton" on:click={nextChapter}>
+                    Next page
+                </div>
+            {/if}
         </div>
         <Watch bind:receiveMessage={sendWatchMessage}
                sentMessage={sentMessage}
