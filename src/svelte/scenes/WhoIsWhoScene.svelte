@@ -15,14 +15,30 @@
 
     let stageList: Stage[] = [
         {
-            text:  `First, take a look at the entropy value of 'Has long hair?'. 
-                    Start by hovering over the question 'Has eyes?'. As you can 
-                    see, its entropy (0.81) is relatively high.`,
-            changeCondition: {type: ww.EventType.hover, trait: ww.Trait.hasEyes}
+            text:  `In this game, you can see all the characters in the center, and 
+            the possible questions at the right. Each one has one number in it: its entropy. For example,
+            look at the question "Has hat?". Only one character has, so...
+            As you can see not all are the same. Start by hovering over the question "Wears glasses?".`,
+            changeCondition: {type: ww.EventType.hover, trait: ww.Trait.hasGlasses}
         },{
-            text: `Now, jump`,
-            changeCondition: {type: ww.EventType.hover, trait: ww.Trait.hasEyes}
-        }
+            text: `The response to this question has an entropy of 0.81 bits. Hovering, you can see why. 
+            As explained before, each possible output (yes or no) has a probability, depending on the number 
+            of characters left on the game that fulfill it. Here, only 2 characters out of 8 wear glasses. Since,
+            a priori, all characters has the same chance of being the chose one, the probability of receceiving a 
+            "yes" is 2/8, or 25%. As we saw in the previous chapter, a yes provides more entropy, since it 
+            crosses out more characters, but is less probable. The opposite happens for the "no". Click to 
+            ask that question.`,
+            changeCondition: {type: ww.EventType.click, trait: ww.Trait.hasGlasses}
+        },{
+            text: `So, we got a "no" and still have 6 characters out of 8. This is equivalent to saying that we 
+            got an entropy of 0.42 bits.`,
+            changeCondition: {type: ww.EventType.hover, trait: ww.Trait.hasShortHair} 
+        },{
+            text: `Now, let's focus on how the entropy of other questions change when we ask this one. Look 
+            at "Has mouth?" (weird question, isn't it?). Right now it has an entropy of 0.65. `,
+            changeCondition: {type: ww.EventType.hover, trait: ww.Trait.hasBeard} 
+        },{}
+
     ]
 
 
@@ -52,17 +68,36 @@
     div.restartButton:hover {
         background-color: crimson;
     }
+    div.mainStage {
+        display: flex;
+        flex-direction: column;
+    }
 </style>
 
-<div class="restartButton"
-     on:click={restart}>
-    Restart
+<div class="main">
+    <h1> Who is Who?</h1>
+    <div class="par">
+        The concept of information theory and entropy can be found in many aspects of our daily life. One 
+        example is the popular game "Who is Who?". If you have never played, it is simple: among the characters
+        displayed, the computer has chosen one. You can ask questions about it and, depending on the response, 
+        you cross the characters that you know they can't be the chosen one. For example, if you ask whether it 
+        has long hair, and you receive a "yes" as an answer, you should cross out characters without long hair.
+    </div>
+    <div class="par">
+        These answers are an example of a binary response. And so, we get back to our familiar setting.
+    </div>
+    <div class="restartButton"
+        on:click={restart}>
+        Restart
+    </div>
+
+    <div class="mainStage">
+        {#key unique}
+            <WhoIsWho sendEvent={eventFunction}/>
+        {/key}
+        <div>
+            {stageList[currentStage].text}
+        </div>
+    </div>
 </div>
 
-{#key unique}
-    <WhoIsWho sendEvent={eventFunction}/>
-{/key}
-
-<div>
-    {stageList[currentStage].text}
-</div>

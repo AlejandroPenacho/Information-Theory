@@ -1,48 +1,48 @@
 <script lang="ts">
 
+    import {characterList} from "../../ts/whoiswho/characters"
     import * as ww from "../../ts/whoiswho/whoiswho";
     import Face from "/src/svelte/whoiswho/Face.svelte";
     import Question from "/src/svelte/whoiswho/Question.svelte";
 
     export let sendEvent: (event: ww.Event) => void;
 
-    let characters = [
-        new ww.Character([
-            ww.Trait.hasEyes, ww.Trait.hasNose,
-            ww.Trait.hasMouth, ww.Trait.hasShortHair
-        ], false),
-        new ww.Character([
-            ww.Trait.hasEyes, ww.Trait.hasNose,
-            ww.Trait.hasMouth, ww.Trait.hasLongHair
-        ], true),
-        new ww.Character([
-            ww.Trait.hasNose,
-            ww.Trait.hasMouth, ww.Trait.hasLongHair
-        ], false),
-        new ww.Character([
-            ww.Trait.hasEyes, ww.Trait.hasNose,
-            ww.Trait.hasMouth, ww.Trait.isBald,
-            ww.Trait.hasBeard, ww.Trait.hasGlasses
-        ], false)
-    ]
+ 
 
-    let game = new ww.WhoIsWho(characters);
+    let game = new ww.WhoIsWho(characterList);
     let onHover = false;
 
 </script>
 
 
 <style>
+    div.main {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    div.H {
+        background-color: var(--color5);
+        margin: 5mm;
+        padding: 5mm;
+        border-radius: 3mm;
+    }
     div.charDeck {
         display: flex;
+        flex-wrap: wrap;
     }
     div.questionDeck {
         display: flex;
-        width: 80%;
+        width: 100%;
         flex-wrap: wrap;
     }
 </style>
 
+<div class="main">
+    <div class="H">
+        H = {game.obtainedEntropy.toFixed(2)} / 2
+    </div>
 <div class="charDeck">
     {#each game.characters as character}
         <Face character={character} />
@@ -74,6 +74,7 @@
                                  sendEvent({type: ww.EventType.hover, trait: question.trait})
                                  game=game}}/>
     {/each}
+</div>
 </div>
 
 {game.obtainedEntropy.toPrecision(2)}
