@@ -3,12 +3,6 @@
 </script>
 
 <style>
-    span.p {
-        color: brown;
-    }
-    span.H {
-        color:cyan
-    }
     div.main {
         height: 30mm
     }

@@ -62,6 +62,14 @@
         -moz-user-select: none;
         -webkit-user-select: none;
     }
+    :global(span.p){
+        color: darkred;
+        font-weight: bold;
+    }
+    :global(span.H){
+        color: deepskyblue;
+        font-weight: bold;
+    }
 </style>
 
 <div class="mainDiv">

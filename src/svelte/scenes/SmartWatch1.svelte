@@ -2,6 +2,7 @@
 
     import { onMount } from "svelte";
     import Watch from "/src/svelte/watch/Watch.svelte"
+    import Instructions from "/src/svelte/watch/Instructions.svelte"
 
     export let nextChapter;
 
@@ -60,18 +61,6 @@
     let currentChangeCause: ChangeCause;
     let nMessagesLeft: number;
     let currentTimeout = undefined;
-
-    let instructionText: Array<string> = [
-        `First of all, answering yes or no questions in this device is no problem, as you can see. 
-        You can respond just by pressing the two buttons at the bottom.`,
-        `There are, however, simple questions that at first can not be answered. However, if your 
-        friend and you agree in a simple format, as here, everything works fine.`,
-        `So, binary questions can be easily answered here. But what about harder questions?`,
-        `Ah! When there are four possibilities, two binary answers seem to be enough. Great!`,
-        `Your friend and you can agree in an uniform method for 4-questions, like: 1st no-no, 
-        2nd yes-no, 3rd no-yes and 4th yes-yes.`,
-        `DONE`
-    ]
 
     function sentMessage(text: string): void {
         responses[messageStage].push(text);
@@ -174,12 +163,6 @@
         display: grid;
         grid-template-columns: 60% 40%;
     }
-    div.text {
-        background-color: var(--color4);
-        border-radius: 5mm;
-        margin: 8mm;
-        padding: 8mm;
-    }
 </style>
 
 <div class="main">
@@ -192,14 +175,7 @@
     </div>
 
     <div class="main-scene">
-        <div class="text">
-            {instructionText[instructionStage]}
-            {#if instructionStage===(instructionText.length-1)}
-                <div class="nextButton" on:click={nextChapter}>
-                    Next page
-                </div>
-            {/if}
-        </div>
+        <Instructions stage={instructionStage} nextChapter={nextChapter} />
         <Watch bind:receiveMessage={sendWatchMessage}
                sentMessage={sentMessage}
                bind:changeStatus={changeStatus} />

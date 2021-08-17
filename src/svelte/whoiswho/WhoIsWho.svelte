@@ -71,7 +71,7 @@
                                  game.recomputeAllEntropies();
                                  question.blocked = true;
                                  onHover = false;
-                                 sendEvent({type: ww.EventType.hover, trait: question.trait})
+                                 sendEvent({type: ww.EventType.click, trait: question.trait})
                                  game=game}}/>
     {/each}
 </div>
