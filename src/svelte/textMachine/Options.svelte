@@ -16,10 +16,12 @@
 
     export let generatorList: GenItem[] = [
         {letter: "A", p: 0.5, cachedP: 0.5, index: 0, coded: "0"},
-        {letter: "B", p: 0.5, cachedP: 0.5, index: 1, coded: "10"}
+        {letter: "B", p: 0.5, cachedP: 0.5, index: 1, coded: "1"}
     ]
 
-    let possibleLetters = "ABCDEFGHI";
+    let possibleLetters = "ABC";
+
+    let possibleEncodings = [["1"], ["0", "1"],["0", "10", "11"]];
 
     let selectedTab = "Generator";
 
@@ -35,6 +37,7 @@
             index: generatorList.length,
             coded: ""
         });
+        resetCoder();
 
         generatorList = generatorList
     }
@@ -45,8 +48,9 @@
             generatorList[generatorList.length - 1].cachedP = missedP;
         } else {
             generatorList.forEach((x)=> {x.p *= (1+missedP); x.cachedP = x.p})
-            generatorList = generatorList;
         }
+        resetCoder();
+        generatorList = generatorList;
     }
 
     function computeEntropy(generatorList: Array<GenItem>){
@@ -85,6 +89,21 @@
     }
 
     // Code for the coder
+
+    function resetCoder(){
+        let nConf = generatorList.length - 1;
+        generatorList.forEach((x, index) => {
+            x.coded = possibleEncodings[nConf][index]
+        })
+    }
+
+    function rotateCoder() {
+        let temp = generatorList[0].coded;
+        generatorList[0].coded = generatorList[2].coded;
+        generatorList[2].coded = generatorList[1].coded;
+        generatorList[1].coded = temp;
+        generatorList = generatorList;
+    }
 
 </script>
 
@@ -157,17 +176,26 @@
         justify-content: center;
     }
 
+    div.compressorOptions {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
 
     div.codificationRow {
         display: flex;
-        height: 14mm;
-        justify-content: space-between;
+        height: 12mm;
+        width: 100%;
+        justify-content: space-evenly;
     }
     div.codInput {
         width: 40%;
     }
     input.codOutput {
         width: 40%
+    }
+    div.codRotator {
+        background-color: gold;
     }
 </style>
 
@@ -219,14 +247,24 @@
             </div>
 
         {:else if selectedTab=="Compressor"}
+            <div class="compressorOptions">
             {#each generatorList as item}
                 <div class="codificationRow">
                     <div class="codInput">
                         {item.letter}
                     </div>
-                    <input class="codOutput" type="text" bind:value={item.coded} />
+                    <div class="codOutput" type="text"> 
+                        {item.coded}
+                    </div>
                 </div>
             {/each}
+            {#if generatorList.length===3}
+                <div class="codRotator"
+                     on:click={rotateCoder}>
+                    Change
+                </div>
+            {/if}
+            </div>
         {/if}
     </div>
 </div>
