@@ -1,5 +1,6 @@
 <script lang="ts">
-    import FillWord from "/src/svelte/fillWord/FillWord.svelte";
+    import ExampleProblems from "./ExampleProblems.svelte";
+import FillWord from "/src/svelte/fillWord/FillWord.svelte";
     import FillWordButton from "/src/svelte/fillWord/FillWordButton.svelte"
 </script>
 
@@ -20,6 +21,11 @@
     }
     span.q{
         color: chartreuse;
+    }
+
+    div.theStuff {
+        display: grid;
+        grid-template-columns: 40% auto;
     }
 </style>
 
@@ -44,5 +50,17 @@
         So far, we have talked about information without considering the probability of each response. But now,
         we can agree that recieving the missing letter of the first sentence would be pointless: we can guess it.
         For the third sentence, however, we only now it is a number.
+    </div>
+    <div class="par">
+        It would be reasonable, then, to think that the information value of the missing character in the first 
+        sentence is greater than in the second, and smaller in the third. But how to quantify that value. Consider 
+        the next example.
+    </div>
+    <div class="theStuff">
+        <div class="par">
+            In this message, you can receive an A, B, C or D. However, the A has a chance of 50 %, while the 
+            B, C and D have a chance of 16.6 %, or 1/6. 
+        </div>
+        <img src="/assets/svg/example.svg" alt="Hard to summarize this with text :/"/>
     </div>
 </div>
