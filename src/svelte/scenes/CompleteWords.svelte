@@ -63,4 +63,8 @@ import FillWord from "/src/svelte/fillWord/FillWord.svelte";
         </div>
         <img src="/assets/svg/example.svg" alt="Hard to summarize this with text :/"/>
     </div>
+    <div class="par">
+        We can also say one thing: we have more entropy if all outputs are equally probable, since in that case 
+        we can not expect anything for the next symbol.
+    </div>
 </div>

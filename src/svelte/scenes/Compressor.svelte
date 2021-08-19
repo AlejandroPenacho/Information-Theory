@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Instruction from "../textMachine/Instruction.svelte";
     import Machine from "/src/svelte/textMachine/Machine.svelte";
     import Options from "/src/svelte/textMachine/Options.svelte";
 
@@ -17,4 +18,5 @@
         <Machine generatorData={generatorData}/>
         <Options bind:generatorList={generatorData}/>
     </div>
+    <Instruction />
 </div>

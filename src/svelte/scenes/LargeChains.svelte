@@ -1,6 +1,15 @@
 <script lang="ts">
     import TextGenerator from "/src/svelte/textGen/TextGenerator.svelte";
     import TextChainer from "/src/svelte/textChains/TextChainer.svelte";
+    import ChanceAdjuster from "/src/svelte/textChains/ChanceAdjuster.svelte"
+
+    let letterTable = [
+        {letter: "a", p: 1/3, cachedP: 1/3},
+        {letter: "b", p: 1/6, cachedP: 1/6},
+        {letter: "c", p: 1/6, cachedP: 1/6},
+        {letter: "d", p: 1/6, cachedP: 1/6},
+        {letter: "e", p: 1/6, cachedP: 1/6}
+    ];
 </script>
 
 <style>
@@ -24,5 +33,6 @@
         their extreme improbability. And we can take advantage of this to compress messages.
     </div>
 </div>
-<TextChainer />
+<ChanceAdjuster bind:letterTable={letterTable}/>
+<TextChainer letterTable={letterTable}/>
 

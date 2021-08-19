@@ -2,9 +2,17 @@
 
     import {TextBuffer, TextGenerator} from "../../ts/wordGenerator/charTransfer"
 
+
+    interface LetterRow {
+        letter: string,
+        p: number,
+        cachedP: number
+    }
+
+    export let letterTable: LetterRow[];
+
     let currentlyRunning = false;
 
-    let setChance : number[] = new Array(5).fill(0.2);
     let resChance : number[][] = new Array(5);
 
     let nSymbolsAtChain : number[][] = new Array(5);
@@ -16,10 +24,8 @@
 
     let nTotalSymbols : number[] = new Array(5).fill(0);
 
-    let rawTable : Array<[number,string]> = [[2, "a"],[1,"b"],[1,"c"],[1,"d"],[1,"e"]];
-    setChance = [2/6, 1/6, 1/6, 1/6, 1/6];
-
-    let generator = new TextGenerator(rawTable);
+    let generator;
+    $: generator = new TextGenerator(letterTable.map((x)=> [x.p, x.letter]));
     let buffers = new Array(5);
 
     for (let i=0; i<buffers.length; i++){
@@ -91,11 +97,11 @@
 <tbody>
 <tr>
     <td class="tg-0lax">Set<br></td>
-    <td class="tg-0lax">{setChance[0].toFixed(3)}</td>
-    <td class="tg-0lax">{setChance[1].toFixed(3)}</td>
-    <td class="tg-0lax">{setChance[2].toFixed(3)}</td>
-    <td class="tg-0lax">{setChance[3].toFixed(3)}</td>
-    <td class="tg-0lax">{setChance[4].toFixed(3)}</td>
+    <td class="tg-0lax">{letterTable[0].p.toFixed(3)}</td>
+    <td class="tg-0lax">{letterTable[1].p.toFixed(3)}</td>
+    <td class="tg-0lax">{letterTable[2].p.toFixed(3)}</td>
+    <td class="tg-0lax">{letterTable[3].p.toFixed(3)}</td>
+    <td class="tg-0lax">{letterTable[4].p.toFixed(3)}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 1</td>
