@@ -168,10 +168,10 @@
 <div class="main">
     <h1> The Problem With The New Smartwatch</h1>
     <div class="par">
-        By pure luck, you have been rewarded with the newest smartwatch on the market, and it takes you
-        just a couple of hours to start using it for everything. This is in general much more convenient
-        that using your phone, except for answering messages. Since the screen is so small, you can only
-        answer with "yes" and "no". 
+        After being the 10,000 visitor to a suspicious webiste, tou have been giftet a brand new smartwatch, 
+        and it takes you just a couple of hours to start using it for everything. This is in general much 
+        more convenient that using your phone, except for answering messages. Since the screen is so small,
+        you can only answer with "yes" and "no". 
     </div>
 
     <div class="main-scene">

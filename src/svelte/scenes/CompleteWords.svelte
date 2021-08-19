@@ -1,7 +1,9 @@
 <script lang="ts">
     import ExampleProblems from "./ExampleProblems.svelte";
-import FillWord from "/src/svelte/fillWord/FillWord.svelte";
+    import FillWord from "/src/svelte/fillWord/FillWord.svelte";
     import FillWordButton from "/src/svelte/fillWord/FillWordButton.svelte"
+
+    export let nextChapter;
 </script>
 
 <style>
@@ -53,8 +55,8 @@ import FillWord from "/src/svelte/fillWord/FillWord.svelte";
     </div>
     <div class="par">
         It would be reasonable, then, to think that the information value of the missing character in the first 
-        sentence is greater than in the second, and smaller in the third. But how to quantify that value. Consider 
-        the next example.
+        sentence is greater than in the second, and smaller in the third. But how to quantify that value?. Look 
+        at the next example.
     </div>
     <div class="theStuff">
         <div class="par">
@@ -64,7 +66,17 @@ import FillWord from "/src/svelte/fillWord/FillWord.svelte";
         <img src="/assets/svg/example.svg" alt="Hard to summarize this with text :/"/>
     </div>
     <div class="par">
-        We can also say one thing: we have more entropy if all outputs are equally probable, since in that case 
+        When we receive an A, which is half of the times, we receive the equivalent to a binary decision. Looking 
+        throwing a coin. And this has an entropy of 1. The other half, we have to also obtain a 3-symbol to determine
+        whether we receive a B, a C or a D. The entropy of such a symbol would be 1.585, but we only receive it half 
+        the times. So, half the times we receive a 2-symbol, and the other half a 2-symbol followed by a 3-symbol. 
+        Then, by mean, how much information do we receive? We just do the mean: 50% * 1 + 50% * (1+1.585) = 1.7925.
+    </div>
+    <div class="par">
+        There is one important thing to say before continuing: we have more entropy if all outputs are equally probable, since in that case 
         we can not expect anything for the next symbol.
+    </div>
+    <div class="nextButton" on:click={nextChapter}>
+        Next page
     </div>
 </div>

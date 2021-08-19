@@ -54,10 +54,12 @@ export class Character {
     crossedOut: boolean;
     underAssumption: Assumption;
     objective: boolean;
+    allTraitsList: Trait[];
 
     constructor(traits: Trait[], objective: boolean) {
         this.objective = objective;
         this.crossedOut = false;
+        this.allTraitsList = traits;
         this.traits = {};
         for (let i=0; i<allTraits.length; i++){
             this.traits[allTraits[i]] = false;

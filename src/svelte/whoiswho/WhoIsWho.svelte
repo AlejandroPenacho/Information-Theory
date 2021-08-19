@@ -7,9 +7,15 @@
 
     export let sendEvent: (event: ww.Event) => void;
 
- 
+    function getCopyOf(list: ww.Character[]) : ww.Character[] {
+        let out = new Array(list.length);
+        for (let i=0; i<list.length; i++){
+            out[i] = new ww.Character(list[i].allTraitsList, list[i].objective)
+        }
+        return out
+    }
 
-    let game = new ww.WhoIsWho(characterList);
+    let game = new ww.WhoIsWho(getCopyOf(characterList));
     let onHover = false;
 
 </script>
@@ -37,11 +43,25 @@
         width: 100%;
         flex-wrap: wrap;
     }
+    div.restartButton {
+        padding: 2mm;
+        width: max-content;
+        background-color: chocolate;
+        cursor: pointer;
+    }
+    div.restartButton:hover {
+        background-color: crimson;
+    }
 </style>
 
+<div class="restartButton" on:click={() => {game = new ww.WhoIsWho(getCopyOf(characterList)); 
+                                            game.characters = game.characters;
+                                            game.questions = game.questions}}>
+    Restart
+</div>
 <div class="main">
     <div class="H">
-        H = {game.obtainedEntropy.toFixed(2)} / 2
+        H = {game.obtainedEntropy.toFixed(2)} / 3
     </div>
 <div class="charDeck">
     {#each game.characters as character}
@@ -76,5 +96,3 @@
     {/each}
 </div>
 </div>
-
-{game.obtainedEntropy.toPrecision(2)}

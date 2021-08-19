@@ -10,10 +10,6 @@
     let nStages = 7;
     let currentStage = 0;
 
-    function restart(){
-        unique = {};
-    }
-
     function eventFunction(event) {
         if ((changeEvents[currentStage].changeCondition.trait === event.trait) &&
              changeEvents[currentStage].changeCondition.type === event.type){
@@ -24,15 +20,7 @@
 </script>
 
 <style>
-    div.restartButton {
-        padding: 2mm;
-        width: max-content;
-        background-color: chocolate;
-        cursor: pointer;
-    }
-    div.restartButton:hover {
-        background-color: crimson;
-    }
+
     div.mainStage {
         display: flex;
         flex-direction: column;
@@ -50,10 +38,6 @@
     </div>
     <div class="par">
         These answers are an example of a binary response. And so, we get back to our familiar setting.
-    </div>
-    <div class="restartButton"
-        on:click={restart}>
-        Restart
     </div>
 
     <div class="mainStage">

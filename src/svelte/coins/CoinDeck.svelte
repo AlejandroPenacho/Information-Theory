@@ -71,8 +71,8 @@
                 index: 4
             },{
                 text: "Exactly 3 coins are heads",
-                probability: "1/77",
-                entropy: binaryEntropy(1/77),
+                probability: "5/16",
+                entropy: binaryEntropy(5/16),
                 questionType: QType.binary,
                 state: (nHeads === 3)? CoinState.head : CoinState.tail,
                 index: 3
@@ -84,9 +84,9 @@
                 state: (nHeads >= 4)? CoinState.head : CoinState.tail,
                 index: 5
             },{
-                text: "1 / 2 or 3 / 4, 5 or 6 coins are heads",
-                probability: "1/6 1/3 1/2",
-                entropy: ternaryEntropy(1/6, 1/3, 1/2),
+                text: "2 or less heads / Exactly 3 heads / 4 or more heads" ,
+                probability: "3/16 5/16 1/2",
+                entropy: ternaryEntropy(3/16, 5/16, 1/2),
                 questionType: QType.ternary,
                 state: (nHeads >= 4)? CoinState.head : CoinState.tail,
                 index: 6
@@ -187,7 +187,7 @@
     div.lower-deck {
         display: flex;
         flex-direction: column;
-        width: 60%;
+        width: 75%;
     }
     div.question {
         display: flex;
@@ -204,13 +204,31 @@
         font-size: 6mm;
     }
     div.probability {
-        width: 20mm;
+        width: 4em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        text-align: center;
     }
     div.entropy {
-        width: 20mm;
+        width: 4em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        margin-right: 1em;
+
+    }
+    div.value {
+        width: 6em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
     }
     img.value {
-        width: 10mm
+        height: 1.5em; 
     }
 </style>
 
@@ -239,7 +257,7 @@
     <div class="lower-deck">
         <div class="question">
             <div class="probability">P</div>
-            <div class="value"> Outcome</div>
+            <div class="value">Outcome</div>
             <div class="entropy">H</div>
         </div>
         {#each rows as row}
@@ -249,13 +267,17 @@
              style="background-color: {hoveredRow===row.index ? 'green': 'orange'}">
             <div class="probability"> {row.probability}</div>
             {#if (row.questionType === QType.binary)}
-            <img class="value"
-                 src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
-                 alt="Coin"/>
+            <div class="value">
+                <img class="value"
+                    src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
+                    alt="Coin"/>
+            </div>
             {:else}
-            <img class="value"
-                 src="/assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
-                 alt="Coin"/>
+            <div class="value">
+                <img class="value"
+                    src="/assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
+                    alt="Coin"/>
+            </div>
             {/if}
             <div class="entropy"> {row.entropy.toPrecision(3)}</div>
             {#if !isShaded}

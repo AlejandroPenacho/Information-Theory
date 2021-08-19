@@ -37,7 +37,8 @@
         one is head.
     {:else if number===6}
         In the message, unlike in the previous ones, there are 3 possible outputs. This does not change at all
-        the way entropy is analyzed. 
+        the way entropy is analyzed: we just see how much information we receive with each output, and get the 
+        expected value. 
         <span class="p">x</span> * <span class="H">x</span> +
         <span class="p">x</span> * <span class="H">x</span> +
         <span class="p">x</span> * <span class="H">x</span> = <span class="H"> X</span>
