@@ -91,6 +91,7 @@
                                  game.recomputeAllEntropies();
                                  question.blocked = true;
                                  onHover = false;
+                                 game.assumptionClear();
                                  sendEvent({type: ww.EventType.click, trait: question.trait})
                                  game=game}}/>
     {/each}

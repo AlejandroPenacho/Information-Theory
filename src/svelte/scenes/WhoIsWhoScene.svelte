@@ -5,7 +5,7 @@
     let changeEvents;
     let unique = {};
 
-    
+    export let nextChpater; 
 
     let nStages = 7;
     let currentStage = 0;
@@ -44,7 +44,7 @@
         {#key unique}
             <WhoIsWho sendEvent={eventFunction}/>
         {/key}
-        <Instructions stage={currentStage} bind:stageList={changeEvents}/>
+        <Instructions nextChapter={nextChpater} stage={currentStage} bind:stageList={changeEvents}/>
     </div>
 </div>
 
