@@ -6,6 +6,8 @@
         cachedP: number
     }
 
+    export let restartCounts;
+
     export let letterTable : LetterRow[] = [
         {letter: "a", p: 1/3, cachedP: 1/3},
         {letter: "b", p: 1/6, cachedP: 1/6},
@@ -35,6 +37,7 @@
                 })
             }
             letterTable = letterTable;
+            restartCounts();
         }
     }
 

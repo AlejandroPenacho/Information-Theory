@@ -3,6 +3,8 @@
     import TextChainer from "/src/svelte/textChains/TextChainer.svelte";
     import ChanceAdjuster from "/src/svelte/textChains/ChanceAdjuster.svelte"
 
+    let restartCounts;
+
     let letterTable = [
         {letter: "a", p: 1/3, cachedP: 1/3},
         {letter: "b", p: 1/6, cachedP: 1/6},
@@ -35,11 +37,11 @@
         letters, with the probabilities you have set.
     </div>
     <div class="theWea">
-        <ChanceAdjuster bind:letterTable={letterTable}/>
-        <TextChainer letterTable={letterTable}/>
+        <ChanceAdjuster bind:letterTable={letterTable} restartCounts={restartCounts}/>
+        <TextChainer letterTable={letterTable} bind:restart={restartCounts}/>
     </div>
     <div class="par">
-        The more characters are added.c
+        The more characters are added.
         of each character wil tend to a fix number. That means that some messages will become impossible, due to
         their extreme improbability. And we can take advantage of this to compress messages.
     </div>

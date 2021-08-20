@@ -66,6 +66,14 @@
         }
     }
 
+    export function restart(){
+        for (let i=0; i<5; i++){
+            nSymbolsAtChain[i] = new Array(5).fill(0);
+            resChance[i] = new Array(5).fill(0);
+        }
+        nTotalSymbols.fill(0);
+    }
+
 </script>
 
 
@@ -76,11 +84,25 @@
     .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
       font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
     .tg .tg-0lax{text-align:left;vertical-align:top}
+
+    div.redButton {
+        width: max-content;
+        height: 2em;
+        background-color: red;
+        cursor: pointer;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        padding: 0 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 
-<div style="width: 20px; height: 20px; background-color: red"
+<div class="redButton" 
      on:click={clickFun}>
+     {currentlyRunning? "Stop":"Run"}
 </div>
 
 <table class="tg">
@@ -96,56 +118,56 @@
 </thead>
 <tbody>
 <tr>
-    <td class="tg-0lax">Set<br></td>
-    <td class="tg-0lax">{letterTable[0].p.toFixed(3)}</td>
-    <td class="tg-0lax">{letterTable[1].p.toFixed(3)}</td>
-    <td class="tg-0lax">{letterTable[2].p.toFixed(3)}</td>
-    <td class="tg-0lax">{letterTable[3].p.toFixed(3)}</td>
-    <td class="tg-0lax">{letterTable[4].p.toFixed(3)}</td>
+    <td class="tg-0lax">Probability (%)<br></td>
+    <td class="tg-0lax">{(letterTable[0].p * 100).toFixed(1)}</td>
+    <td class="tg-0lax">{(letterTable[1].p * 100).toFixed(1)}</td>
+    <td class="tg-0lax">{(letterTable[2].p * 100).toFixed(1)}</td>
+    <td class="tg-0lax">{(letterTable[3].p * 100).toFixed(1)}</td>
+    <td class="tg-0lax">{(letterTable[4].p * 100).toFixed(1)}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 1</td>
-    <td class="tg-0lax">{resChance[0][0].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[0][1].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[0][2].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[0][3].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[0][4].toFixed(3)}</td>
+    <td class="tg-0lax">{(resChance[0][0]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[0][1]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[0][2]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[0][3]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[0][4]*100).toFixed(1)}</td>
     <td class="tg-0lax">{buffers[0].buffer}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 2</td>
-    <td class="tg-0lax">{resChance[1][0].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[1][1].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[1][2].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[1][3].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[1][4].toFixed(3)}</td>
+    <td class="tg-0lax">{(resChance[1][0]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[1][1]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[1][2]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[1][3]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[1][4]*100).toFixed(1)}</td>
     <td class="tg-0lax">{buffers[1].buffer}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 3</td>
-    <td class="tg-0lax">{resChance[2][0].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[2][1].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[2][2].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[2][3].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[2][4].toFixed(3)}</td>
+    <td class="tg-0lax">{(resChance[2][0]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[2][1]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[2][2]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[2][3]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[2][4]*100).toFixed(1)}</td>
     <td class="tg-0lax">{buffers[2].buffer}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 4</td>
-    <td class="tg-0lax">{resChance[3][0].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[3][1].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[3][2].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[3][3].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[3][4].toFixed(3)}</td>
+    <td class="tg-0lax">{(resChance[3][0]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[3][1]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[3][2]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[3][3]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[3][4]*100).toFixed(1)}</td>
     <td class="tg-0lax">{buffers[3].buffer}</td>
 </tr>
 <tr>
     <td class="tg-0lax">Chain 5</td>
-    <td class="tg-0lax">{resChance[4][0].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[4][1].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[4][2].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[4][3].toFixed(3)}</td>
-    <td class="tg-0lax">{resChance[4][4].toFixed(3)}</td>
+    <td class="tg-0lax">{(resChance[4][0]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[4][1]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[4][2]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[4][3]*100).toFixed(1)}</td>
+    <td class="tg-0lax">{(resChance[4][4]*100).toFixed(1)}</td>
     <td class="tg-0lax">{buffers[4].buffer}</td>
 </tr>
 </tbody>
