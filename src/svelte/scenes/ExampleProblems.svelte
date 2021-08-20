@@ -26,11 +26,28 @@
     div.problem-block {
         display: grid;
         grid-template-columns: 20% auto 20%;
+        height: max-content;
     }
-    div.arrow {
+    div.arrowBlock {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    div.arrow {
+        background-color: var(--color4);
+        width: 80%;
+        height: 30mm;
+        border-style: solid;
+        border-radius: 5mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    div.arrow:hover {
+        background-color: var(--color2);
+    }
+    div.arrow:active {
+        background-color: var(--color1);
     }
     div.problem-container {
         position: relative;
@@ -55,6 +72,7 @@
     div.explanation {
         width: 70%;
     }
+
 </style>
 
 <div class="main">
@@ -64,15 +82,15 @@
     <p> Below, you can see three problems of real life, and how they were solved</p>
 
     <div class="problem-block">
-        <div>
-            <div class="arrow" 
-                on:click={changeSlide(-1)} 
-                style="display: {(currentSlide==1)? 'none':'block'}">
+        <div class="arrowBlock">
+            <div class="arrow"
+                 on:click={changeSlide(-1)}
+                 style="display: {(currentSlide==1)? 'none':'flex'}">
                 &lt
             </div>
         </div>
         <div class="problem-container">
-            <div class="problem" style="opacity: {opacityArray[0]}">
+            <div class="problem" style="position: relative; opacity: {opacityArray[0]}">
                 <img src="/assets/img/problems/telegraph.jpg" alt="A woman with a telegraph"/>
                 <div class="explanation">
                     Back when telegraphs were used for communications, the cost of a message was 
@@ -102,15 +120,15 @@
                     as you may have assumed, related to communication. And all of them show how a
                     clear solution can be found, so some mathematical theory can be developed.
                 </div>
-                <div style="background-color: yellow" on:click={nextChapter}>
-                    Next chapter
+                <div class="nextButton" on:click={nextChapter}>
+                    Next page
                 </div>
             </div>
         </div>
-        <div>
+        <div class="arrowBlock">
             <div class="arrow"
-                on:click={changeSlide(1)}
-                style="display: {(currentSlide==totalSlides)? 'none':'block'}">
+                 style="display: {(currentSlide==totalSlides)? 'none':'flex'}"
+                    on:click={changeSlide(1)}>
                 &gt
             </div>
         </div>
