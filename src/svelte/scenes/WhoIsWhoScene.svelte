@@ -37,7 +37,8 @@
         has long hair, and you receive a "yes" as an answer, you should cross out characters without long hair.
     </div>
     <div class="par">
-        These answers are an example of a binary response. And so, we get back to our familiar setting.
+        These answers are an example of a binary response, and we need to get one character out of 8, which 
+        corresponds to an information of 3 bits (look at the left). Now follow the instructions.
     </div>
     <Instructions nextChapter={nextChpater} stage={currentStage} bind:stageList={changeEvents}/>
     <div class="mainStage">

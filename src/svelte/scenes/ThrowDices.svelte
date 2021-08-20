@@ -1,5 +1,7 @@
 <script lang="ts">
     import DiceDeck from "/src/svelte/dice/DiceDeck.svelte";
+
+    export let nextChapter;
 </script>
 
 <style> 
@@ -25,4 +27,13 @@
         Look carefully at the graph showing the proportionality of results.
     </div>
     <DiceDeck />
+    <div class="par">
+        The main conclusion to draw from here is how, as the number of dice increases, the percentage of dice 
+        at each number become more uniform. This is due to the law of large numbers and, if we could throw infinte dice,
+        we would get exactly 1/6 of dice at each face.
+    </div>
+    <div class="nextButton"
+         on:click={nextChapter}>
+        Next page
+    </div>
 </div>

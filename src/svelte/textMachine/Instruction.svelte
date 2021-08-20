@@ -6,21 +6,36 @@
 
 <style>
     div.main {
-        padding: 8%;
+        margin-top: 15mm;
+        padding: 1%;
+        display: grid;
+        grid-template-columns: 80% auto;
+        background-color: var(--color4);
+        border-radius: 6mm;
     }
     div.changeStageButtons {
         display: flex;
-        align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    div.text {
+        padding: 2em;
+        background-color: var(--color5);
+        border-radius: 6mm 0mm 0mm 6mm;
     }
     div.jumpStage {
-        width: 20mm;
-        height: 10mm;
+        width: 16mm;
+        height: 8mm;
         padding: 3mm;
         border-radius: 3mm;
-        margin: 5mm;
+        margin: 3mm;
         display: flex;
         align-items: center;
         justify-content: center;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        cursor: pointer;
     }
     div#prev {
         background-color: coral;

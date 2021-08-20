@@ -45,6 +45,7 @@
         background-color: var(--color3);
         grid-column: 2 3;
         min-height: 100vh;
+        padding: 1% 4% 0% 4%;
     }
 
     :global(.nextButton) {

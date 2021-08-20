@@ -111,7 +111,6 @@
     div.main {
         height: 80mm;
         width: 60mm;
-        background-color: cyan;
     }
     div.tabMenu {
         height: 8mm;
@@ -127,15 +126,18 @@
         border-radius: 0mm 3mm 0mm 0mm;
         cursor: pointer;
     }
+    div.menu {
+        background-color: var(--color4);
+        height: 72mm;
+    }
 
     div.letterList {
-        padding: 5mm;
+        padding: 8%;
         display: flex;
         align-items: center;
         flex-direction: column;
     }
     div.genRow {
-        width: 100%;
         height: 8mm;
         display: flex;
         align-items: center;
@@ -148,6 +150,7 @@
     }
     div.generatorAddRemove {
         height: 14mm;
+        padding: 5% 15% 0% 15%;
         display:flex;
         align-items: center;
         justify-content: space-between;
@@ -161,6 +164,9 @@
         justify-content: center;
         cursor: pointer;
     }
+    div.generatorAdd:hover {
+        background-color: darkgreen;
+    }
     div.generatorRemove {
         width: 40%;
         border-radius: 5mm;
@@ -169,6 +175,9 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+    }
+    div.generatorRemove:hover {
+        background-color: darkred;
     }
     div.entropyData {
         display: flex;
@@ -184,18 +193,42 @@
 
     div.codificationRow {
         display: flex;
-        height: 12mm;
-        width: 100%;
+        height: 10mm;
+        width: 80%;
+        margin-bottom: 2mm;
+        margin-top: 2mm;
         justify-content: space-evenly;
+        background-color: var(--color5);
+        border-radius: 3mm;
     }
     div.codInput {
         width: 40%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
     }
-    input.codOutput {
-        width: 40%
+    div.codOutput {
+        width: 40%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+    div.codArrow {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     div.codRotator {
         background-color: gold;
+        padding: 1em;
+        border-radius: 3mm;
+        cursor: pointer;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+    div.codRotator:hover {
+        background-color: coral;
     }
 </style>
 
@@ -253,7 +286,10 @@
                     <div class="codInput">
                         {item.letter}
                     </div>
-                    <div class="codOutput" type="text"> 
+                    <div class="codArrow">
+                        =>
+                    </div>
+                    <div class="codOutput"> 
                         {item.coded}
                     </div>
                 </div>

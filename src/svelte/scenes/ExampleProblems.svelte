@@ -35,7 +35,7 @@
     }
     div.arrow {
         background-color: var(--color4);
-        width: 80%;
+        width: 40%;
         height: 30mm;
         border-style: solid;
         border-radius: 5mm;

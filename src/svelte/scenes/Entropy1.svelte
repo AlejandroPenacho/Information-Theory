@@ -11,7 +11,7 @@
     }
 
     div.par {
-        margin: 10px 0px 0px 0px;
+        margin: 4mm 0mm 4mm 0mm;
         padding: 8mm;
         background-color: var(--color4);
         border-radius: 3mm;
@@ -31,6 +31,10 @@
 
     img {
         height: 70mm;
+    }
+    img.latex {
+        height: 1em;
+        transform: translateY(0.2em);
     }
 
 </style>
@@ -57,8 +61,9 @@
     </div>
     <div class="par">
         This function is the logarithmic function. Specifically, the logarithm in base 2 (ln2) has this shape. 
-        The name of this information measure is called entropy, abreviated as <emph>H</emph>. Mathematically, we 
-        can descrive this realtion as: H=ln2(N), where N is the number of possible symbols (2 for the coin, 4 for the 
+        The name of this information measure is called <b>entropy</b>, abreviated as <emph>H</emph> and measured 
+        in <b>bits</b>. Mathematically, we 
+        can describe this relation as: <img class="latex" src="https://latex.codecogs.com/svg.latex?H=log_{2}(N)" alt="H=log_{2}(N)" />, where N is the number of possible symbols (2 for the coin, 4 for the 
         suits, 8 for the compass, etc.).
     </div>
     <div class="imageWrap">
