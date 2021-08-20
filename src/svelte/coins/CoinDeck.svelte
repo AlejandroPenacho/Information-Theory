@@ -28,6 +28,9 @@
     let nCoins: number = 6;
 
     let nHeads: number;
+    let animationTime;
+
+    $: animationTime = isShaded? 100 : 1000;
 
     $: {
         nHeads = 0;
@@ -246,7 +249,9 @@
         </div>
         <div class="deck">
             {#each [...Array(nCoins).keys()] as index}
-                <Coin bind:click={clickFunctions[index]} bind:currentValue={coinValues[index]}/>
+                <Coin animationTime={animationTime} 
+                       bind:click={clickFunctions[index]} 
+                       bind:currentValue={coinValues[index]}/>
             {/each}
             <div class="shader"
                  style="opacity: {isShaded? 1: 0}; display: {isShaded? 'block': 'none'}">

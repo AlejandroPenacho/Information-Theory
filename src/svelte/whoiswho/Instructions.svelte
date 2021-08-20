@@ -32,6 +32,15 @@
     ]
 </script>
 
+<style>
+    div.text {
+        background-color: var(--color4);
+        border-radius: 3mm;
+        padding: 4mm;
+        margin: 6mm;
+    }
+</style>
+
 {#if stage===0}
 <div class="text">
     In this game, you can see all the characters in the center, and 

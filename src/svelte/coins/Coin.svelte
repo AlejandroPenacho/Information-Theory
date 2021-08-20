@@ -6,7 +6,7 @@
         third
     }
 
-    const ANIMATION_TIME : number = 1000;
+    export let animationTime: number;
 
     let displayValue: CoinState = CoinState.head;
     export let currentValue: CoinState = CoinState.head;
@@ -39,8 +39,8 @@
 
         let currentTime = Date.now();
 
-        coinAngle += deltaTime/ANIMATION_TIME * nHalfTurns * Math.PI;
-        coinSize = 1.3 - 0.3*Math.pow((1-(currentTime-clickTime)/(ANIMATION_TIME/2)),2);
+        coinAngle += deltaTime/animationTime * nHalfTurns * Math.PI;
+        coinSize = 1.3 - 0.3*Math.pow((1-(currentTime-clickTime)/(animationTime/2)),2);
 
         if (Math.cos(coinAngle) < 0){
             coinAngle -= Math.PI;
@@ -52,7 +52,7 @@
         }
 
 
-        if (currentTime - clickTime < ANIMATION_TIME){
+        if (currentTime - clickTime < animationTime){
             requestAnimationFrame(rAFfunction);
         } else {
             coinAngle = 0;

@@ -39,12 +39,11 @@
     <div class="par">
         These answers are an example of a binary response. And so, we get back to our familiar setting.
     </div>
-
+    <Instructions nextChapter={nextChpater} stage={currentStage} bind:stageList={changeEvents}/>
     <div class="mainStage">
         {#key unique}
             <WhoIsWho sendEvent={eventFunction}/>
         {/key}
-        <Instructions nextChapter={nextChpater} stage={currentStage} bind:stageList={changeEvents}/>
     </div>
 </div>
 

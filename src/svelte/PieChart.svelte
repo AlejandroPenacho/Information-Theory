@@ -2,6 +2,7 @@
     export let percentageList;
 
     let angleList = new Array(7);
+    let onlyOneValue;
     angleList[0] = 0;
     angleList[6] = 0;
 
@@ -15,8 +16,13 @@
     ]
 
     $: {
-        for (let i=0; i<5; i++){
-            angleList[i+1] = angleList[i] + percentageList[i]*2*Math.PI;
+        if (percentageList[0] === 1){
+            onlyOneValue = true;
+        } else {
+            onlyOneValue = false;
+            for (let i=0; i<5; i++){
+                angleList[i+1] = angleList[i] + percentageList[i]*2*Math.PI;
+            }
         }
     }
 
@@ -36,16 +42,20 @@
     div {
         height: 80mm;
     }
-    svg {
-    }
 </style>
 
 <div>
         <svg width="50mm" height="50mm" viewBox="-1 -1 202 202" id="main">
-            {#each [...Array(colorList.length).keys()] as index}
-                <path 
-                style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-                d={generatePath(200, angleList[index], angleList[index+1])} />
-            {/each}
+            {#if onlyOneValue}
+                <circle
+                    style="fill:{colorList[0]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+                    cx="100" cy="100" r="100" />
+            {:else}
+                {#each [...Array(colorList.length).keys()] as index}
+                    <path 
+                    style="fill:{colorList[index]};fill-opacity:1;stroke:#000000;stroke-width:1.500;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+                    d={generatePath(200, angleList[index], angleList[index+1])} />
+                {/each}
+            {/if}
         </svg>
 </div>

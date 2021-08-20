@@ -26,10 +26,13 @@
 
 
 <div class="main">
+    <h1>
+        The real entropy
+    </h1>
     <div class="par">
         The question now is how to evaluate entropy when the probability of a symbol is not uniform. Below, 
         you can see six different symbols: 5 are binary, and the last one is a 3-symbol. At their side, 
-        the probability of of obtaining head (for the 3-response, the probability of obtaining 1, 2 or 3). Click 
+        the probability of obtaining head (for the 3-response, the probability of obtaining 1, 2 or 3). Click 
         "Roll" to recalculate them. When you are done, click "Reveal".
     </div>
     <CoinDeck bind:isShaded={isShaded} bind:hoveredRow={explanation}/>
@@ -37,7 +40,7 @@
         <Explanation number={explanation} />
         <div class="par">
             Turns out, all of our messages come from a set of unbiased coins, with which we are already familiar. 
-            Depending of the symbol we obtain, we are actually recieving different information, with different value. 
+            Depending of the symbol we obtain, we are actually receiving different information, with different value. 
             We can then, consider the information of a symbol as the expected one, considering each possible output. 
             Hover over each row to see an individual explanation.
         </div>

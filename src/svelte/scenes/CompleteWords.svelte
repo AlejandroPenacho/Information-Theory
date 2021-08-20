@@ -26,6 +26,10 @@
     }
 
     div.theStuff {
+        background-color: var(--color4);
+        border-radius: 3mm;
+        margin: 8mm;
+        padding: 6mm;
         display: grid;
         grid-template-columns: 40% auto;
     }

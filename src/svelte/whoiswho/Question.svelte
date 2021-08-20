@@ -74,6 +74,7 @@
         display:flex;
         align-items: center;
         justify-content: space-between;
+        overflow: hidden;
     }
     div.entropy-number {
         position:absolute;

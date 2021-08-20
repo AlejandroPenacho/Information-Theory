@@ -21,18 +21,27 @@
     div.par {
         margin: 10px 0px 0px 0px
     }
+
+    div.theWea {
+        display: flex;
+    }
 </style>
 
 <div class="main">
-    <h1>Too Much Text</h1>
+    <h1>Long Text Chains</h1>
     <div class="par">
-        Now, instead of dice, we have a generator of random characters, whose probabilities you can change.
-        This generator creates "messages", although none of use understand them. But they are not that different
-        from any other method of communication. As with dice, if we generate a very long message, the percentage
+        Now, instead of dice, we have a generator of random characters, whose probabilities you can change with the 
+        slider on the left. After you click the red button, five random messages will be generated with 5 different 
+        letters, with the probabilities you have set.
+    </div>
+    <div class="theWea">
+        <ChanceAdjuster bind:letterTable={letterTable}/>
+        <TextChainer letterTable={letterTable}/>
+    </div>
+    <div class="par">
+        The more characters are added.c
         of each character wil tend to a fix number. That means that some messages will become impossible, due to
         their extreme improbability. And we can take advantage of this to compress messages.
     </div>
 </div>
-<ChanceAdjuster bind:letterTable={letterTable}/>
-<TextChainer letterTable={letterTable}/>
 

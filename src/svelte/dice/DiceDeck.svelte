@@ -71,8 +71,7 @@ div.allClickButton:active {
 }
 
 div.diceBox {
-    padding: 20px;
-    max-width: 400px;
+    padding: 5mm;
     display: flex;
     flex-wrap: wrap;
 }
@@ -92,13 +91,13 @@ div.lowerDeck {
 div.result {
     background-color: white;
     height: 40px;
-    width: 40px;
+    padding: 4mm;
+    width: min-content;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 4mm;
 }
 
 div.diceNumbersBlock {
@@ -107,13 +106,15 @@ div.diceNumbersBlock {
     justify-content: center;
     align-items: center;
     width: 150px;
-    margin-right: 20px;
+    margin-right: 10mm;
+    margin-left: 5mm;
 }
 
 div.minorDiceBlock {
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin-bottom: 4mm;
     align-items: center;
 }
 div.minorDiceBlock img {
@@ -123,7 +124,6 @@ div.minorDiceBlock img {
 img.exampleDice {
     width: 100%;
     height: 100%;
-    padding-left: 30px;
 }
 
 div.block1 {
@@ -136,6 +136,11 @@ div.ndice-block {
 div.ndice-select {
     display: grid;
     grid-template-rows: 90% 10%;
+}
+div.imoutofnames {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 
@@ -164,15 +169,17 @@ div.ndice-select {
             </div>
         </div>
     </div>
-    <div class="diceNumbersBlock">
-        {#each [...Array(6).keys()] as index}
-            <div class="minorDiceBlock" >
-                <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
-                {(diceValueStatus.nDicesAt[index]/nDices).toFixed(3)}
-            </div>
-        {/each}
+    <div class="imoutofnames">
+        <div class="diceNumbersBlock">
+            {#each [...Array(6).keys()] as index}
+                <div class="minorDiceBlock" >
+                    <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
+                    {(diceValueStatus.nDicesAt[index]/nDices).toFixed(3)}
+                </div>
+            {/each}
+        </div>
+        <PieChart percentageList={diceValueStatus.nDicesAt.map((x)=>{return x/nDices})}/>
     </div>
-    <PieChart percentageList={diceValueStatus.nDicesAt.map((x)=>{return x/nDices})}/>
     <div class="diceBox">
         {#each [...Array(nDices).keys()] as index}
             <Dice bind:click={diceClick[index]} bind:restart={diceRestart[index]} 
