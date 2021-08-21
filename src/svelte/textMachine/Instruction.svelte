@@ -89,7 +89,7 @@
         </div>
     {:else if stage=6}
         <div class="text">
-            If you try changing the probabilities, you will achieve different trasnfer rates. 
+            If you try changing the probabilities, you will achieve different transfer rates. 
         </div>
     {/if}
     <div class="changeStageButtons">

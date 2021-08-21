@@ -77,9 +77,8 @@
 
 <div class="main">
     <h1>
-        Some real life problems
+        Everyday Communications
     </h1>
-    <p> Below, you can see three problems of real life, and how they were solved</p>
 
     <div class="problem-block">
         <div class="arrowBlock">
@@ -93,32 +92,43 @@
             <div class="problem" style="position: relative; opacity: {opacityArray[0]}">
                 <img src="/assets/img/problems/telegraph.jpg" alt="A woman with a telegraph"/>
                 <div class="explanation">
-                    Back when telegraphs were used for communications, the cost of a message was 
-                    proportional to the number of characters it contained. In order to cheapen costs,
-                    an useful strategy was to substitute common words (like "Hello") with a short
-                    combination of letters that would not be used otherwise (like "hl").
+                    Back when telegraphs were used for communications, it was usually a priority to
+                    reduce as much as possible the number of characters in a telegram, in order to decrease 
+                    costs. Telegraph operators would shorten commonly used words: for example, "ty" would be 
+                    used instead of "they", or "hw" instead of "how". Since neither "ty" or "hw" are words with 
+                    meaning, the person who would receive the problem would have no problem recovering the 
+                    original words.
                 </div>
             </div>
 
             <div class="problem" style="opacity: {opacityArray[1]}">
-                <img src="/assets/img/problems/aircrash.png" alt="Something"/>
+                <img src="https://www.maxpixel.net/static/photo/1x/Hello-Bonjour-Ciao-Hi-Hola-Languages-Words-1907233.png" alt="Something"/>
                 <div class="explanation">
-                    Something terrible happened here
+                    As there are many different languages in the world, each one has its own particularity. For 
+                    example, the mean word length changes a lot from language to language. While words in mongolian 
+                    have a mean length of almost 12 characters, the mean length in croatian is close to only 7!
                 </div>
             </div>
 
             <div class="problem" style="opacity: {opacityArray[2]}">
-                <img src="/assets/img/problems/unnamed.jpg" alt="Something"/>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tenerife747s.png/800px-Tenerife747s.png" alt="Something"/>
                 <div class="explanation">
-                    This is clearly a placeholder
+                    On March 27, 1977, took place the deadliest accident in the history of aviation, when two 
+                    747s collided in the Los Rodeos airport, Spain. Among the causes, some phrases spoken by the 
+                    control tower were found to be ambigous when there was some kind of disturbance in the communication. 
+                    That is, a phrase like "Don't take off", if the first word was not correctly heard, could be completely 
+                    misunderstood. By repeating messages (that is, addind redundancy to the communication) such kind of erros 
+                    could be mitigated.
                 </div>
             </div>
 
             <div class="problem" style="opacity: {opacityArray[3]}">
                 <div class="explanation">
                     What is the relation between the three previous problems? Well, all of them are,
-                    as you may have assumed, related to communication. And all of them show how a
-                    clear solution can be found, so some mathematical theory can be developed.
+                    as you may have assumed, related to communication. What might be unexpected is how, in 
+                    the 1940s, a mathematical theory to shine some light on this topic was developed by 
+                    electrical engineer Claude Shannon. In this little project, I will provide a little 
+                    introduction to this fascinating topic.
                 </div>
                 <div class="nextButton" on:click={nextChapter}>
                     Next page

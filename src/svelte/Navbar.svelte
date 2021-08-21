@@ -27,6 +27,13 @@
 <style>
     div.header {
         height: 10vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    div.header img {
+        width: 80%;
+        border-radius: 3mm;
     }
     div.mainBar {
         position: fixed;
@@ -63,7 +70,7 @@
 
 <div class="mainBar">
     <div class="header">
-        Here it comes
+        <img src="/assets/svg/banner.svg" alt="Information theory"/>
     </div>
     <div class="allChapters">
         {#each listOfChapters as element}
