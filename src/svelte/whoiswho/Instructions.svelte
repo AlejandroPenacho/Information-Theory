@@ -38,6 +38,7 @@
         border-radius: 3mm;
         padding: 4mm;
         margin: 6mm;
+        min-height: 10em;
     }
 </style>
 

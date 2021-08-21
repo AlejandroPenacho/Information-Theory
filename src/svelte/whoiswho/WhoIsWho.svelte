@@ -28,6 +28,11 @@
         align-items: center;
         width: 100%;
     }
+    div.leftZone {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
     div.H {
         background-color: var(--color5);
         margin: 5mm;
@@ -60,14 +65,16 @@
     Restart
 </div>
 <div class="main">
-    <div class="H">
-        H = {game.obtainedEntropy.toFixed(2)} / 3
+    <div class="leftZone">
+        <div class="H">
+            H = {game.obtainedEntropy.toFixed(2)} / 3
+        </div>
+        <div class="charDeck">
+            {#each game.characters as character}
+                <Face character={character} />
+            {/each}
+        </div>
     </div>
-<div class="charDeck">
-    {#each game.characters as character}
-        <Face character={character} />
-    {/each}
-</div>
 
 <div class="questionDeck">
     {#each game.questions as question}
