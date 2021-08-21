@@ -23,7 +23,11 @@
         Here is a small compression system to transmit messages. At the top right, a sequence of characters is 
         sent to the bottom left block. One of the lines, the inner one, is not codified. The outer one, meanwhile,
         is: characters are translated to 0 and 1 in the middle. There are also two counters, that indicate the number 
-        ob characters that cross each line per second.
+        of characters that cross each line per second.
+    </div>
+    <div class="par">
+        As explained before, the fact that the different symbols of a message usually have different probabilities can 
+        be exploited in order to compress this messages.
     </div>
     <div class="theZone">
         <Machine generatorData={generatorData}/>
