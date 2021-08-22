@@ -28,17 +28,17 @@
 </style>
 
 <div class="main">
-    <h1> Who is Who?</h1>
+    <h1> Guess Who?</h1>
     <div class="par">
         The concept of information theory and entropy can be found in many aspects of our daily life. One 
-        example is the popular game "Who is Who?". If you have never played, it is simple: among the characters
+        example is the popular game "Guess Who?". If you have never played, it is simple: among the characters
         displayed, the computer has chosen one. You can ask questions about it and, depending on the response, 
         you cross the characters that you know they can't be the chosen one. For example, if you ask whether it 
         has long hair, and you receive a "yes" as an answer, you should cross out characters without long hair.
     </div>
     <div class="par">
         These answers are an example of a binary response, and we need to get one character out of 8, which 
-        corresponds to an information of 3 bits (look at the left). Now follow the instructions.
+        corresponds to an information of 3 bits (look above the faces). Now follow the instructions.
     </div>
     <Instructions nextChapter={nextChapter} stage={currentStage} bind:stageList={changeEvents}/>
     <div class="mainStage">

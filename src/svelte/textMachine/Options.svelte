@@ -11,7 +11,7 @@
 
     let tabList = [
         "Generator",
-        "Compressor"
+        "Encoder"
     ]
 
     export let generatorList: GenItem[] = [
@@ -279,7 +279,7 @@
                 H = {generatorEntropy.toPrecision(3)}
             </div>
 
-        {:else if selectedTab=="Compressor"}
+        {:else if selectedTab=="Encoder"}
             <div class="compressorOptions">
             {#each generatorList as item}
                 <div class="codificationRow">

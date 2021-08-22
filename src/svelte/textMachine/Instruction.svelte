@@ -71,15 +71,15 @@
         </div>
     {:else if stage===3}
         <div class="text">
-            The codified channel sends only two possible symbols: "0" and "1". That is, its entropy is 1. The key of 
+            The codified channel sends only two possible symbols: "0" and "1". That is, its entropy per symbol is 1. The key of 
             compression is that the amount of entropy sent can not change. Since the raw message of "A", "B" and "C" sends 
             2 symbols of 1.5 bits per seconds, or 3 bits/sec. Then, we should be able to send the same information with 
             3 symbols per second through the codified line (the right one).
         </div>
     {:else if stage===4}
         <div class="text">
-            Click on <b>Compressor</b>, at the panel where you choos the chance of each letter. There are 3 possible ways 
-            of transforming the letters to "0" and "1". Cycle through them and check the number of symbols per second (right 
+            Click on <b>Encoder</b>, at the panel where you choose the chance of each letter. There are 3 possible ways 
+            of transforming the letters to "0" and "1". Cycle through them by pressing the "Change" button and check the number of symbols per second (right 
             yellow indicator).
         </div>
     {:else if stage===5}

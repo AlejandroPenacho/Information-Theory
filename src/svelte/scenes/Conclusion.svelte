@@ -10,8 +10,8 @@
 
 <h1>Conclusions</h1>
 <div class="par">
-    So far, this has only been a small introduction to information theory, as explained in the first pages 
-    of the original paper by Claude Shannon. As a quick summary of the main ideas shown here:
+    So far, this has only been a small introduction to <b>information theory</b>, as explained in the first pages 
+    of the original paper by Claude Shannon at the end of the 40s. As a quick summary of the main ideas shown here:
     <ol class="summary">
         <li>Information is transmitted with symbols out of a set of possible symbols.</li>
         <li>The amount of information sent in a message is called entropy, measured in bits.</li>
@@ -39,4 +39,8 @@
     Covering all this would have been too much for an introduction, but I hope this small project has made you 
     curious enough to start investigating on your own. If that is the case, my first recommendation would be the 
     <a href="https://web.archive.org/web/19980715013250/http://cm.bell-labs.com/cm/ms/what/shannonday/shannon1948.pdf">original paper by Claude Shannon</a>, which is relatively easy to understand.
+</div>
+<div class="par">
+    Thank you for getting here! For any comments, suggestions or threats, please contact me at 
+    <a href="mailto: alejandro.per@hotmail.es">alejandro.per@hotmail.es</a>.
 </div>
