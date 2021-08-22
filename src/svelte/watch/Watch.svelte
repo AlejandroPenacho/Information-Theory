@@ -37,8 +37,6 @@
 
 
    let listOfMessages: Array<MessageData> = [
-     // {text: "Te vieness?",author: Author.other, offset: 2, dimensions: [7, 1]},
-     // {text: "No", author: Author.self, offset: 0, dimensions: [2.4, 1]}
    ]
 
    export function receiveMessage(text){

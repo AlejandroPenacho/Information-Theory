@@ -71,14 +71,14 @@
                 state: ((coinValues[0]==CoinState.head)
                         &&(coinValues[1]==CoinState.head)
                         &&(coinValues[2]==CoinState.head))? CoinState.head : CoinState.tail,
-                index: 4
+                index: 3
             },{
                 text: "Exactly 3 coins are heads",
                 probability: "5/16",
                 entropy: binaryEntropy(5/16),
                 questionType: QType.binary,
                 state: (nHeads === 3)? CoinState.head : CoinState.tail,
-                index: 3
+                index: 4
             },{
                 text: "4 or more coins are heads",
                 probability: "1/2",

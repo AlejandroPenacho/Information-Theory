@@ -3,6 +3,8 @@
     import Machine from "/src/svelte/textMachine/Machine.svelte";
     import Options from "/src/svelte/textMachine/Options.svelte";
 
+    export let nextChapter;
+
     let generatorData;
 </script>
 
@@ -34,5 +36,5 @@
         <Machine generatorData={generatorData}/>
         <Options bind:generatorList={generatorData}/>
     </div>
-    <Instruction />
+    <Instruction nextChapter={nextChapter}/>
 </div>

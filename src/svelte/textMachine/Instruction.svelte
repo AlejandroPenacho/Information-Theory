@@ -1,7 +1,8 @@
 <script lang="ts">
 
     let stage = 0;
-    let maxStage = 4;
+    let maxStage = 6;
+    export let nextChapter;
 </script>
 
 <style>
@@ -85,11 +86,14 @@
         <div class="text">
             You shuld be able to get a mean transfer speed of 3 symbols per second in the right channel by codifying 
             the "C" as a "0". It seems reasonable: since the "C" is the most probable character, you should transform it 
-            to a short message. This is the basis of most compression algorithms.
+            to a short message. This is the basis of most compression algorithms (remember the telegraph example at 
+            the start).
         </div>
     {:else if stage=6}
         <div class="text">
-            If you try changing the probabilities, you will achieve different transfer rates. 
+            <div class="nextButton" on:click={nextChapter}>
+                Next page
+            </div>
         </div>
     {/if}
     <div class="changeStageButtons">

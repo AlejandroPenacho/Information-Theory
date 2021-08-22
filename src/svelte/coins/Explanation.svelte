@@ -9,9 +9,12 @@
         padding: 8mm;
         border-radius: 5mm;
         display: flex;
-        justify-content: center;
         min-height: 6em;
     }
+    img.latex {
+        transform: translateY(0.3em);
+    }
+
 </style>
 
 <div class="main">
@@ -23,25 +26,29 @@
     {:else if number===2}
     <div class="text">
         Most of the times (63 out of 64), this will be negative. In that case, the information is little: all
-        combinations of coins are possible, except all heads. That corresponds to a small entropy, of <span class="H">0.023</span> bits.
+        combinations of coins are possible, except all heads. That corresponds to a small entropy. How small? 
+        If we recover the alternative definition of <img class="latex" src="https://latex.codecogs.com/svg.latex?H=log_{2}(1/p)" alt="H=log_{2}(1/p)" />, 
+        with a probablity of <span class="p">63/64</span> the entropy is <span class="H">0.023</span> bits.
         However, if this coin is positive, we know the state of all coins, that is, <span class="H">6</span> bits. Entropy is, then, 
-        <span class="p">63/64</span> * <span class="H">0023</span> + <span class="p">1/64</span> * 
+        <span class="p">63/64</span> * <span class="H">0.023</span> + <span class="p">1/64</span> * 
         <span class="H">6</span> = <span class="H">0.116</span> bits.
     </div>
     {:else if number===3}
     <div class="text">
-        The chance that the first 3 coins are heads is <span class="p">1/16</span>. This case is similar to the previous one: getting a
+        The chance that the first 3 coins are heads is <span class="p">1/8</span>. This case is similar to the previous one: getting a
         head is complicated (1 out of 8), but in that case, it provides a lot of information, <span class="H">3</span> bits, as we know 
-        the first three outputs. Most of the times, however, we will obtain a tail. In that case, we only know that 
+        the first three coins. Most of the times, however, we will obtain a tail. In that case, we only know that 
         at least one of the three first coins is head, which correspons to a value of information of <span class="H">0.193</span>
-        bits. At the end, the entropy of this symbol is <span class="p">1/8</span> * <span class="H">3</span> + 
+        bits, using the knwon formula. At the end, the entropy of this symbol is <span class="p">1/8</span> * <span class="H">3</span> + 
         <span class="p">7/8</span> * <span class="H">0.193</span> = 0.5435.
     </div>
     {:else if number===4}
     <div class="text">
         This case is similar to the previous one, but now, these 3 coins are not necessarily the first ones. Then, there are 
         more combinations of coins such that we get a head here. The chance of getting a head is 5 out of 16, that is, a 
-        probability of <span class="p">5/16</span>. Again, receiving a head gives more information than a tail.
+        probability of <span class="p">5/16</span>. Again, receiving a head gives more information than a tail. And taking the 
+        ponderated mean gives H = <span class="p">5/16</span>*<span class="H">1.678</span> + 
+        <span class="p">11/16</span>*<span class="H">1.137</span> = <span class="H">0.896</span>.
     </div>
     {:else if number===5}
     <div class="text">

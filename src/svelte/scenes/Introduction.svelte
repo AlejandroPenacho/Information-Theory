@@ -45,7 +45,7 @@
         From our experience with the smartwatch, it seems a question with 2 possible answers (let's call it 
         a 2-question) can be answered with a symbol with 2 possibilities (like "yes"-"no", let's call it
         a 2-symbol, or binary symbol). Moreover, a 4-question, like the hour or the drink, can be answered 
-        with a pair of 2-symbols. And, obviously, a 4-question can also be asnwered with a 4-symbols.
+        with a pair of 2-symbols. And, obviously, a 4-question can also be answered with a 4-symbols.
     </div>
     <div class="par">
         Below, you can check how two responses with different number of possibilites generatate a response of
@@ -61,10 +61,13 @@
         </div>
     </div>
     <div class="par">
-        So, two responses, or symbols, of a certain number can be used to answer a question of a higher number. 
+        So, two symbols of a certain number can be used as a symbol of a higher number. 
         Also, we can combine more than two symbols: since a pair of 2-symbols are equivalent to a 4-symbol, three 
-        2-symbols are like a 4-symbol and a 2-symbol. And this is equivalent to a 8-symbol. You can check above.
-        <!-- In information theory, a group of symbols, or responses, constitutes a "message". -->
+        2-symbols are like a 4-symbol and a 2-symbol. And this is equivalent to a 8-symbol. You can check above, again.
+    </div>
+    <div class="par">
+        In information theory, we usually deal with messages. A message is made of one or more symbols, with the 
+        purporse of transmitting some information.
     </div>
     <div class="nextButton" on:click={nextChapter}>
         Next page

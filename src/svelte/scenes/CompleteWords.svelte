@@ -63,7 +63,7 @@
     </div>
     <div class="par">
         So far, we have talked about information without considering the probability of each response. But now,
-        we can agree that recieving the missing letter of the first sentence would be pointless: we can guess it.
+        we can agree that receiving the missing letter of the first sentence would be pointless: we can guess it.
         For the third sentence, however, we only now it is a number.
     </div>
     <div class="par">

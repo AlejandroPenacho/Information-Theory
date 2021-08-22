@@ -3,7 +3,9 @@
 </script>
 
 <style>
-
+    div.par {
+        margin: 2em;
+    }
 </style>
 
 <h1>Conclusions</h1>
@@ -28,10 +30,10 @@
     </ol>
 </div>
 <div class="par">
-    There are, however, some important ideas that could not make it into this brief exaplanation. The most interesting 
-    one is related to how a lower entropy can decrease the effect noise in the communication channel. Other key 
-    point in the original paper was the analysis of continuous messages, rather than a discrete number of 
-    symbols.
+    There are, however, some important ideas that could not make it into this brief exaplanation. 
+    For example, one is related to how a lower entropy can decrease the effect noise in the communication channel. 
+    This is connected to the example of the accident shown in the first page. Other key point in the original paper 
+    was the analysis of continuous messages, rather than a discrete number of symbols.
 </div>
 <div class="par">
     Covering all this would have been too much for an introduction, but I hope this small project has made you 

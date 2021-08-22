@@ -64,7 +64,9 @@
         The name of this information measure is called <b>entropy</b>, abreviated as <emph>H</emph> and measured 
         in <b>bits</b>. Mathematically, we 
         can describe this relation as: <img class="latex" src="https://latex.codecogs.com/svg.latex?H=log_{2}(N)" alt="H=log_{2}(N)" />, where N is the number of possible symbols (2 for the coin, 4 for the 
-        suits, 8 for the compass, etc.).
+        suits, 8 for the compass, etc.). Alternatively, it can be expressed as a function of the probablity of 
+        each output. When all outputs have the same chance, each one has a chance of p = 1/N, and the 
+        entropy is <img class="latex" src="https://latex.codecogs.com/svg.latex?H=log_{2}(1/p)" alt="H=log_{2}(1/p)" />.
     </div>
     <div class="imageWrap">
         <img src="/assets/img/plot.png" alt="Plot of the ln2 function"/>

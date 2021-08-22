@@ -5,7 +5,7 @@
     let changeEvents;
     let unique = {};
 
-    export let nextChpater; 
+    export let nextChapter; 
 
     let nStages = 7;
     let currentStage = 0;
@@ -40,7 +40,7 @@
         These answers are an example of a binary response, and we need to get one character out of 8, which 
         corresponds to an information of 3 bits (look at the left). Now follow the instructions.
     </div>
-    <Instructions nextChapter={nextChpater} stage={currentStage} bind:stageList={changeEvents}/>
+    <Instructions nextChapter={nextChapter} stage={currentStage} bind:stageList={changeEvents}/>
     <div class="mainStage">
         {#key unique}
             <WhoIsWho sendEvent={eventFunction}/>

@@ -31,9 +31,9 @@
     </h1>
     <div class="par">
         The question now is how to evaluate entropy when the probability of a symbol is not uniform. Below, 
-        you can see six different symbols: 5 are binary, and the last one is a 3-symbol. At their side, 
-        the probability of obtaining head (for the 3-response, the probability of obtaining 1, 2 or 3). Click 
-        "Roll" to recalculate them. When you are done, click "Reveal".
+        you can see six different symbols: 5 are binary, and the last one is a 3-symbol. However, the probability of each 
+        output is not the same. Next to the coins you can see the chance of obtaining head. And for the dice, the chance 
+        of obtaining 1, 2 and 3. Click "Roll" to reroll them. When you are done, click "Reveal".
     </div>
     <CoinDeck bind:isShaded={isShaded} bind:hoveredRow={explanation}/>
     {#if !isShaded}
@@ -45,7 +45,7 @@
             Hover over each row to see an individual explanation.
         </div>
         <div class="par">
-            We said before that the entropy of a symbol was calculated as  <img src="https://latex.codecogs.com/svg.latex?log_{2}(N)=log_{2}(1/p)" 
+            We said before that the entropy of a symbol was calculated as  <img src="https://latex.codecogs.com/svg.latex?H=log_{2}(N)=log_{2}(1/p)" 
             alt="log_{2}(N)=log_{2}(1/p)" />.
             This was valid when the probability was the same for all outputs. When it is not, the entropy of an output 
             is <img src="https://latex.codecogs.com/svg.latex?log_{2}(1/p_{'{'}i{'}'})"alt="log_{2}(1/p_{'{'}i{'}'})" />, 
@@ -55,6 +55,22 @@
         </div>
         <div class="finalContainer">
             <img src="/assets/svg/H.svg" alt="sum( p_i * log2(1/p_i)" />
+        </div>
+        <div class="par">
+            Note that when all outputs have the same chance, we obtain our previous formula: <img src="https://latex.codecogs.com/svg.latex?H=log_{2}(1/p)" 
+            alt="log_{2}(N)=log_{2}(1/p)"/>.
+        </div>
+        <div class="par">
+            As you could see in the previous page, written text is a good example of a message where symbols have 
+            very different probabilities. Remember when we said there are at least 27 different symbols in English text? 
+            This would correspond to an entropy above 4.7. However, since you can usually predict which letter follows in a 
+            text, entropy of English language is around 4.
+        </div>
+        <div class="par">
+            This affects the mean length of the words. In a languages in which all combinations of letters would be valid,
+            the 520,000 words in the English Wiktionary could all be written using always less than 5 letter. 
+            The dictionary would then start with these words: "a", "aa", "aaa", "aaaa", "aaaaa", "aaaab", etc.
+            However, writing incorrectly one character would totally change the meaning of the word.
         </div>
         <div class="nextButton" on:click={nextChapter}>
             Next page
