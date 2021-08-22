@@ -54,7 +54,7 @@
             Examples can be seen hovering over the rows above. The final expression is:
         </div>
         <div class="finalContainer">
-            <img src="/assets/svg/H.svg" alt="sum( p_i * log2(1/p_i)" />
+            <img src="./assets/svg/H.svg" alt="sum( p_i * log2(1/p_i)" />
         </div>
         <div class="par">
             Note that when all outputs have the same chance, we obtain our previous formula: <img src="https://latex.codecogs.com/svg.latex?H=log_{2}(1/p)" 

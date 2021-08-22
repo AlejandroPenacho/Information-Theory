@@ -70,7 +70,7 @@
 
 <div class="mainBar">
     <div class="header">
-        <img src="/assets/svg/banner.svg" alt="Information theory"/>
+        <img src="./assets/svg/banner.svg" alt="Information theory"/>
     </div>
     <div class="allChapters">
         {#each listOfChapters as element}
