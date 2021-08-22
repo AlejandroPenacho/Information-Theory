@@ -3,16 +3,16 @@
     export let selectedChapter : number = 0;
 
     let listOfChapters : [number, string][]= [
-        [0, "Problems of communication"],
-        [1, "The new Smartwatch"],
-        [2, "Intro to information"],
-        [3, "Entropy"],
-        [4, "Guessing the letter"],
+        [0, "Communications"],
+        [1, "The new smartwatch"],
+        [2, "Symbols and messages"],
+        [3, "Measuring information"],
+        [4, "Unequal probability"],
         [5, "The real entropy"],
-        [6, "Who is Who?"],
-        [7, "Lots of Dices"],
+        [6, "Guess who?"],
+        [7, "Large numbers"],
         [8, "Large text chains"],
-        [9, "Compressing Data"],
+        [9, "Compressing data"],
         [10, "Conclusion"]
     ]
 

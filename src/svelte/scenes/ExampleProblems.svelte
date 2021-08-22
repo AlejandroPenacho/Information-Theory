@@ -23,10 +23,18 @@
         padding: 20px;
         min-height: 100vh;
     }
+    div.par {
+        margin: 4mm;
+    }
     div.problem-block {
+        padding: 3em;
+        margin-top: 12mm;
         display: grid;
         grid-template-columns: 20% auto 20%;
         height: max-content;
+        border-radius: 4mm;
+        border-style: solid;
+        border-width: 1mm;
     }
     div.arrowBlock {
         display: flex;
@@ -79,7 +87,16 @@
     <h1>
         Everyday Communications
     </h1>
-
+    <div class="par">
+        Hello! Thank you for passing by! In this small project I want to show you what is information theory, an 
+        interesting branch of mathematics that deals with information (the name kind of hints at it). But before, 
+        find below 3 real life cases related to the topic. Move through the cases with the arrows at the sides. 
+    </div>
+    <div class="par">
+        One last thing, this page was made for computer, rather than smartphone or tablet. Sorry! You can still 
+        see the most part of it without a mouse, but some parts require hovering, and you will have to skip them.
+        This can be done by clicking on the chapters at the left.
+    </div>
     <div class="problem-block">
         <div class="arrowBlock">
             <div class="arrow"

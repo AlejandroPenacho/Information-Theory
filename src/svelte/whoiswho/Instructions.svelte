@@ -37,7 +37,7 @@
         background-color: var(--color4);
         border-radius: 3mm;
         padding: 4mm;
-        margin: 6mm;
+        margin: 6mm 6mm 0mm 6mm;
         min-height: 10em;
     }
 </style>
@@ -45,10 +45,8 @@
 {#if stage===0}
 <div class="text">
     In this game, you can see all the characters in the center, and 
-    the possible questions at the right. Each one has one number in it: its <b>entropy</b>. For example,
-    look at the question "Has hat?". Only one character has, so...
+    the possible questions at the right. Each one has one number in it: its <b>entropy</b>.
     As you can see not all are the same. Start by <b>hovering</b> over the question <b>"Wears glasses?"</b>.
-   
 </div>
 {:else if stage===1}
 <div class="text">
@@ -91,7 +89,8 @@
 {:else if stage===5}
     <div class="text">
         Look at the left: we have 3 bits out of the required 4 to win the game! One bit corresponds to a binary 
-        question and, as you can see, that's what we need, since there are only two characters left. 
+        question and, as you can see, that's what we need, since there are only two characters left. Click the 
+        only question that can help you here. 
     </div>
 {:else if stage===6}
     <div class="nextButton" on:click={nextChapter}>

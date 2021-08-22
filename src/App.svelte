@@ -68,7 +68,7 @@
         font-weight: bold;
     }
     :global(span.H){
-        color: deepskyblue;
+        color:darkblue;
         font-weight: bold;
     }
 </style>

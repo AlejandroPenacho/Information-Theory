@@ -4,16 +4,13 @@
 
 <style>
     div.main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 10em;
-    }
-    div.text {
         background-color: var(--color4);
-        border-radius: 5mm;
+        margin-top: 8mm;
         padding: 8mm;
-        margin: 4mm 8%;
+        border-radius: 5mm;
+        display: flex;
+        justify-content: center;
+        min-height: 6em;
     }
 </style>
 

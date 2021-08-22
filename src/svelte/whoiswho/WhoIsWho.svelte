@@ -33,6 +33,11 @@
         align-items: center;
         flex-direction: column;
     }
+    div.justFlexing {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     div.H {
         background-color: var(--color5);
         margin: 5mm;
@@ -59,15 +64,17 @@
     }
 </style>
 
-<div class="restartButton" on:click={() => {game = new ww.WhoIsWho(getCopyOf(characterList)); 
-                                            game.characters = game.characters;
-                                            game.questions = game.questions}}>
-    Restart
-</div>
 <div class="main">
     <div class="leftZone">
-        <div class="H">
-            H = {game.obtainedEntropy.toFixed(2)} / 3
+        <div class="justFlexing">
+            <div class="restartButton" on:click={() => {game = new ww.WhoIsWho(getCopyOf(characterList)); 
+                                                        game.characters = game.characters;
+                                                        game.questions = game.questions}}>
+                Restart
+            </div>
+            <div class="H">
+                H = {game.obtainedEntropy.toFixed(2)} / 3
+            </div>
         </div>
         <div class="charDeck">
             {#each game.characters as character}

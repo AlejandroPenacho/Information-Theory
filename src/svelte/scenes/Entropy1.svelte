@@ -40,9 +40,9 @@
 </style>
 
 <div class="main">
-    <h3>
+    <h1>
        How to measure information? 
-    </h3>
+    </h1>
     <div class="par">
         As we saw before, the information of, say, a 16-symbol, is equal to 2 different 4-symbols, 
         4 different 2-symbols, or one 2-symbol and one 8-symbol. You can check below how there are 16 

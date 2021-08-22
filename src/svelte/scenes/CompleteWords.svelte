@@ -33,20 +33,29 @@
         display: grid;
         grid-template-columns: 40% auto;
     }
+    div.allSen {
+        background-color: var(--color4);
+        border-radius: 3mm;
+        margin-top: 5mm;
+        margin-bottom: 8mm;
+    }
 </style>
 
 <div class="main">
+    <h1>Unequal probabilities</h1>
     <div class="par">
         Check now the following sentences. All of them are missing one character (?), can you guess which one?
     </div>
-    <div class="sentence">
-        I have found a c<span class="q">?</span>in under the desk
-    </div>
-    <div class="sentence">
-        This sh<span class="q">?</span>p is wonderful
-    </div>
-    <div class="sentence">
-        I call at my number: 923 273 4<span class="q">?</span>8
+    <div class="allSen">
+        <div class="sentence">
+            I have found a c<span class="q">?</span>in under the desk
+        </div>
+        <div class="sentence">
+            This sh<span class="q">?</span>p is wonderful
+        </div>
+        <div class="sentence">
+            I call at my number: 923 273 4<span class="q">?</span>8
+        </div>
     </div>
     <div class="par">
         Probably you have guessed the first one. The second one, however, is not clear: could be either 'o' or 'i'.

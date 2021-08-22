@@ -263,12 +263,14 @@
         <div class="question">
             <div class="probability">P</div>
             <div class="value">Outcome</div>
-            <div class="entropy">H</div>
+            {#if !isShaded}
+                <div class="entropy">H</div>
+                Explanation
+            {/if}
         </div>
         {#each rows as row}
         <div class="question"
              on:mouseenter={()=>{hoveredRow = row.index}}
-             on:mouseleave={()=>{hoveredRow = 0}}
              style="background-color: {hoveredRow===row.index ? 'green': 'orange'}">
             <div class="probability"> {row.probability}</div>
             {#if (row.questionType === QType.binary)}
@@ -284,8 +286,8 @@
                     alt="Coin"/>
             </div>
             {/if}
-            <div class="entropy"> {row.entropy.toPrecision(3)}</div>
             {#if !isShaded}
+            <div class="entropy"> {row.entropy.toPrecision(3)}</div>
                 {row.text}
             {/if}
         </div>

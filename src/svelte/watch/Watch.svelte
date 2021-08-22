@@ -42,8 +42,7 @@
    ]
 
    export function receiveMessage(text){
-      //TODO: Compute dimension of message
-      let dimensions: [number, number] = [7, 2];
+      let dimensions: [number, number] = [9, 2];
 
       addMessage({
          text: text,

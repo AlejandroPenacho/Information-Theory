@@ -21,7 +21,7 @@
         Any
     }
 
-    let nMessageStages = 11;
+    let nMessageStages = 12;
 
     let responses: string[][] = new Array(nMessageStages);
     for (let i=0; i<nMessageStages; i++){
@@ -36,12 +36,14 @@
     let messageStages: MessageStage[] = [
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         [`Heyy! Are you finally`, `coming to dinner tonigh?`]},
+        {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 1, time: 2000, newInstruction: false, message: ()=>
+        getInitialResponse(responses[0])},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
         [`Ok, I'll buy pizzas! Do`, `you prefer ham or pineapple?`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         [`Oh, right. Say yes for`, `ham, no for pineapple`]},
         {change: ChangeCause.Timeout, allowAnswer: false, nMessages: 0, time: 6000, newInstruction: false, message: ()=>
-        getPizzaResponse(responses[2])},
+        getPizzaResponse(responses[3])},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 5000, newInstruction: true, message: ()=>
         [`At which hour should we`, ` meet?`]},
         {change: ChangeCause.Any, allowAnswer: true, nMessages: 1, time: 4000, newInstruction: false, message: ()=>
@@ -51,11 +53,11 @@
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: false, message: ()=>
         [`And yes for .00 and no`, `for .30`]},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 1, time: 0, newInstruction: true, message: ()=>
-        getTimeResponse([responses[6][0], responses[7][0]])},
+        getTimeResponse([responses[7][0], responses[8][0]])},
         {change: ChangeCause.Message, allowAnswer: true, nMessages: 2, time: 0, newInstruction: true, message: ()=>
         [`And for the drinks: water,`, `coke, nestea or orange juice`]},
         {change: ChangeCause.Message, allowAnswer: false, nMessages: 1, time: 0, newInstruction: true, message: ()=>
-        getDrinkResponse(responses[9])},
+        getDrinkResponse(responses[10])},
     ]
 
     let currentChangeCause: ChangeCause;
@@ -103,6 +105,14 @@
             nMessagesLeft = stage.nMessages;
         }
         sendWatchMessage(stage.message());
+    }
+
+    function getInitialResponse(messages: string[]) : string[] {
+        if (messages[0] === "Yes"){
+            return ["Great, I know you would", "like to come!"]
+        } else {
+            return [`"No way I'm missing this",`,`you mean? Great!`]
+        }
     }
 
     function getPizzaResponse(messages: string[]) : string[]{
