@@ -276,13 +276,13 @@
             {#if (row.questionType === QType.binary)}
             <div class="value">
                 <img class="value"
-                    src="/assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
+                    src="./assets/svg/coins/{getBinarySymbol(row.state)}.svg" 
                     alt="Coin"/>
             </div>
             {:else}
             <div class="value">
                 <img class="value"
-                    src="/assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
+                    src="./assets/svg/dice/{getTernarySymbol(row.state)}.svg" 
                     alt="Coin"/>
             </div>
             {/if}
