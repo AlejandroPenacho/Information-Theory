@@ -78,5 +78,5 @@
 </style>
 
 <div class="container">
-    <img src="/assets/svg/coins/{displayValue===CoinState.head? "lightCoin":"darkCoin"}.svg" alt="a coin" on:click={click} style="transform: scale({coinSize*Math.cos(coinAngle)}, {coinSize})">
+    <img src="./assets/svg/coins/{displayValue===CoinState.head? "lightCoin":"darkCoin"}.svg" alt="a coin" on:click={click} style="transform: scale({coinSize*Math.cos(coinAngle)}, {coinSize})">
 </div>

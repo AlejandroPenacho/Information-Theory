@@ -69,7 +69,7 @@
         entropy is <img class="latex" src="https://latex.codecogs.com/svg.latex?H=log_{2}(1/p)" alt="H=log_{2}(1/p)" />.
     </div>
     <div class="imageWrap">
-        <img src="/assets/img/plot.png" alt="Plot of the ln2 function"/>
+        <img src="./assets/img/plot.png" alt="Plot of the ln2 function"/>
         <div class="imgPar">
             As you can see, a 2-reponse has a value H=1, a 4-symbol has H=2, etc. For the example above, the entropy
             would be equal to 4.

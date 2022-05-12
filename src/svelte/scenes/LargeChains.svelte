@@ -27,6 +27,8 @@
 
     div.theWea {
         display: flex;
+        margin-top: 8mm;
+        margin-bottom: 8mm;
     }
 </style>
 

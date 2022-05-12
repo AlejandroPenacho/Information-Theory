@@ -107,7 +107,7 @@
         </div>
         <div class="problem-container">
             <div class="problem" style="position: relative; opacity: {opacityArray[0]}">
-                <img src="/assets/img/problems/telegraph.jpg" alt="A woman with a telegraph"/>
+                <img src="./assets/img/problems/telegraph.jpg" alt="A woman with a telegraph"/>
                 <div class="explanation">
                     Back when telegraphs were used for communications, it was usually a priority to
                     reduce as much as possible the number of characters in a telegram, in order to decrease 

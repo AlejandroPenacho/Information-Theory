@@ -173,7 +173,7 @@ div.imoutofnames {
         <div class="diceNumbersBlock">
             {#each [...Array(6).keys()] as index}
                 <div class="minorDiceBlock" >
-                    <img class="exampleDice" src="/assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
+                    <img class="exampleDice" src="./assets/svg/dice/dice{index+1}.svg" alt="{(index+1).toString()}" >
                     {(diceValueStatus.nDicesAt[index]/nDices).toFixed(3)}
                 </div>
             {/each}

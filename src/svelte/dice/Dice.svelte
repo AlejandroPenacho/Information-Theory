@@ -82,5 +82,5 @@
 </style>
 
 <div class="container">
-    <img src="/assets/svg/dice/dice{currentValue}.svg" alt="{currentValue.toString()}" on:click={click} style="transform: rotate({diceAngle}deg) scale({diceSize})">
+    <img src="./assets/svg/dice/dice{currentValue}.svg" alt="{currentValue.toString()}" on:click={click} style="transform: rotate({diceAngle}deg) scale({diceSize})">
 </div>

@@ -76,7 +76,7 @@
             In this message, you can receive an A, B, C or D. However, the A has a chance of 50 %, while the 
             B, C and D have a chance of 16.6 %, or 1/6. 
         </div>
-        <img src="/assets/svg/example.svg" alt="Hard to summarize this with text :/"/>
+        <img src="./assets/svg/example.svg" alt="Hard to summarize this with text :/"/>
     </div>
     <div class="par">
         When we receive an A, which is half of the times, we receive the equivalent to a binary decision. Looking 
